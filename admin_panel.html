@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Panel - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+        .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-gray  { background: #f1f5f9; color: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4">
+
+    <div class="max-w-7xl mx-auto space-y-5">
+
+        <!-- Header -->
+        <div class="bg-white p-5 rounded-xl shadow-md border-t-4 border-amber-500 flex flex-wrap gap-4 justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="images.jpg" alt="Police Logo" class="w-12 h-12 object-contain">
+                <div>
+                    <h2 class="text-xl font-bold text-amber-900">ප්‍රධාන පාලක පුවරුව</h2>
+                    <p class="text-xs text-gray-500">Super Admin Control Panel — Full System Management</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">
+                    <i class="fa-solid fa-user-shield mr-1"></i> ROOT Admin
+                </span>
+                <button onclick="logout()" class="text-xs font-bold text-white bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-lg transition">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="statsRow">
+            <div class="bg-white p-4 rounded-xl shadow border-l-4 border-blue-400">
+                <p class="text-xs text-gray-500 font-semibold">Total Patients</p>
+                <p id="stat_total" class="text-3xl font-extrabold text-blue-700">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow border-l-4 border-emerald-400">
+                <p class="text-xs text-gray-500 font-semibold">Medical History</p>
+                <p id="stat_history" class="text-3xl font-extrabold text-emerald-700">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow border-l-4 border-indigo-400">
+                <p class="text-xs text-gray-500 font-semibold">Social History</p>
+                <p id="stat_social" class="text-3xl font-extrabold text-indigo-700">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow border-l-4 border-rose-400">
+                <p class="text-xs text-gray-500 font-semibold">Doctors Registered</p>
+                <p id="stat_docs" class="text-3xl font-extrabold text-rose-700">0</p>
+            </div>
+        </div>
+
+        <!-- Patients Table -->
+        <div class="bg-white p-5 rounded-xl shadow-md">
+            <div class="flex flex-wrap gap-3 justify-between items-center mb-4">
+                <h3 class="text-base font-bold text-gray-800">ලියාපදිංචි රෝගීන් (Registered Patients)</h3>
+                <div class="flex gap-2">
+                    <input id="searchInput" type="text" placeholder="Search by name or ID..." class="text-sm px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-400">
+                    <button onclick="clearAllData()" class="text-xs font-bold text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg transition">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear All
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-700 border border-gray-200 rounded-lg overflow-hidden">
+                    <thead class="bg-slate-100 border-b text-xs uppercase tracking-wider text-slate-600">
+                        <tr>
+                            <th class="px-4 py-3">Reg. No</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">NIC / Police ID</th>
+                            <th class="px-4 py-3">Contact</th>
+                            <th class="px-4 py-3">Form Status</th>
+                            <th class="px-4 py-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="noDataMsg" class="text-center text-sm text-gray-400 mt-6 hidden">
+                <i class="fa-solid fa-database mr-1"></i> දත්ත ගබඩාවේ කිසිදු රෝගියෙකු නොමැත. (No patients registered yet.)
+            </p>
+        </div>
+
+        <!-- Doctors Table -->
+        <div class="bg-white p-5 rounded-xl shadow-md">
+            <h3 class="text-base font-bold text-gray-800 mb-4">ලියාපදිංචි වෛද්‍යවරුන් (Registered Doctors)</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-700 border border-gray-200 rounded-lg">
+                    <thead class="bg-slate-100 border-b text-xs uppercase tracking-wider text-slate-600">
+                        <tr>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">SLMC No</th>
+                            <th class="px-4 py-3">Specialty</th>
+                            <th class="px-4 py-3">Contact</th>
+                            <th class="px-4 py-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctorsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="noDoctorMsg" class="text-center text-sm text-gray-400 mt-6 hidden">
+                <i class="fa-solid fa-user-doctor mr-1"></i> කිසිදු වෛද්‍යවරයෙකු ලියාපදිංචි වී නොමැත.
+            </p>
+        </div>
+    </div>
+
+    <!-- Full Data Edit Modal -->
+    <div id="editModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden flex flex-col" style="max-height:85vh">
+            <div class="p-4 border-b border-gray-200 bg-amber-50 flex justify-between items-center">
+                <h3 class="font-bold text-amber-900"><i class="fa-solid fa-pen-to-square mr-2"></i>සියලු දත්ත සංස්කරණය (Edit All Data)</h3>
+                <button onclick="closeEditModal()" class="text-gray-500 hover:text-red-500 text-xl font-bold leading-none">&times;</button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col overflow-hidden">
+                <input type="hidden" id="editKey">
+                <p class="text-xs text-gray-500 mb-2">JSON දත්ත සෘජුව සංස්කරණය කරන්න. Field නාමය හෝ අගය වෙනස් කළ හැක:</p>
+                <textarea id="editJson" class="w-full flex-1 p-3 font-mono text-xs border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-amber-500 bg-slate-50 resize-none" style="min-height:350px"></textarea>
+            </div>
+            <div class="p-4 border-t border-gray-200 bg-gray-50 text-right space-x-2">
+                <button onclick="closeEditModal()" class="px-4 py-2 text-sm font-bold text-gray-600 bg-gray-200 hover:bg-gray-300 rounded-lg">
+                    Cancel
+                </button>
+                <button onclick="savePatientEdit()" class="px-4 py-2 text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow">
+                    <i class="fa-solid fa-floppy-disk mr-1"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('admin_logged_in') !== 'true') {
+                window.location.href = "admin_login.html";
+                return;
+            }
+            loadAll();
+
+            document.getElementById('searchInput').addEventListener('input', function() {
+                loadPatients(this.value.toLowerCase());
+            });
+        });
+
+        function logout() {
+            sessionStorage.removeItem('admin_logged_in');
+            window.location.href = "admin_login.html";
+        }
+
+        function loadAll() {
+            loadPatients();
+            loadDoctors();
+            updateStats();
+        }
+
+        function updateStats() {
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            const doctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
+            const keys = Object.keys(patients);
+            document.getElementById('stat_total').innerText = keys.length;
+            document.getElementById('stat_history').innerText = keys.filter(k => patients[k].medical_history).length;
+            document.getElementById('stat_social').innerText = keys.filter(k => patients[k].has_social_history).length;
+            document.getElementById('stat_docs').innerText = doctors.length;
+        }
+
+        function badge(has, label) {
+            if (has) return `<span class="badge badge-green"><i class="fa-solid fa-check"></i> ${label}</span>`;
+            return `<span class="badge badge-gray">${label}</span>`;
+        }
+
+        function loadPatients(filter = '') {
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            const tbody = document.getElementById('patientsTableBody');
+            tbody.innerHTML = '';
+
+            const keys = Object.keys(patients).filter(k => {
+                if (!filter) return true;
+                const p = patients[k];
+                return k.toLowerCase().includes(filter) || (p.full_name || '').toLowerCase().includes(filter);
+            });
+
+            if (keys.length === 0) {
+                document.getElementById('noDataMsg').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('noDataMsg').classList.add('hidden');
+
+            for (const key of keys) {
+                const p = patients[key];
+                const tr = document.createElement('tr');
+                tr.className = 'border-b hover:bg-amber-50/40 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-bold text-slate-800 font-mono">${key}</td>
+                    <td class="px-4 py-3">${p.full_name || '-'}</td>
+                    <td class="px-4 py-3 text-xs">
+                        <div>${p.nic_no || '-'}</div>
+                        <div class="text-slate-400">${p.police_id_no || ''}</div>
+                    </td>
+                    <td class="px-4 py-3">${p.contact_no || '-'}</td>
+                    <td class="px-4 py-3">
+                        <div class="flex flex-wrap gap-1">
+                            ${badge(p.medical_history, 'History')}
+                            ${badge(p.has_reports, 'Reports')}
+                            ${badge(p.has_social_history, 'Social')}
+                            ${badge(p.has_physical_activity, 'Activity')}
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 text-center space-x-1">
+                        <button onclick="editPatient('${key}')" class="text-xs bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-lg hover:bg-blue-200 transition">
+                            <i class="fa-solid fa-pen mr-1"></i>Edit
+                        </button>
+                        <button onclick="deletePatient('${key}')" class="text-xs bg-red-100 text-red-700 font-bold px-3 py-1.5 rounded-lg hover:bg-red-200 transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        function loadDoctors() {
+            const doctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
+            const tbody = document.getElementById('doctorsTableBody');
+            tbody.innerHTML = '';
+
+            if (doctors.length === 0) {
+                document.getElementById('noDoctorMsg').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('noDoctorMsg').classList.add('hidden');
+
+            doctors.forEach((d, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b hover:bg-purple-50/40 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-semibold">${d.name || '-'}</td>
+                    <td class="px-4 py-3 font-mono text-xs">${d.slmc || '-'}</td>
+                    <td class="px-4 py-3">${d.specialty || '-'}</td>
+                    <td class="px-4 py-3">${d.contact || '-'}</td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="deleteDoctor(${idx})" class="text-xs bg-red-100 text-red-700 font-bold px-3 py-1.5 rounded-lg hover:bg-red-200 transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function editPatient(key) {
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            const p = patients[key];
+            if (p) {
+                document.getElementById('editKey').value = key;
+                document.getElementById('editJson').value = JSON.stringify(p, null, 4);
+                document.getElementById('editModal').classList.remove('hidden');
+            }
+        }
+
+        function savePatientEdit() {
+            const key = document.getElementById('editKey').value;
+            const jsonStr = document.getElementById('editJson').value;
+            try {
+                const updatedP = JSON.parse(jsonStr);
+                const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+                patients[key] = updatedP;
+                localStorage.setItem('hospital_patients', JSON.stringify(patients));
+                document.getElementById('editModal').classList.add('hidden');
+                loadAll();
+                alert('දත්ත සාර්ථකව යාවත්කාලීන කරන ලදී! (Data Updated Successfully)');
+            } catch (e) {
+                alert('JSON ආකෘතිය වැරදී! කරුණාකර නිවැරදිව ඇතුළු කරන්න.\n(Invalid JSON format — please check and try again)');
+            }
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
+        }
+
+        function deletePatient(key) {
+            if (confirm(`PH-XXXX "${key}" මකා දැමිය යුතුද?\n(Are you sure you want to delete this patient?)`)) {
+                const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+                delete patients[key];
+                localStorage.setItem('hospital_patients', JSON.stringify(patients));
+                loadAll();
+            }
+        }
+
+        function deleteDoctor(idx) {
+            if (confirm('මෙම වෛද්‍යවරයා ඉවත් කරනවාද? (Delete this doctor?)')) {
+                const doctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
+                doctors.splice(idx, 1);
+                localStorage.setItem('hospital_doctors', JSON.stringify(doctors));
+                loadAll();
+            }
+        }
+
+        function clearAllData() {
+            if (confirm('සියලුම රෝගී දත්ත මකා දැමීමට ඔබ විශ්වාසද?\n(Are you sure you want to CLEAR ALL patient data? This cannot be undone!)')) {
+                localStorage.removeItem('hospital_patients');
+                localStorage.removeItem('current_patient_reg_no');
+                loadAll();
+                alert('සියලු දත්ත ගබඩාව ඉවත් කරන ලදී! (All data cleared.)');
+            }
+        }
+    </script>
+</body>
+</html>

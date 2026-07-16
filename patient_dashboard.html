@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>රෝගී පාලක පුවරුව - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+        .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-gray  { background: #f1f5f9; color: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-6">
+
+    <div class="max-w-5xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800 flex justify-between items-center flex-wrap gap-4">
+            <div class="flex items-center space-x-3">
+                <img src="images.jpg" alt="Logo" class="w-12 h-12 object-contain">
+                <div>
+                    <h2 class="text-xl font-bold text-blue-950" id="patientWelcome">රෝගී පාලක පුවරුව</h2>
+                    <p class="text-xs text-gray-500 font-mono" id="patientRegNo">PH-XXXX</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition shadow text-xs">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Left Side: Profile Summary -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                    <div class="text-center pb-4 border-b">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center mx-auto mb-2 text-2xl font-bold">
+                            <i class="fa-solid fa-hospital-user"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-base" id="profileName">Patient Name</h3>
+                        <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full" id="profileBlood">Blood Group: -</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs leading-relaxed">
+                        <div>
+                            <span class="text-slate-400 block">වයස (Age) / DOB</span>
+                            <span class="font-bold text-slate-700 block" id="profileAgeDob">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">NIC අංකය</span>
+                            <span class="font-bold text-slate-700 block" id="profileNIC">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">පොලිස් සේවා අංකය (Police ID)</span>
+                            <span class="font-bold text-slate-700 block" id="profilePoliceID">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">නිලය / සේවා ස්ථානය (Rank / Office)</span>
+                            <span class="font-bold text-slate-700 block" id="profileOffice">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block">දුරකථන අංකය (Phone)</span>
+                            <span class="font-bold text-slate-700 block" id="profileContact">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forms Status -->
+                <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">පෝරම සම්පූර්ණ කිරීමේ තත්ත්වය</h3>
+                    <div class="space-y-2" id="statusBadges">
+                        <!-- Badges loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Medical Records & Clinical Notes -->
+            <div class="md:col-span-2 space-y-6">
+                
+                <!-- Clinical Prescription / Notes from Doctor -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-800 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center">
+                        <i class="fa-solid fa-prescription-bottle-medical text-purple-800 mr-2"></i>
+                        වෛද්‍ය නිර්දේශ සහ සටහන් (Doctor's Prescriptions & Notes)
+                    </h3>
+                    <div class="p-4 bg-purple-50 rounded-lg text-xs leading-relaxed text-slate-700 border border-purple-100" id="doctorNotes">
+                        කිසිදු වෛද්‍ය නිර්දේශයක් සටහන් කර නොමැත. (No clinical notes found).
+                    </div>
+                </div>
+
+                <!-- Medical History Info -->
+                <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center">
+                        <i class="fa-solid fa-notes-medical text-emerald-600 mr-2"></i>
+                        ඔබගේ වෛද්‍ය ඉතිහාසය (My Medical History)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed" id="medHistoryInfo">
+                        <!-- Med history loaded here -->
+                    </div>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">කෙටිමං සහ සේවා (Quick Links)</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <a href="medical_history.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-file-medical text-emerald-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Update History</span>
+                        </a>
+                        <a href="medical_reports.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-file-medical-chart text-rose-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Add Reports</span>
+                        </a>
+                        <a href="physical_activity.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-heart-pulse text-cyan-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Physical Activity</span>
+                        </a>
+                        <a href="social_history.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-users-line text-indigo-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Social History</span>
+                        </a>
+                        <a href="clinical_calendar.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-calendar-check text-amber-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Book Clinic</span>
+                        </a>
+                        <a href="contact_doctor.html" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border text-center transition">
+                            <i class="fa-solid fa-user-doctor text-teal-600 text-lg mb-1"></i>
+                            <span class="text-[10px] font-bold text-slate-700">Contact Doctor</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('patient_logged_in') !== 'true') {
+                window.location.href = "patient_login.html";
+                return;
+            }
+
+            const regNo = sessionStorage.getItem('patient_reg_no');
+            document.getElementById('patientRegNo').innerText = regNo;
+
+            loadPatientData(regNo);
+        });
+
+        function logout() {
+            sessionStorage.removeItem('patient_logged_in');
+            sessionStorage.removeItem('patient_reg_no');
+            window.location.href = "patient_login.html";
+        }
+
+        function loadPatientData(regNo) {
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            const p = patients[regNo];
+
+            if (!p) {
+                alert('රෝගී දත්ත හමු නොවීය! (Patient data not found!)');
+                logout();
+                return;
+            }
+
+            // Bind values
+            document.getElementById('patientWelcome').innerText = p.full_name;
+            document.getElementById('profileName').innerText = p.full_name;
+            document.getElementById('profileBlood').innerText = 'Blood Group: ' + (p.blood_group || '-');
+            document.getElementById('profileAgeDob').innerText = `${p.age || '-'} Yrs | ${p.dob || '-'}`;
+            document.getElementById('profileNIC').innerText = p.nic_no || '-';
+            document.getElementById('profilePoliceID').innerText = p.police_id_no || '-';
+            document.getElementById('profileOffice').innerText = `${p.rank || '-'} / ${p.station_office || '-'}`;
+            document.getElementById('profileContact').innerText = p.contact_no || '-';
+
+            // Status badges helper
+            const statusCont = document.getElementById('statusBadges');
+            const badgeHtml = (has, label) => {
+                const type = has ? 'badge-green' : 'badge-gray';
+                const icon = has ? '<i class="fa-solid fa-check mr-1"></i>' : '<i class="fa-solid fa-xmark mr-1"></i>';
+                return `<div class="flex justify-between items-center py-1">
+                    <span class="text-xs text-slate-600">${label}</span>
+                    <span class="badge ${type}">${icon} ${has ? 'සම්පූර්ණයි' : 'නොමැත'}</span>
+                </div>`;
+            };
+            statusCont.innerHTML = `
+                ${badgeHtml(p.medical_history, 'Medical History')}
+                ${badgeHtml(p.has_reports, 'Reports')}
+                ${badgeHtml(p.has_social_history, 'Social History')}
+                ${badgeHtml(p.has_physical_activity, 'Physical Activity')}
+            `;
+
+            // Render medical history info details
+            const medHistCont = document.getElementById('medHistoryInfo');
+            if (p.medical_history) {
+                const mh = p.medical_history;
+                medHistCont.innerHTML = `
+                    <div>
+                        <p class="text-slate-500">🍬 High Blood Pressure</p>
+                        <p class="font-bold text-slate-700">${mh.high_blood_pressure ? 'ඔව් (Yes)' : 'නැත (No)'}</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-500">🍬 Diabetes</p>
+                        <p class="font-bold text-slate-700">${mh.diabetes ? 'ඔව් (Yes)' : 'නැත (No)'}</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-500">❤️ Heart Attack</p>
+                        <p class="font-bold text-slate-700">${mh.heart_attack ? 'ඔව් (Yes)' : 'නැත (No)'}</p>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <p class="text-slate-500">📝 වෙනත් සටහන් (Other notes)</p>
+                        <p class="font-bold text-slate-700">${mh.other || '-'}</p>
+                    </div>
+                `;
+            } else {
+                medHistCont.innerHTML = '<p class="text-slate-400 sm:col-span-2">වෛද්‍ය ඉතිහාසය ඇතුළත් කර නොමැත.</p>';
+            }
+
+            // Render clinical notes / prescription from doctor
+            if (p.clinical_notes) {
+                document.getElementById('doctorNotes').innerHTML = `
+                    <div class="whitespace-pre-line font-bold font-mono text-purple-950">${p.clinical_notes}</div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

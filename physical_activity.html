@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ශාරීරික ක්‍රියාකාරකම් - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl w-full border-t-8 border-cyan-600">
+        <div class="text-center mb-6">
+            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-2">
+            <h2 class="text-2xl font-bold text-slate-800">04. Update Physical Activity</h2>
+            <p class="text-cyan-600 text-sm font-semibold mt-1">දෛනික ශාරීරික ව්‍යායාම සහ ක්‍රියාකාරකම් මට්ටම</p>
+        </div>
+
+        <div class="mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Police Hospital reg. No.</label>
+            <input type="text" id="reg_no_input" placeholder="PH-XXXX" required class="w-full md:w-1/2 p-2 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-cyan-500">
+        </div>
+
+        <form id="activityForm" class="space-y-5">
+            
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Typical daily routine (දෛනික සාමාන්‍ය ජීවන රටාව)</label>
+                <select class="w-full p-2.5 border border-gray-300 rounded-lg text-sm bg-white outline-none focus:ring-2 focus:ring-cyan-500">
+                    <option value="Sedentary">Sedentary (Mostly sitting / desk job - බොහෝවිට අසුන්ගෙන සිටින)</option>
+                    <option value="Lightly Active">Lightly Active (Some standing / walking - මඳක් ඇවිදින/සිටගෙන සිටින)</option>
+                    <option value="Moderately Active">Moderately Active (Regular walking, active - සක්‍රීය/සාමාන්‍ය ලෙස ඇවිදින)</option>
+                    <option value="Very Active">Very Active (Heavy physical labor / High-level - අධික වෙහෙස මහන්සි වන)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Aerobic Exercise Frequency (සතියකට ව්‍යායාම කරන වාර ගණන)</label>
+                <select class="w-full p-2.5 border border-gray-300 rounded-lg text-sm bg-white outline-none focus:ring-2 focus:ring-cyan-500">
+                    <option value="0 days">0 days (ව්‍යායාම නොකරයි)</option>
+                    <option value="1-2 days">1–2 days (සතියට දින 1-2 ක්)</option>
+                    <option value="3-4 days">3–4 days (සතියට දින 3-4 ක්)</option>
+                    <option value="5+ days">5+ days (සතියට දින 5 කට වඩා වැඩි)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Average Duration (එක් වරකට ව්‍යායාමයේ නිරත වන සාමාන්‍ය කාලය)</label>
+                <select class="w-full p-2.5 border border-gray-300 rounded-lg text-sm bg-white outline-none focus:ring-2 focus:ring-cyan-500">
+                    <option value="Less than 20 minutes">Less than 20 minutes (විනාඩි 20 කට අඩු)</option>
+                    <option value="20-30 minutes">20–30 minutes (විනාඩි 20 ත් 30 ත් අතර)</option>
+                    <option value="30-60 minutes">30–60 minutes (විනාඩි 30 ත් 60 ත් අතර)</option>
+                    <option value="More than 60 minutes">More than 60 minutes (විනාඩි 60 කට වැඩි)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full mt-4 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-200">
+                දත්ත සුරකින්න (Save Physical Activity)
+            </button>
+        </form>
+
+        <div class="text-center text-xs text-gray-400 mt-8 border-t pt-4">
+            <p>© 2026 ශ්‍රී ලංකා පොලිස් රෝහල (Sri Lanka Police Hospital). All Rights Reserved.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedRegNo = localStorage.getItem('current_patient_reg_no');
+            if (savedRegNo) {
+                document.getElementById('reg_no_input').value = savedRegNo;
+            }
+        });
+
+        document.getElementById('activityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const regNo = document.getElementById('reg_no_input').value.trim();
+            if(!regNo) {
+                alert('කරුණාකර රෝහල් ලියාපදිංචි අංකය ඇතුළත් කරන්න.');
+                return;
+            }
+
+            let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            if(patients[regNo]) {
+                patients[regNo].has_physical_activity = true;
+                localStorage.setItem('hospital_patients', JSON.stringify(patients));
+            }
+
+            alert('ශාරීරික ක්‍රියාකාරකම් දත්ත සාර්ථකව සුරකින ලදී! (Physical Activity Saved)');
+        });
+    </script>
+
+    <!-- Language Switcher Support -->
+    <script>
+        (function() {
+            // Page-level translations (si = default Sinhala labels, en = English)
+            var pageTranslations = {
+                'si': {
+                    'page_title_01': 'රෝගී ලියාපදිංචිය',
+                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
+                    'page_title_03': 'වෛද්‍ය වාර්තා',
+                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
+                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
+                    'page_title_06': 'සායන දින වෙන්කිරීම',
+                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
+                    'save_btn': 'සුරකින්න (Save Data)',
+                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
+                    'send_btn': 'හරටම පක්වැන්න (Submit)'
+                },
+                'en': {
+                    'page_title_01': 'Patient Registration',
+                    'page_title_02': 'Medical History',
+                    'page_title_03': 'Medical Reports',
+                    'page_title_04': 'Social/Family History',
+                    'page_title_05': 'Physical Activity',
+                    'page_title_06': 'Clinic Appointments',
+                    'page_title_07': 'Contact Doctor',
+                    'save_btn': 'Save Data',
+                    'signup_btn': 'Sign Up / Save',
+                    'send_btn': 'Submit / Send'
+                }
+            };
+
+            function applyPageLang(lang) {
+                if (!pageTranslations[lang]) return;
+                var t = pageTranslations[lang];
+                // Update submit/save buttons
+                var btns = document.querySelectorAll('[data-lang-key]');
+                btns.forEach(function(el) {
+                    var key = el.getAttribute('data-lang-key');
+                    if (t[key]) el.innerText = t[key];
+                });
+                // Store in localStorage for persistence
+                localStorage.setItem('hospital_lang', lang);
+            }
+
+            // Listen for language change message from parent dashboard
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'changeLang') {
+                    applyPageLang(event.data.lang);
+                }
+            });
+
+            // Apply saved language on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                var savedLang = localStorage.getItem('hospital_lang') || 'si';
+                applyPageLang(savedLang);
+            });
+        })();
+    </script>
+</body>
+</html>

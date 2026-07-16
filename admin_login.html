@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Login - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full border-t-8 border-amber-500">
+        <div class="text-center mb-8">
+            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-3">
+            <h2 class="text-2xl font-bold text-amber-900">Super Admin Portal</h2>
+            <p class="text-gray-500 text-sm mt-1">ප්‍රධාන පාලක පිවිසුම (Root Access)</p>
+        </div>
+
+        <form id="adminLoginForm" class="space-y-5">
+            
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">පරිශීලක නාමය (Username)</label>
+                <input type="text" id="username" placeholder="admin" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">මුරපදය (Password)</label>
+                <input type="password" id="password" placeholder="admin123" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+            </div>
+
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
+                Secure Login
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+
+            if (user === 'admin' && pass === 'admin123') {
+                sessionStorage.setItem('admin_logged_in', 'true');
+                window.location.href = "admin_panel.html";
+            } else {
+                alert('පරිශීලක නාමය හෝ මුරපදය වැරදියි! (Access Denied)');
+            }
+        });
+    </script>
+</body>
+</html>

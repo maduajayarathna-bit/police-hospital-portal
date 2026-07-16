@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>වෛද්‍යවරයා සම්බන්ධ කරගැනීම - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen py-10 px-4">
+
+    <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- ශීර්ෂය -->
+        <div class="bg-white p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between border-l-8 border-red-600">
+            <div class="flex items-center space-x-4">
+                <img src="images.jpg" alt="Police Logo" class="w-14">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800">07. Contact a Doctor / Emergency Help</h2>
+                    <p class="text-red-600 text-xs font-semibold mt-0.5">වෛද්‍යවරයා සමඟ සම්බන්ධ වීමේ සහ හදිසි උපදෙස් ලබාගැනීමේ මෙනුව</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- වම් පස: හදිසි අවස්ථා ඇමතුම් (Emergency Card) -->
+            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-6 rounded-xl shadow-md flex flex-col justify-between">
+                <div>
+                    <div class="text-3xl mb-3"><i class="fa-solid fa-kit-medical animate-pulse"></i></div>
+                    <h3 class="text-lg font-bold mb-2">හදිසි අවස්ථාවකදී (Emergency)</h3>
+                    <p class="text-xs text-red-100 leading-relaxed mb-4">
+                        සායනයට පැමිණීමට නොහැකි අවස්ථාවක හෝ ක්ෂණික රෝගී තත්ත්වයකදී රෝහලේ රාජකාරි වෛද්‍යවරයා සම්බන්ධ කරගෙන ක්ෂණික උපදෙස් ලබාගැනීමට පහත බොත්තම භාවිතා කරන්න.
+                    </p>
+                </div>
+                <a href="tel:0112XXXXXX" class="w-full bg-white text-red-700 font-bold text-center py-3 rounded-lg shadow hover:bg-red-50 transition block text-sm">
+                    <i class="fa-solid fa-phone-flip mr-2"></i> Quick Connect Doctor
+                </a>
+            </div>
+
+            <!-- දකුණු පස: පණිවිඩ යැවීමේ පුවරුව (Message Portal) -->
+            <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-md space-y-4">
+                <h3 class="text-sm font-bold text-slate-700 pb-2 border-b flex items-center">
+                    <i class="fa-regular fa-comment-dots mr-2 text-blue-800"></i> Send a Message to Medical Officer
+                </h3>
+                
+                <form class="space-y-4 text-xs">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-semibold text-gray-700 mb-1">Police Hospital Reg. No.</label>
+                            <input type="text" placeholder="PH-XXXX" required class="w-full p-2.5 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-gray-700 mb-1">අදාළ අංශය / සායනය (Clinic/Department)</label>
+                            <select class="w-full p-2.5 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>General OPD (සාමාන්‍ය බාහිර රෝගී අංශය)</option>
+                                <option>Diabetic Clinic (දියවැඩියා සායනය)</option>
+                                <option>Cardiology Clinic (හෘද රෝග සායනය)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">ඔබේ ගැටලුව හෝ රෝග ලක්ෂණ (Message / Symptoms)</label>
+                        <textarea rows="4" placeholder="වෛද්‍යවරයා වෙත යොමු කිරීමට අවශ්‍ය විස්තරය මෙහි සටහන් කරන්න..." required class="w-full p-2.5 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <!-- ෆයිල් අප්ලෝඩ් කිරීමේ හැකියාව -->
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">පැරණි බෙහෙත් වට්ටෝරු හෝ වාර්තා (Attach Prescriptions/Reports)</label>
+                        <input type="file" class="w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 rounded-lg shadow transition text-sm">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> පණිවිඩය යොමු කරන්න (Send Message)
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- ප්‍රකාශන අයිතිය -->
+        <div class="text-center text-xs text-gray-400 mt-6 border-t pt-4">
+            <p>© 2026 ශ්‍රී ලංකා පොලිස් රෝහල (Sri Lanka Police Hospital). All Rights Reserved.</p>
+        </div>
+
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('ඔබේ පණිවිඩය වෛද්‍යවරයා වෙත සාර්ථකව යොමු කරන ලදී! (Message Sent)');
+            e.target.reset();
+        });
+    </script>
+
+    <!-- Language Switcher Support -->
+    <script>
+        (function() {
+            // Page-level translations (si = default Sinhala labels, en = English)
+            var pageTranslations = {
+                'si': {
+                    'page_title_01': 'රෝගී ලියාපදිංචිය',
+                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
+                    'page_title_03': 'වෛද්‍ය වාර්තා',
+                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
+                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
+                    'page_title_06': 'සායන දින වෙන්කිරීම',
+                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
+                    'save_btn': 'සුරකින්න (Save Data)',
+                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
+                    'send_btn': 'හරටම පක්වැන්න (Submit)'
+                },
+                'en': {
+                    'page_title_01': 'Patient Registration',
+                    'page_title_02': 'Medical History',
+                    'page_title_03': 'Medical Reports',
+                    'page_title_04': 'Social/Family History',
+                    'page_title_05': 'Physical Activity',
+                    'page_title_06': 'Clinic Appointments',
+                    'page_title_07': 'Contact Doctor',
+                    'save_btn': 'Save Data',
+                    'signup_btn': 'Sign Up / Save',
+                    'send_btn': 'Submit / Send'
+                }
+            };
+
+            function applyPageLang(lang) {
+                if (!pageTranslations[lang]) return;
+                var t = pageTranslations[lang];
+                // Update submit/save buttons
+                var btns = document.querySelectorAll('[data-lang-key]');
+                btns.forEach(function(el) {
+                    var key = el.getAttribute('data-lang-key');
+                    if (t[key]) el.innerText = t[key];
+                });
+                // Store in localStorage for persistence
+                localStorage.setItem('hospital_lang', lang);
+            }
+
+            // Listen for language change message from parent dashboard
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'changeLang') {
+                    applyPageLang(event.data.lang);
+                }
+            });
+
+            // Apply saved language on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                var savedLang = localStorage.getItem('hospital_lang') || 'si';
+                applyPageLang(savedLang);
+            });
+        })();
+    </script>
+</body>
+</html>

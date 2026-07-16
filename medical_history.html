@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>වෛද්‍ය ඉතිහාසය යාවත්කාලීන කිරීම - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl w-full border-t-8 border-emerald-600">
+        <div class="text-center mb-6">
+            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-2">
+            <h2 class="text-2xl font-bold text-slate-800">02. Update Medical History</h2>
+            <p class="text-emerald-600 text-sm font-semibold mt-1">නිදන්ගත රෝග සහ රෝග ලක්ෂණ පිරික්සුම් මෙනුව</p>
+        </div>
+
+        <div class="mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Police Hospital reg. No.</label>
+            <input type="text" id="reg_no_input" placeholder="PH-XXXX" required class="w-full md:w-1/2 p-2 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <form id="historyForm">
+            <h3 class="text-md font-bold text-slate-700 mb-4 pb-2 border-b">පහත සඳහන් රෝගී තත්ත්වයන් පවතීදැයි සලකුණු කරන්න (Checkboxes):</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-slate-700 font-medium">
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="high_blood_pressure" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>High Blood Pressure</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="diabetes" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Diabetes (Type 1 / Type 2)</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="heart_attack" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Heart Attack</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="heart_failure" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Heart Failure</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="thyroid_disorder" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Thyroid Disorder</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="kidney_disease" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Kidney Disease</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="high_cholesterol" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>High Cholesterol</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="liver_disease" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Liver Disease</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="asthma" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Asthma</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="stroke_tia" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Stroke / TIA</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="severe_allergies" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Severe Allergies</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="chronic_bronchitis" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Chronic Bronchitis</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="epilepsy_seizures" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Epilepsy / Seizures</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="depression_anxiety" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Depression / Anxiety</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="migraine_headaches" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Migraine / Headaches</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="gastritis" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Gastritis</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="cancer_tumor" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Cancer / Tumor</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="arthritis_joint" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Arthritis / Joint Pains</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-slate-50 p-3 rounded-lg hover:bg-emerald-50 cursor-pointer transition">
+                    <input type="checkbox" id="tuberculosis" class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                    <span>Tuberculosis (TB)</span>
+                </label>
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Any Other Chronic Illness (වෙනත් යම් නිදන්ගත රෝගී තත්ත්වයක් ඇත්නම්)</label>
+                <textarea id="any_other" rows="3" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+            </div>
+
+            <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-200">
+                සුරකින්න (Save Data)
+            </button>
+        </form>
+
+        <div class="text-center text-xs text-gray-400 mt-8 border-t pt-4">
+            <p>© 2026 ශ්‍රී ලංකා පොලිස් රෝහල (Sri Lanka Police Hospital). All Rights Reserved.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedRegNo = localStorage.getItem('current_patient_reg_no');
+            if (savedRegNo) {
+                document.getElementById('reg_no_input').value = savedRegNo;
+            }
+        });
+
+        document.getElementById('historyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const regNo = document.getElementById('reg_no_input').value.trim();
+            if(!regNo) {
+                alert('කරුණාකර රෝහල් ලියාපදිංචි අංකය ඇතුළත් කරන්න.');
+                return;
+            }
+
+            let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            if(!patients[regNo]) {
+                alert('මෙම අංකයට අදාළ රෝගියෙකු ලියාපදිංචි වී නොමැත.');
+                return;
+            }
+
+            const history = {
+                high_blood_pressure: document.getElementById('high_blood_pressure').checked,
+                diabetes: document.getElementById('diabetes').checked,
+                heart_attack: document.getElementById('heart_attack').checked,
+                other: document.getElementById('any_other').value
+                // For simplicity, just recording a few in test
+            };
+
+            patients[regNo].medical_history = history;
+            localStorage.setItem('hospital_patients', JSON.stringify(patients));
+
+            alert('වෛද්‍ය ඉතිහාසය සාර්ථකව යාවත්කාලීන කරන ලදී! (Medical History Updated)');
+        });
+    </script>
+
+    <!-- Language Switcher Support -->
+    <script>
+        (function() {
+            // Page-level translations (si = default Sinhala labels, en = English)
+            var pageTranslations = {
+                'si': {
+                    'page_title_01': 'රෝගී ලියාපදිංචිය',
+                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
+                    'page_title_03': 'වෛද්‍ය වාර්තා',
+                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
+                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
+                    'page_title_06': 'සායන දින වෙන්කිරීම',
+                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
+                    'save_btn': 'සුරකින්න (Save Data)',
+                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
+                    'send_btn': 'හරටම පක්වැන්න (Submit)'
+                },
+                'en': {
+                    'page_title_01': 'Patient Registration',
+                    'page_title_02': 'Medical History',
+                    'page_title_03': 'Medical Reports',
+                    'page_title_04': 'Social/Family History',
+                    'page_title_05': 'Physical Activity',
+                    'page_title_06': 'Clinic Appointments',
+                    'page_title_07': 'Contact Doctor',
+                    'save_btn': 'Save Data',
+                    'signup_btn': 'Sign Up / Save',
+                    'send_btn': 'Submit / Send'
+                }
+            };
+
+            function applyPageLang(lang) {
+                if (!pageTranslations[lang]) return;
+                var t = pageTranslations[lang];
+                // Update submit/save buttons
+                var btns = document.querySelectorAll('[data-lang-key]');
+                btns.forEach(function(el) {
+                    var key = el.getAttribute('data-lang-key');
+                    if (t[key]) el.innerText = t[key];
+                });
+                // Store in localStorage for persistence
+                localStorage.setItem('hospital_lang', lang);
+            }
+
+            // Listen for language change message from parent dashboard
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'changeLang') {
+                    applyPageLang(event.data.lang);
+                }
+            });
+
+            // Apply saved language on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                var savedLang = localStorage.getItem('hospital_lang') || 'si';
+                applyPageLang(savedLang);
+            });
+        })();
+    </script>
+</body>
+</html>

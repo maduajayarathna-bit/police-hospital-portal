@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPD Dashboard - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-6">
+
+    <div class="max-w-4xl mx-auto space-y-6">
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-600 flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-bold text-sky-900">බාහිර රෝගී අංශය - පාලක පුවරුව</h2>
+                <p class="text-sm text-gray-500">OPD Control Dashboard</p>
+            </div>
+            <div class="text-right">
+                <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1 rounded-full" id="loggedInUser">
+                    Logged in as: -
+                </span>
+                <button onclick="logout()" class="ml-3 text-xs text-red-600 hover:underline font-bold">Logout</button>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">ලියාපදිංචි රෝගීන් සෙවීම (Search Registered Patients)</h3>
+            
+            <div class="flex space-x-2 mb-6">
+                <input type="text" id="searchId" placeholder="PH-XXXX හෝ දුරකථන / NIC / පොලිස් සේවා අංකය" class="flex-1 p-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-sky-500">
+                <button onclick="searchPatient()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-6 rounded-lg transition shadow">Search</button>
+            </div>
+
+            <div id="patientDetails" class="hidden border border-sky-200 rounded-lg overflow-hidden bg-sky-50/30">
+                <table class="w-full text-sm text-left text-gray-600">
+                    <tbody>
+                        <tr class="border-b border-sky-100">
+                            <th class="px-4 py-3 bg-sky-50 font-semibold w-1/3">සම්පූර්ණ නම (Name)</th>
+                            <td class="px-4 py-3 bg-white" id="p_name"></td>
+                        </tr>
+                        <tr class="border-b border-sky-100">
+                            <th class="px-4 py-3 bg-sky-50 font-semibold">වයස (Age)</th>
+                            <td class="px-4 py-3 bg-white" id="p_age"></td>
+                        </tr>
+                        <tr class="border-b border-sky-100">
+                            <th class="px-4 py-3 bg-sky-50 font-semibold">පොලිස් සේවා අංකය (Police ID)</th>
+                            <td class="px-4 py-3 bg-white" id="p_police_id"></td>
+                        </tr>
+                        <tr>
+                            <th class="px-4 py-3 bg-sky-50 font-semibold">ලේ වර්ගය (Blood Group)</th>
+                            <td class="px-4 py-3 bg-white" id="p_blood"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="p-4 bg-white border-t border-sky-100 text-right">
+                    <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded shadow text-xs transition">වෛද්‍යවරයා වෙත යොමු කරන්න (Send to Doctor)</button>
+                </div>
+            </div>
+            <p id="notFoundMsg" class="hidden text-sm text-red-500 font-bold mt-2">මෙම අංකයට අදාළ රෝගියෙකු හමු නොවීය.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('opd_logged_in') !== 'true') {
+                window.location.href = "opd_login.html";
+            } else {
+                document.getElementById('loggedInUser').innerText = 'Logged in as: ' + sessionStorage.getItem('opd_user');
+            }
+        });
+
+        function logout() {
+            sessionStorage.removeItem('opd_logged_in');
+            sessionStorage.removeItem('opd_user');
+            window.location.href = "opd_login.html";
+        }
+
+        function searchPatient() {
+            const query = document.getElementById('searchId').value.trim().toLowerCase();
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            
+            let foundPatient = null;
+            let foundRegNo = null;
+
+            if (patients[query.toUpperCase()]) {
+                foundPatient = patients[query.toUpperCase()];
+                foundRegNo = query.toUpperCase();
+            } else {
+                for (const regNo in patients) {
+                    const p = patients[regNo];
+                    if (
+                        (p.nic_no && p.nic_no.toLowerCase() === query) ||
+                        (p.contact_no && p.contact_no.toLowerCase() === query) ||
+                        (p.police_id_no && p.police_id_no.toLowerCase() === query)
+                    ) {
+                        foundPatient = p;
+                        foundRegNo = regNo;
+                        break;
+                    }
+                }
+            }
+
+            if (foundPatient) {
+                document.getElementById('p_name').innerText = (foundPatient.full_name || '-') + ' (' + foundRegNo + ')';
+                document.getElementById('p_age').innerText = foundPatient.age || '-';
+                document.getElementById('p_police_id').innerText = foundPatient.police_id_no || '-';
+                document.getElementById('p_blood').innerText = foundPatient.blood_group || '-';
+                
+                document.getElementById('patientDetails').classList.remove('hidden');
+                document.getElementById('notFoundMsg').classList.add('hidden');
+            } else {
+                document.getElementById('patientDetails').classList.add('hidden');
+                document.getElementById('notFoundMsg').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

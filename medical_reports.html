@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>රසායනාගාර වාර්තා - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl w-full border-t-8 border-red-600">
+        <div class="text-center mb-6">
+            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-2">
+            <h2 class="text-2xl font-bold text-slate-800">02. Update Medical Reports</h2>
+            <p class="text-red-600 text-sm font-semibold mt-1">රුධිර පීඩනය සහ රසායනාගාර දත්ත ඇතුළත් කිරීමේ පුවරුව</p>
+        </div>
+
+        <div class="mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Police Hospital reg. No.</label>
+            <input type="text" id="reg_no_input" placeholder="PH-XXXX" required class="w-full md:w-1/2 p-2 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-red-500">
+        </div>
+
+        <form id="reportsForm" class="space-y-6">
+            
+            <div class="p-5 bg-red-50/50 rounded-xl border border-red-100">
+                <h3 class="text-sm font-bold text-red-800 mb-3 flex items-center">🩸 Blood Pressure (රුධිර පීඩනය)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">දිනය (Date)</label>
+                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">වේලාව (Time)</label>
+                        <input type="time" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Systolic Level</label>
+                        <input type="number" placeholder="e.g. 120" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Diastolic Level</label>
+                        <input type="number" placeholder="e.g. 80" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 bg-orange-50/50 rounded-xl border border-orange-100">
+                <h3 class="text-sm font-bold text-orange-800 mb-3 flex items-center">🧬 Blood Sugar Tests (රුධිරයේ සීනි මට්ටම)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">පරීක්ෂණ දිනය (Date)</label>
+                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">FBS (mg/dL)</label>
+                        <input type="number" step="0.1" placeholder="Fasting Sugar" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">PPBS (mg/dL)</label>
+                        <input type="number" step="0.1" placeholder="Post Prandial" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">HbA1c (%)</label>
+                        <input type="number" step="0.1" placeholder="Average 3 Months" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 bg-blue-50/50 rounded-xl border border-blue-100">
+                <h3 class="text-sm font-bold text-blue-800 mb-3 flex items-center">🧪 Cholesterol Values (කොලෙස්ටරෝල් මට්ටම)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">පරීක්ෂණ දිනය (Date)</label>
+                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Total Cholesterol</label>
+                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">HDL (Good)</label>
+                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">LDL (Bad)</label>
+                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-200">
+                වාර්තා සුරකින්න (Save Medical Reports)
+            </button>
+        </form>
+
+        <div class="text-center text-xs text-gray-400 mt-8 border-t pt-4">
+            <p>© 2026 ශ්‍රී ලංකා පොලිස් රෝහල (Sri Lanka Police Hospital). All Rights Reserved.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedRegNo = localStorage.getItem('current_patient_reg_no');
+            if (savedRegNo) {
+                document.getElementById('reg_no_input').value = savedRegNo;
+            }
+        });
+
+        document.getElementById('reportsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const regNo = document.getElementById('reg_no_input').value.trim();
+            if(!regNo) {
+                alert('කරුණාකර රෝහල් ලියාපදිංචි අංකය ඇතුළත් කරන්න.');
+                return;
+            }
+
+            let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            if(patients[regNo]) {
+                patients[regNo].has_reports = true; // Mock saving report status
+                localStorage.setItem('hospital_patients', JSON.stringify(patients));
+            }
+
+            alert('රසායනාගාර වාර්තා සාර්ථකව සුරකින ලදී! (Medical Reports Saved)');
+        });
+    </script>
+
+    <!-- Language Switcher Support -->
+    <script>
+        (function() {
+            // Page-level translations (si = default Sinhala labels, en = English)
+            var pageTranslations = {
+                'si': {
+                    'page_title_01': 'රෝගී ලියාපදිංචිය',
+                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
+                    'page_title_03': 'වෛද්‍ය වාර්තා',
+                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
+                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
+                    'page_title_06': 'සායන දින වෙන්කිරීම',
+                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
+                    'save_btn': 'සුරකින්න (Save Data)',
+                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
+                    'send_btn': 'හරටම පක්වැන්න (Submit)'
+                },
+                'en': {
+                    'page_title_01': 'Patient Registration',
+                    'page_title_02': 'Medical History',
+                    'page_title_03': 'Medical Reports',
+                    'page_title_04': 'Social/Family History',
+                    'page_title_05': 'Physical Activity',
+                    'page_title_06': 'Clinic Appointments',
+                    'page_title_07': 'Contact Doctor',
+                    'save_btn': 'Save Data',
+                    'signup_btn': 'Sign Up / Save',
+                    'send_btn': 'Submit / Send'
+                }
+            };
+
+            function applyPageLang(lang) {
+                if (!pageTranslations[lang]) return;
+                var t = pageTranslations[lang];
+                // Update submit/save buttons
+                var btns = document.querySelectorAll('[data-lang-key]');
+                btns.forEach(function(el) {
+                    var key = el.getAttribute('data-lang-key');
+                    if (t[key]) el.innerText = t[key];
+                });
+                // Store in localStorage for persistence
+                localStorage.setItem('hospital_lang', lang);
+            }
+
+            // Listen for language change message from parent dashboard
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'changeLang') {
+                    applyPageLang(event.data.lang);
+                }
+            });
+
+            // Apply saved language on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                var savedLang = localStorage.getItem('hospital_lang') || 'si';
+                applyPageLang(savedLang);
+            });
+        })();
+    </script>
+</body>
+</html>
