@@ -220,5 +220,49 @@
             });
         });
     </script>
+<!-- ==========================================
+         REAL-TIME BACKEND INTEGRATION ENGINE
+         ========================================== -->
+    <script>
+        // Render එකෙන් ලැබුණු සජීවී API ලිපිනය මෙතනට දමන්න
+        const RENDER_API_URL = "https://police-hospital-api.onrender.com";
+
+        // 1. රෝගී නිලධාරියා ඇප් එකෙන් ලියාපදිංචි වන විට සර්වර් එකට දත්ත යැවීමේ ශ්‍රිතය
+        async function registerPatientToBackend(patientData) {
+            try {
+                const response = await fetch(`${RENDER_API_URL}/api/patient/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(patientData)
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    alert("ලියාපදිංචිය සාර්ථකයි! නිල අංකය: " + result.police_hospital_reg_no);
+                } else {
+                    alert("දෝෂයක් සිදු විය: " + result.detail);
+                }
+            } catch (error) {
+                console.error("Server Error:", error);
+            }
+        }
+
+        // 2. වෛද්‍යවරුන්ගේ පැනලයට ඇප් එකෙන් එන පණිවිඩ සජීවීව ලබාගැනීමේ ශ්‍රිතය (Live Feed Fetch)
+        async function fetchLiveMessagesFromApp() {
+            try {
+                const response = await fetch(`${RENDER_API_URL}/api/messages/live-feed`);
+                const data = await response.json();
+                console.log("Live Messages Loaded:", data.messages);
+                // මෙතනින් වෛද්‍යවරයාගේ HTML UI එකට දත්ත සජීවීව සවි වේ
+            } catch (error) {
+                console.error("Error fetching live feed:", error);
+            }
+        }
+
+        // පද්ධතිය පණ ගැන්වෙන විට සජීවී පණිවිඩ පරීක්ෂාව ආරම්භ කිරීම
+        // සෑම තත්පර 10කට වරක්ම අලුත් පණිවිඩ ඇත්දැයි සර්වර් එකෙන් විමසයි
+        setInterval(fetchLiveMessagesFromApp, 10000);
+    </script>
 </body>
 </html>
