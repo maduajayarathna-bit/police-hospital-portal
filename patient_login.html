@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>රෝගී පිවිසුම - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+        input, select, textarea {
+            border: 2px solid #93c5fd !important;
+            background-color: #f8fafc !important;
+        }
+        input:focus {
+            border-color: #1d4ed8 !important;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full border-t-8 border-blue-800">
+        <div class="text-center mb-8">
+            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-3">
+            <h2 class="text-2xl font-bold text-blue-950">රෝගී පිවිසුම</h2>
+            <p class="text-gray-500 text-sm mt-1">Patient Login Portal</p>
+        </div>
+
+        <form id="patientLoginForm" class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">පරිශීලක නාමය (Username / Phone / NIC)</label>
+                <input type="text" id="username" placeholder="පරිශීලක නාමය, දුරකථන අංකය හෝ NIC ඇතුළත් කරන්න" required class="w-full p-2.5 rounded-lg outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">මුරපදය (Password)</label>
+                <input type="password" id="password" placeholder="මුරපදය ඇතුළත් කරන්න" required class="w-full p-2.5 rounded-lg outline-none">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
+                පිවිසෙන්න (Login)
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-xs text-slate-500">තවමත් ගිණුමක් නොමැතිද? <a href="register.html" class="text-blue-700 font-bold hover:underline">මෙහි ලියාපදිංචි වන්න</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('patientLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = document.getElementById('username').value.trim().toLowerCase();
+            const pass = document.getElementById('password').value;
+
+            const patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            
+            let matchedPatient = null;
+            let matchedKey = null;
+
+            for (const key in patients) {
+                const p = patients[key];
+                if (
+                    (p.username && p.username.toLowerCase() === user) ||
+                    (p.contact_no && p.contact_no === user) ||
+                    (p.nic_no && p.nic_no.toLowerCase() === user)
+                ) {
+                    if (p.password === pass) {
+                        matchedPatient = p;
+                        matchedKey = key;
+                        break;
+                    }
+                }
+            }
+
+            if (matchedPatient) {
+                sessionStorage.setItem('patient_logged_in', 'true');
+                sessionStorage.setItem('patient_reg_no', matchedKey);
+                // Also set standard current patient key so sub-forms automatically load it
+                localStorage.setItem('current_patient_reg_no', matchedKey);
+                window.location.href = "patient_dashboard.html";
+            } else {
+                alert('පරිශීලක නාමය හෝ මුරපදය වැරදියි! (Invalid username or password)');
+            }
+        });
+    </script>
+</body>
+</html>
