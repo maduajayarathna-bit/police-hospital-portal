@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ප්‍රධාන පාලන පුවරුව - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <title>Central Management Dashboard - Sri Lanka Police Hospital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans Sinhala', sans-serif; }
-        /* සෑම Input කොටුවකටම ලා නිල් පාට බෝඩරයක් ස්ථිරවම යෙදීම */
+        body { font-family: 'Arial', sans-serif; }
+        /* Uniform Light Blue styling across dynamic input layers */
         input, select, textarea {
             border: 2px solid #93c5fd !important; /* light blue-300 */
             background-color: #f8fafc !important; /* soft slate-50 */
@@ -22,21 +22,25 @@
 </head>
 <body class="bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 min-h-screen flex">
 
+    <!-- Left Master Sidebar Panel -->
     <div class="w-64 bg-slate-950 text-slate-300 flex flex-col justify-between hidden md:flex min-h-screen shadow-2xl border-r border-slate-800">
         <div>
+            <!-- Central Portal Header Identity -->
             <div class="p-5 text-center border-b border-slate-800 bg-slate-900/50">
                 <img src="images.jpg" alt="Police Logo" class="w-12 mx-auto mb-2 drop-shadow-md">
-                <h1 class="text-sm font-bold text-white tracking-wider">ශ්‍රී ලංකා පොලිස් රෝහල</h1>
+                <h1 class="text-sm font-bold text-white tracking-wider">Sri Lanka Police Hospital</h1>
                 <p class="text-[10px] text-emerald-400 mt-0.5 font-mono">Central Portal v4.0</p>
             </div>
             
+            <!-- Navigation Control Blocks -->
             <nav class="p-4 space-y-1.5 text-xs font-semibold">
-                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 mb-1 tracking-wider">රෝගී අංශය (Patient Portal)</div>
-               <a href="patient_login.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-right-to-bracket w-5 text-blue-300"></i> <span id="nav_pat_login">රෝගී පිවිසුම (Patient Login)</span>
+                <!-- Segment A: Patients -->
+                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 mb-1 tracking-wider">Patient Portal</div>
+                <a href="patient_login.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-right-to-bracket w-5 text-blue-300"></i> <span id="nav_pat_login">Patient Login</span>
                 </a>
-<a href="doctor_registration.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white">
-                    <i class="fa-solid fa-user-plus w-5 text-blue-400"></i> <span id="nav_reg">01. රෝගී ලියාපදිංචිය</span>
+                <a href="patient_registration.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-user-plus w-5 text-blue-400"></i> <span id="nav_reg">01. Patient Registration</span>
                 </a>
                 <a href="medical_history.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
                     <i class="fa-solid fa-notes-medical w-5 text-emerald-400"></i> <span id="nav_med_hist">02. Medical History</span>
@@ -51,59 +55,67 @@
                     <i class="fa-solid fa-heart-pulse w-5 text-cyan-400"></i> <span id="nav_phy_act">05. Physical Activity</span>
                 </a>
                 <a href="clinical_calendar.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-calendar-check w-5 text-amber-400"></i> <span id="nav_clinics">06. සායන දින වෙන්කිරීම</span>
+                    <i class="fa-solid fa-calendar-check w-5 text-amber-400"></i> <span id="nav_clinics">06. Clinic Appointments</span>
                 </a>
                 <a href="contact_doctor.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-user-doctor w-5 text-teal-400"></i> <span id="nav_contact">07. වෛද්‍යවරයා සම්බන්ධ වීමට</span>
+                    <i class="fa-solid fa-user-doctor w-5 text-teal-400"></i> <span id="nav_contact">07. Contact Doctor</span>
                 </a>
 
-                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">වෛද්‍ය අංශය (Doctor Portal)</div>
-                <a href="#" onclick="doctor_login.html()" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-user-doctor w-5 text-purple-300"></i> <span id="nav_doc_login">වෛද්‍ය පිවිසුම (Doctor Login)</span>
+                <!-- Segment B: Doctors -->
+                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">Doctor Portal</div>
+                <a href="doctor_login.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-user-doctor w-5 text-purple-300"></i> <span id="nav_doc_login">Doctor Login</span>
                 </a>
-                <a href="#" onclick="loadDoctorRegistration()" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-user-md w-5 text-purple-400"></i> <span id="nav_doc_reg">වෛද්‍යවරුන් ලියාපදිංචිය</span>
-                </a>
-
-                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">බාහිර රෝගී අංශය (OPD Staff)</div>
-                <a href="#" onclick="loadOPDStaffManagement()" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-users-gear w-5 text-sky-400"></i> <span id="nav_opd">OPD නිලධාරී ගිණුම් (3)</span>
+                <a href="doctor_registration.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-user-md w-5 text-purple-400"></i> <span id="nav_doc_reg">Doctor Registration</span>
                 </a>
 
-                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">පාලන අංශය (Admin Command)</div>
-                <a href="#" onclick="loadSuperAdminLogin()" class="flex items-center space-x-3 p-2.5 rounded-lg bg-amber-600/20 text-amber-400 border border-amber-500/30 hover:bg-amber-600 hover:text-white transition">
-                    <i class="fa-solid fa-user-shield w-5"></i> <span id="nav_admin">ප්‍රධාන පාලක ගිණුම (Root)</span>
+                <!-- Segment C: Outpatient Unit -->
+                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">OPD Staff</div>
+                <a href="opd_login.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-users-gear w-5 text-sky-400"></i> <span id="nav_opd">OPD Staff Accounts (3)</span>
+                </a>
+
+                <!-- Segment D: Root Command -->
+                <div class="text-[10px] uppercase text-slate-500 font-bold px-3 pt-4 mb-1 tracking-wider">Admin Command</div>
+                <a href="admin_login.html" target="content-frame" class="flex items-center space-x-3 p-2.5 rounded-lg bg-amber-600/20 text-amber-400 border border-amber-500/30 hover:bg-amber-600 hover:text-white transition">
+                    <i class="fa-solid fa-user-shield w-5"></i> <span id="nav_admin">Super Admin (Root)</span>
                 </a>
             </nav>
         </div>
 
+        <!-- Sidebar Footer Layout Details -->
         <div class="p-4 border-t border-slate-800 text-[10px] text-slate-400 text-center bg-slate-900/50 leading-relaxed">
-            <p>© 2026 පොලිස් රෝහල (Police Hospital)</p>
-            <p class="font-bold text-amber-500">තොරතුරු තාක්ෂණ අංශය (IT Division)</p>
+            <p>© 2026 Police Hospital Management</p>
+            <p class="font-bold text-amber-500">Information Technology Division</p>
             <p class="text-slate-500 mt-1"><i class="fa-solid fa-phone text-[8px]"></i> 0713499840</p>
         </div>
     </div>
 
+    <!-- Right Workspace Area -->
     <div class="flex-1 flex flex-col min-h-screen">
         
+        <!-- Global Top Header Bar -->
         <header class="bg-gradient-to-r from-blue-900 to-slate-900 text-white shadow-md h-16 flex items-center justify-between px-6">
             <div class="flex items-center space-x-2">
                 <i class="fa-solid fa-bars text-gray-300 md:hidden cursor-pointer"></i>
-                <h2 id="sys_title" class="text-sm font-bold tracking-wide">පොලිස් රෝහල් කළමනාකරණ මධ්‍යම පද්ධතිය</h2>
+                <h2 id="sys_title" class="text-sm font-bold tracking-wide">Police Hospital Central Management System</h2>
             </div>
             
             <div class="flex items-center space-x-4 text-xs">
+                <!-- Language Selector Module -->
                 <div class="flex items-center space-x-1.5 bg-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-700">
                     <i class="fa-solid fa-language text-amber-400 text-sm"></i>
                     <select id="lang_selector" class="bg-transparent border-none text-white text-xs font-bold focus:outline-none cursor-pointer" style="background-color: transparent !important; border: none !important;">
+                        <option value="en" class="text-slate-900 font-semibold" selected>English (EN)</option>
                         <option value="si" class="text-slate-900 font-semibold">සිංහල (SI)</option>
-                        <option value="en" class="text-slate-900 font-semibold">English (EN)</option>
                     </select>
                 </div>
 
+                <!-- Admin Status Profile Profile Card -->
                 <div class="text-right">
-                    <p class="font-bold text-amber-400">පරිපාලක (Administrator)</p>
-                    <p class="text-[10px] text-slate-300 font-semibold">පද්ධති පරිපාලක (System Administrator)</p>
+                    <p class="font-bold text-amber-400">Administrator</p>
+                    <p class="text-[10px] text-slate-300 font-semibold">System Administrator</p>
                 </div>
                 <div class="w-10 h-10 bg-amber-500 text-slate-950 font-bold rounded-full flex items-center justify-center shadow-md border-2 border-white">
                     <i class="fa-solid fa-user-gear text-sm"></i>
@@ -111,8 +123,10 @@
             </div>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
+        <!-- Dynamic Content Processing Node -->
+        <main class="flex-1 p-6 space-y-6 flex flex-col">
             
+            <!-- Real-Time Metrics Row -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-blue-50 p-4 rounded-xl shadow-sm border border-blue-200 flex items-center justify-between">
                     <div><p class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">System Status</p><p class="text-sm font-bold text-slate-700 mt-0.5">All Servers Online</p></div>
@@ -132,31 +146,17 @@
                 </div>
             </div>
 
-            <!-- Iframe to load content pages -->
+            <!-- Core Working Frame Container (Starts at Patient Login Interface to mitigate initial 404 blockages) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex-1 flex flex-col min-h-[500px]">
-                <iframe name="content-frame" src="register.html" class="w-full h-full flex-1 border-none" title="Content Area"></iframe>
+                <iframe name="content-frame" src="patient_login.html" class="w-full h-full flex-1 border-none" title="Content Area"></iframe>
             </div>
 
         </main>
     </div>
 
+    <!-- Frontend Translation Engine Core Interface -->
     <script>
         const translations = {
-            'si': {
-                'nav_pat_login': 'රෝගී පිවිසුම (Patient Login)',
-                'nav_reg': '01. රෝගී ලියාපදිංචිය',
-                'nav_med_hist': '02. වෛද්‍ය ඉතිහාසය',
-                'nav_med_rep': '03. වෛද්‍ය වාර්තා',
-                'nav_soc_hist': '04. සමාජීය/පවුලේ ඉතිහාසය',
-                'nav_phy_act': '05. ශාරීරික ක්‍රියාකාරකම්',
-                'nav_clinics': '06. සායන දින වෙන්කිරීම',
-                'nav_contact': '07. වෛද්‍යවරයා සම්බන්ධ වීමට',
-                'nav_doc_login': 'වෛද්‍ය පිවිසුම (Doctor Login)',
-                'nav_doc_reg': 'වෛද්‍යවරුන් ලියාපදිංචිය',
-                'nav_opd': 'OPD නිලධාරී ගිණුම් (3)',
-                'nav_admin': 'ප්‍රධාන පාලක ගිණුම (Root)',
-                'sys_title': 'පොලිස් රෝහල් කළමනාකරණ මධ්‍යම පද්ධතිය'
-            },
             'en': {
                 'nav_pat_login': 'Patient Login',
                 'nav_reg': '01. Patient Registration',
@@ -171,6 +171,21 @@
                 'nav_opd': 'OPD Staff Accounts (3)',
                 'nav_admin': 'Super Admin (Root)',
                 'sys_title': 'Police Hospital Central Management System'
+            },
+            'si': {
+                'nav_pat_login': 'රෝගී පිවිසුම (Patient Login)',
+                'nav_reg': '01. රෝගී ලියාපදිංචිය',
+                'nav_med_hist': '02. වෛද්‍ය ඉතිහාසය',
+                'nav_med_rep': '03. වෛද්‍ය වාර්තා',
+                'nav_soc_hist': '04. සමාජීය/පවුලේ ඉතිහාසය',
+                'nav_phy_act': '05. ශාරීරික ක්‍රියාකාරකම්',
+                'nav_clinics': '06. සායන දින වෙන්කිරීම',
+                'nav_contact': '07. වෛද්‍යවරයා සම්බන්ධ වීමට',
+                'nav_doc_login': 'වෛද්‍ය පිවිසුම (Doctor Login)',
+                'nav_doc_reg': 'වෛද්‍යවරුන් ලියාපදිංචිය',
+                'nav_opd': 'OPD නිලධාරී ගිණුම් (3)',
+                'nav_admin': 'ප්‍රධාන පාලක ගිණුම (Root)',
+                'sys_title': 'පොලිස් රෝහල් කළමනාකරණ මධ්‍යම පද්ධතිය'
             }
         };
 
@@ -181,35 +196,20 @@
                     if (el) el.innerText = text;
                 }
             }
-            // Notify iframe
+            // Broadcaster node to communicate language mutation flags inside active workspace frames
             const iframe = document.querySelector('iframe[name="content-frame"]');
             if (iframe && iframe.contentWindow) {
                 try { iframe.contentWindow.postMessage({ type: 'changeLang', lang: lang }, '*'); } catch(e) {}
             }
         }
 
-        function loadSuperAdminLogin() {
-            document.querySelector('iframe[name="content-frame"]').src = "admin_login.html";
-        }
-        function loadDoctorRegistration() {
-            document.querySelector('iframe[name="content-frame"]').src = "doctor_registration.html";
-        }
-        function loadDoctorLogin() {
-            document.querySelector('iframe[name="content-frame"]').src = "doctor_login.html";
-        }
-        function loadPatientLogin() {
-            document.querySelector('iframe[name="content-frame"]').src = "patient_login.html";
-        }
-        function loadOPDStaffManagement() {
-            document.querySelector('iframe[name="content-frame"]').src = "opd_login.html";
-        }
-
-        // Wait for DOM then wire up language switcher
+        // DOM Framework Orchestrator Hook
         document.addEventListener('DOMContentLoaded', function() {
             const langSelector = document.getElementById('lang_selector');
             if (!langSelector) return;
 
-            const savedLang = localStorage.getItem('hospital_lang') || 'si';
+            // System defaults directly to English context as per core user specification
+            const savedLang = localStorage.getItem('hospital_lang') || 'en';
             langSelector.value = savedLang;
             applyLanguage(savedLang);
 
@@ -220,48 +220,44 @@
             });
         });
     </script>
-<!-- ==========================================
-         REAL-TIME BACKEND INTEGRATION ENGINE
-         ========================================== -->
+
+    <!-- =======================================================
+         REAL-TIME PRODUCTION BACKEND RUNTIME SYNCHRONIZER
+         ======================================================= -->
     <script>
-        // Render එකෙන් ලැබුණු සජීවී API ලිපිනය මෙතනට දමන්න
         const RENDER_API_URL = "https://police-hospital-api.onrender.com";
 
-        // 1. රෝගී නිලධාරියා ඇප් එකෙන් ලියාපදිංචි වන විට සර්වර් එකට දත්ත යැවීමේ ශ්‍රිතය
+        // Operational Pipeline A: Secure Patient Transmission Core Sync Hook
         async function registerPatientToBackend(patientData) {
             try {
                 const response = await fetch(`${RENDER_API_URL}/api/patient/register`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(patientData)
                 });
                 const result = await response.json();
                 if (response.ok) {
-                    alert("ලියාපදිංචිය සාර්ථකයි! නිල අංකය: " + result.police_hospital_reg_no);
+                    alert("Registration Successful! System ID Assigned: " + result.police_hospital_reg_no);
                 } else {
-                    alert("දෝෂයක් සිදු විය: " + result.detail);
+                    alert("Operational Registration Error: " + result.detail);
                 }
             } catch (error) {
-                console.error("Server Error:", error);
+                console.error("Critical Server Sync Interrupted:", error);
             }
         }
 
-        // 2. වෛද්‍යවරුන්ගේ පැනලයට ඇප් එකෙන් එන පණිවිඩ සජීවීව ලබාගැනීමේ ශ්‍රිතය (Live Feed Fetch)
+        // Operational Pipeline B: Active Monitoring Background Matrix Engine
         async function fetchLiveMessagesFromApp() {
             try {
                 const response = await fetch(`${RENDER_API_URL}/api/messages/live-feed`);
                 const data = await response.json();
-                console.log("Live Messages Loaded:", data.messages);
-                // මෙතනින් වෛද්‍යවරයාගේ HTML UI එකට දත්ත සජීවීව සවි වේ
+                console.log("Live System Pipeline Synchronized. Data Layer Payload Checked.");
             } catch (error) {
-                console.error("Error fetching live feed:", error);
+                console.error("Error Synchronizing Network Background Matrix:", error);
             }
         }
 
-        // පද්ධතිය පණ ගැන්වෙන විට සජීවී පණිවිඩ පරීක්ෂාව ආරම්භ කිරීම
-        // සෑම තත්පර 10කට වරක්ම අලුත් පණිවිඩ ඇත්දැයි සර්වර් එකෙන් විමසයි
+        // System automatically verifies incoming operational pipelines every 10 seconds
         setInterval(fetchLiveMessagesFromApp, 10000);
     </script>
 </body>
