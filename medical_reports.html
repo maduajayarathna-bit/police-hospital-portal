@@ -1,106 +1,169 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>රසායනාගාර වාර්තා - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <title>Lab Reports & Vitals - Sri Lanka Police Hospital</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+        body { font-family: 'Arial', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+<body class="bg-slate-950 min-h-screen p-4 md:p-6 flex items-center justify-center">
 
-    <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl w-full border-t-8 border-red-600">
-        <div class="text-center mb-6">
-            <img src="images.jpg" alt="Police Logo" class="w-16 mx-auto mb-2">
-            <h2 class="text-2xl font-bold text-slate-800">02. Update Medical Reports</h2>
-            <p class="text-red-600 text-sm font-semibold mt-1">රුධිර පීඩනය සහ රසායනාගාර දත්ත ඇතුළත් කිරීමේ පුවරුව</p>
+    <!-- Main Dynamic Card Container -->
+    <div class="w-full max-w-4xl bg-slate-900/70 border border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden my-auto">
+        
+        <!-- Top Neon Accent Line (Rose/Red themed for Lab/Blood reports) -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-500 via-red-600 to-orange-500"></div>
+
+        <!-- Section Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-5 mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-file-medical text-rose-500"></i> 03. Update Medical Reports
+                </h1>
+                <p class="text-xs text-slate-400 mt-1">Vitals log, metabolic screening, and full laboratory data integration interface</p>
+            </div>
+            <div class="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-droplet animate-pulse"></i> BIO-CHEMICAL DATA STREAM
+            </div>
         </div>
 
-        <div class="mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
-            <label class="block text-sm font-bold text-slate-700 mb-1">Police Hospital reg. No.</label>
-            <input type="text" id="reg_no_input" placeholder="PH-XXXX" required class="w-full md:w-1/2 p-2 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-red-500">
+        <!-- Patient Mapping Context Area -->
+        <div class="mb-6 bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 max-w-md">
+            <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Police Hospital Registration No.</label>
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-hashtag text-sm"></i></span>
+                <input type="text" id="reg_no_input" placeholder="e.g., PH-1234" required class="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-600 font-bold tracking-wider text-sm focus:outline-none focus:border-rose-500 transition-all">
+            </div>
         </div>
 
-        <form id="reportsForm" class="space-y-6">
+        <!-- Multi-Segment Medical Metrics Form -->
+        <form id="reportsForm" class="space-y-5">
             
-            <div class="p-5 bg-red-50/50 rounded-xl border border-red-100">
-                <h3 class="text-sm font-bold text-red-800 mb-3 flex items-center">🩸 Blood Pressure (රුධිර පීඩනය)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <!-- Segment 1: Vitals / Blood Pressure -->
+            <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
+                <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart-pulse"></i> 1. Blood Pressure & Cardiovascular Vitals
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">දිනය (Date)</label>
-                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Date</label>
+                        <input type="date" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">වේලාව (Time)</label>
-                        <input type="time" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Time</label>
+                        <input type="time" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Systolic Level</label>
-                        <input type="number" placeholder="e.g. 120" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Systolic Level (mmHg)</label>
+                        <input type="number" placeholder="e.g., 120" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Diastolic Level</label>
-                        <input type="number" placeholder="e.g. 80" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-5 bg-orange-50/50 rounded-xl border border-orange-100">
-                <h3 class="text-sm font-bold text-orange-800 mb-3 flex items-center">🧬 Blood Sugar Tests (රුධිරයේ සීනි මට්ටම)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">පරීක්ෂණ දිනය (Date)</label>
-                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">FBS (mg/dL)</label>
-                        <input type="number" step="0.1" placeholder="Fasting Sugar" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">PPBS (mg/dL)</label>
-                        <input type="number" step="0.1" placeholder="Post Prandial" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">HbA1c (%)</label>
-                        <input type="number" step="0.1" placeholder="Average 3 Months" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Diastolic Level (mmHg)</label>
+                        <input type="number" placeholder="e.g., 80" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
                     </div>
                 </div>
             </div>
 
-            <div class="p-5 bg-blue-50/50 rounded-xl border border-blue-100">
-                <h3 class="text-sm font-bold text-blue-800 mb-3 flex items-center">🧪 Cholesterol Values (කොලෙස්ටරෝල් මට්ටම)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <!-- Segment 2: Blood Sugar Tests -->
+            <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
+                <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-dna"></i> 2. Glycemic / Blood Sugar Screening
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">පරීක්ෂණ දිනය (Date)</label>
-                        <input type="date" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
+                        <input type="date" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">Total Cholesterol</label>
-                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">FBS (mg/dL)</label>
+                        <input type="number" step="0.1" placeholder="Fasting Sugar" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">HDL (Good)</label>
-                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">PPBS (mg/dL)</label>
+                        <input type="number" step="0.1" placeholder="Post Prandial" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 mb-1">LDL (Bad)</label>
-                        <input type="number" placeholder="mg/dL" class="w-full p-2 border border-slate-300 rounded-lg text-sm">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">HbA1c (%)</label>
+                        <input type="number" step="0.1" placeholder="3-Month Average" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-200">
-                වාර්තා සුරකින්න (Save Medical Reports)
-            </button>
+            <!-- Segment 3: Lipid Profile -->
+            <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
+                <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-flask text-sm"></i> 3. Lipid Profile / Cholesterol Values
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
+                        <input type="date" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Total Cholesterol</label>
+                        <input type="number" placeholder="Total (mg/dL)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">HDL (Good)</label>
+                        <input type="number" placeholder="HDL (mg/dL)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">LDL (Bad)</label>
+                        <input type="number" placeholder="LDL (mg/dL)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🚀 NEW ADDITION: Advanced Metabolic Lab Panel (FBC, Liver, Kidney, Gout) -->
+            <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-microscope text-sm"></i> 4. Advanced Clinical & Organ Function Metrics
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Hemoglobin - FBC (g/dL)</label>
+                        <input type="number" step="0.1" placeholder="e.g., 14.2" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Creatinine (mg/dL)</label>
+                        <input type="number" step="0.01" placeholder="Kidney (0.6 - 1.2)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">SGPT / ALT (U/L)</label>
+                        <input type="number" placeholder="Liver (up to 50)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Uric Acid (mg/dL)</label>
+                        <input type="number" step="0.1" placeholder="Gout (3.5 - 7.2)" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submission Area -->
+            <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-[11px] text-slate-500 text-center sm:text-left">By saving, data parameters are automatically committed into the cloud ledger.</span>
+                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-sm min-w-[200px]">
+                    <i class="fa-solid fa-square-plus"></i> Save Medical Reports
+                </button>
+            </div>
         </form>
 
-        <div class="text-center text-xs text-gray-400 mt-8 border-t pt-4">
-            <p>© 2026 ශ්‍රී ලංකා පොලිස් රෝහල (Sri Lanka Police Hospital). All Rights Reserved.</p>
+        <!-- Footer Module -->
+        <div class="text-center text-[10px] text-slate-600 mt-8 border-t border-slate-800/60 pt-4">
+            <p>© 2026 Sri Lanka Police Hospital. All Operational Rights Reserved.</p>
         </div>
     </div>
+
+    <!-- Script Execution System -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const savedRegNo = localStorage.getItem('current_patient_reg_no');
@@ -111,80 +174,20 @@
 
         document.getElementById('reportsForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const regNo = document.getElementById('reg_no_input').value.trim();
             if(!regNo) {
-                alert('කරුණාකර රෝහල් ලියාපදිංචි අංකය ඇතුළත් කරන්න.');
+                alert('Input Action Failed: Please enter a valid Hospital Registration Number.');
                 return;
             }
 
             let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
             if(patients[regNo]) {
-                patients[regNo].has_reports = true; // Mock saving report status
+                patients[regNo].has_reports = true;
                 localStorage.setItem('hospital_patients', JSON.stringify(patients));
             }
 
-            alert('රසායනාගාර වාර්තා සාර්ථකව සුරකින ලදී! (Medical Reports Saved)');
+            alert('Success: Advanced biological parameters saved successfully!');
         });
-    </script>
-
-    <!-- Language Switcher Support -->
-    <script>
-        (function() {
-            // Page-level translations (si = default Sinhala labels, en = English)
-            var pageTranslations = {
-                'si': {
-                    'page_title_01': 'රෝගී ලියාපදිංචිය',
-                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
-                    'page_title_03': 'වෛද්‍ය වාර්තා',
-                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
-                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
-                    'page_title_06': 'සායන දින වෙන්කිරීම',
-                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
-                    'save_btn': 'සුරකින්න (Save Data)',
-                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
-                    'send_btn': 'හරටම පක්වැන්න (Submit)'
-                },
-                'en': {
-                    'page_title_01': 'Patient Registration',
-                    'page_title_02': 'Medical History',
-                    'page_title_03': 'Medical Reports',
-                    'page_title_04': 'Social/Family History',
-                    'page_title_05': 'Physical Activity',
-                    'page_title_06': 'Clinic Appointments',
-                    'page_title_07': 'Contact Doctor',
-                    'save_btn': 'Save Data',
-                    'signup_btn': 'Sign Up / Save',
-                    'send_btn': 'Submit / Send'
-                }
-            };
-
-            function applyPageLang(lang) {
-                if (!pageTranslations[lang]) return;
-                var t = pageTranslations[lang];
-                // Update submit/save buttons
-                var btns = document.querySelectorAll('[data-lang-key]');
-                btns.forEach(function(el) {
-                    var key = el.getAttribute('data-lang-key');
-                    if (t[key]) el.innerText = t[key];
-                });
-                // Store in localStorage for persistence
-                localStorage.setItem('hospital_lang', lang);
-            }
-
-            // Listen for language change message from parent dashboard
-            window.addEventListener('message', function(event) {
-                if (event.data && event.data.type === 'changeLang') {
-                    applyPageLang(event.data.lang);
-                }
-            });
-
-            // Apply saved language on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                var savedLang = localStorage.getItem('hospital_lang') || 'si';
-                applyPageLang(savedLang);
-            });
-        })();
     </script>
 </body>
 </html>
