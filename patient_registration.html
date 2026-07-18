@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration - Sri Lanka Police Hospital</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Arial', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen p-4 md:p-6 flex items-center justify-center">
+
+    <!-- Main Dynamic Form Card -->
+    <div class="w-full max-w-4xl bg-slate-900/70 border border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden my-auto">
+        
+        <!-- Top Neon Accent Line -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-600 to-teal-500"></div>
+
+        <!-- Section Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-5 mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-blue-500"></i> Patient Registration Portal
+                </h1>
+                <p class="text-xs text-slate-400 mt-1">Fill in official operational details to link with Central Management Core</p>
+            </div>
+            <div class="bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-halved animate-pulse"></i> SECURE ENCRYPTED CHANNEL
+            </div>
+        </div>
+
+        <!-- Registration Multi-Grid Form -->
+        <form id="registrationForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            
+            <!-- 01. Full Name -->
+            <div class="md:col-span-2">
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">01. Full Name</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-user text-sm"></i></span>
+                    <input type="text" required placeholder="Enter full official name" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 02. Date of Birth -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">02. Date of Birth</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-calendar-day text-sm"></i></span>
+                    <input type="date" required class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" style="color-scheme: dark;">
+                </div>
+            </div>
+
+            <!-- 03. Rank -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">03. Rank</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-award text-sm"></i></span>
+                    <input type="text" required placeholder="e.g., PC / SI / IP" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 04. NIC No -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">04. NIC No</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-address-card text-sm"></i></span>
+                    <input type="text" required placeholder="National Identity Card Number" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 05. Police ID No -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">05. Police ID No</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-id-badge text-sm"></i></span>
+                    <input type="text" required placeholder="Service / Warrant Number" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 06. Gender -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">06. Gender</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-venus-mars text-sm"></i></span>
+                    <select required class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all appearance-none">
+                        <option value="" disabled selected class="bg-slate-900">Select Gender</option>
+                        <option value="Male" class="bg-slate-900">Male</option>
+                        <option value="Female" class="bg-slate-900">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 10. PHN No -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider flex justify-between">
+                    <span>10. PHN No <span class="text-rose-500 font-black text-sm">* Mandatory</span></span>
+                </label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-rose-400"><i class="fa-solid fa-square-h text-sm"></i></span>
+                    <input type="text" id="phn" required pattern="\d{4}-\d{6}-\d" placeholder="Format: 0285-271055-3" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-rose-900/50 rounded-xl text-white placeholder-rose-900/60 text-sm font-bold focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/10 transition-all border-2 border-dashed">
+                </div>
+            </div>
+
+            <!-- 07. Address -->
+            <div class="md:col-span-2">
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">07. Address</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-map-location-dot text-sm"></i></span>
+                    <input type="text" required placeholder="Official residential address" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 08. Email -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">08. Email Address</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-envelope text-sm"></i></span>
+                    <input type="email" required placeholder="e.g., officer@police.gov.lk" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 09. Contact No -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">09. Contact No</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-phone text-sm"></i></span>
+                    <input type="tel" required placeholder="Mobile / Phone number" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 11. Police Division -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">11. Police Division</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-layer-group text-sm"></i></span>
+                    <input type="text" required placeholder="e.g., IT Division / Kandy Division" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- 12. Station / Office / Branch / Unit -->
+            <div>
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">12. Station / Office / Branch / Unit</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-building-shield text-sm"></i></span>
+                    <input type="text" required placeholder="Current working deployment unit" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- Action Submissions Box -->
+            <div class="md:col-span-2 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-[11px] text-slate-500 text-center sm:text-left">By submitting, you declare all administrative parameters are accurate.</span>
+                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg shadow-blue-600/10 flex items-center justify-center gap-2 text-sm min-w-[200px]">
+                    <i class="fa-solid fa-user-check"></i> Register Patient
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Interactive Execution Script -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phnField = document.getElementById('phn');
+            const phnPattern = /^\d{4}-\d{6}-\d$/;
+            
+            if (!phnPattern.test(phnField.value)) {
+                alert("❌ Input Error: PHN Number format must strictly match 0000-000000-0.");
+                phnField.focus();
+                return;
+            }
+
+            alert("✅ Patient Data Registered Successfully!");
+            window.location.href = "patient_login.html";
+        });
+    </script>
+</body>
+</html>
