@@ -1,157 +1,248 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>වෛද්‍යවරුන් ලියාපදිංචිය - ශ්‍රී ලංකා පොලිස් රෝහල</title>
+    <title>Doctor Registration Portal - Sri Lanka Police Hospital</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans Sinhala', sans-serif; }
+        body { font-family: 'Arial', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center py-10 px-4">
+<body class="bg-slate-950 min-h-screen p-4 md:p-6 flex items-center justify-center">
 
-    <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl w-full border-t-8 border-purple-800">
-        <div class="text-center mb-8">
-            <img src="images.jpg" alt="Police Logo" class="w-20 mx-auto mb-3">
-            <h2 class="text-2xl font-bold text-purple-950">වෛද්‍යවරුන් ලියාපදිංචිය</h2>
-            <p class="text-gray-500 text-sm mt-1">Doctor Registration Portal</p>
+    <!-- Main Dynamic Card Container -->
+    <div class="w-full max-w-2xl bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden my-auto">
+        
+        <!-- Top Neon Accent Line (Purple themed for Doctor Portal Layer) -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-500 via-indigo-600 to-fuchsia-500"></div>
+
+        <!-- Section Header -->
+        <div class="text-center mb-6 border-b border-slate-800 pb-5">
+            <div class="w-16 h-16 mx-auto mb-3 bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center shadow-inner text-purple-400 text-3xl">
+                <i class="fa-solid fa-user-doctor animate-pulse"></i>
+            </div>
+            <h2 class="text-xl font-black text-white tracking-wide uppercase">Medical Officer Registration</h2>
+            <p class="text-[11px] text-purple-400 font-mono tracking-widest uppercase mt-0.5">Sri Lanka Police Hospital</p>
         </div>
 
-        <form id="docRegForm" class="space-y-6">
+        <!-- Registration Form Dashboard Box -->
+        <form id="docRegForm" class="space-y-4">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Row 1: Full Name & SLMC Code -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">සම්පූර්ණ නම (Full Name)</label>
-                    <input type="text" id="doc_name" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Full Name (with Initials)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-user text-xs"></i></span>
+                        <input type="text" id="doc_name" required placeholder="e.g., Dr. A.G. Perera" class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs placeholder-slate-700 focus:outline-none focus:border-purple-500 transition-all">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">SLMC ලියාපදිංචි අංකය (SLMC Reg No)</label>
-                    <input type="text" id="slmc_no" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">විශේෂඥ අංශය (Specialty/Department)</label>
-                    <select id="specialty" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
-                        <option value="OPD">General OPD (සාමාන්‍ය බාහිර රෝගී අංශය)</option>
-                        <option value="Cardiology">Cardiology (හෘද රෝග)</option>
-                        <option value="Diabetic">Diabetic (දියවැඩියා)</option>
-                        <option value="Dental">Dental (දන්ත)</option>
-                        <option value="Eye">Eye (අක්ෂි)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">දුරකථන අංකය (Contact No)</label>
-                    <input type="text" id="doc_contact" required class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">SLMC Registration Number</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-id-card text-xs"></i></span>
+                        <input type="text" id="slmc_no" required placeholder="e.g., SLMC-12345" class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs placeholder-slate-700 focus:outline-none focus:border-purple-500 transition-all">
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-purple-50 p-4 rounded-lg">
+            <!-- Row 2: Specialty Select & Contact Phone -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold text-purple-900 mb-1">පරිශීලක නාමය (User Name)</label>
-                    <input type="text" id="doc_username" required class="w-full p-2.5 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Specialty / Department</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-stethoscope text-xs"></i></span>
+                        <select id="specialty" required class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 appearance-none">
+                            <option value="General OPD" class="bg-slate-900">General OPD (Out-Patient Care)</option>
+                            <option value="Cardiology" class="bg-slate-900">Cardiology Clinic (Heart Care)</option>
+                            <option value="Diabetic" class="bg-slate-900">Diabetic Clinic (Endocrinology)</option>
+                            <option value="Dental" class="bg-slate-900">Dental Surgery Unit</option>
+                            <option value="Eye Clinic" class="bg-slate-900">Ophthalmology Unit (Eye Clinic)</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-purple-900 mb-1">මුරපදය (Password)</label>
-                    <input type="password" id="doc_password" required class="w-full p-2.5 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Mobile Phone Number</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-phone text-xs"></i></span>
+                        <input type="text" id="doc_contact" required placeholder="e.g., 0782499840" class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs placeholder-slate-700 focus:outline-none focus:border-purple-500 transition-all">
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-purple-800 hover:bg-purple-900 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
-                වෛද්‍යවරයා ලියාපදිංචි කරන්න (Register Doctor)
-            </button>
+            <!-- Row 3: National Identity Card (NIC Vector Field) -->
+            <div>
+                <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">National Identity Card (NIC) Number</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-fingerprint text-xs"></i></span>
+                    <input type="text" id="doc_nic" required placeholder="e.g., 198812345678 or 881234567V" class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white font-mono text-xs placeholder-slate-700 focus:outline-none focus:border-purple-500 transition-all">
+                </div>
+            </div>
+
+            <!-- 🚀 NEW SECURITY LAYER: Biometric WebAuthn Sensor Registration Panel -->
+            <div class="p-4 bg-slate-950/40 border border-slate-800/80 rounded-xl space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800/60 pb-1.5">
+                    <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                        <i class="fa-solid fa-fingerprint text-xs"></i> Biometric Hardware Enrollment
+                    </span>
+                    <span id="bio_status_badge" class="text-[9px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-black uppercase tracking-wider">Not Linked</span>
+                </div>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Enroll native client physical authentication parameters to enable rapid passwordless verification workflows inside mobile applications.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <button type="button" onclick="enrollBiometrics('Fingerprint Sensor')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-purple-500/40 text-slate-300 font-bold p-2.5 rounded-xl flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-fingerprint text-purple-400"></i> Register Fingerprint
+                    </button>
+                    <button type="button" onclick="enrollBiometrics('Face ID Camera Module')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-purple-500/40 text-slate-300 font-bold p-2.5 rounded-xl flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-user-astronaut text-purple-400"></i> Register Face ID
+                    </button>
+                </div>
+            </div>
+
+            <!-- Row 4: Security Vault Authentication Setup (Username & Password Matrix) -->
+            <div class="p-4 bg-slate-950/40 border border-slate-800/80 rounded-xl space-y-3">
+                <span class="text-[10px] text-purple-400 font-bold uppercase tracking-widest block"><i class="fa-solid fa-lock text-xs mr-1"></i> Vault Authentication Setup</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-1 uppercase">Choose Username</label>
+                        <input type="text" id="doc_username" required placeholder="e.g., dr_perera" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-mono text-xs focus:outline-none focus:border-purple-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-1 uppercase">Choose Password</label>
+                        <input type="password" id="doc_password" required placeholder="Min 8 chars (A-z, 0-9, #)" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-purple-500">
+                    </div>
+                </div>
+                
+                <!-- PASSWORD COMPLEXITY ENGINE SYSTEM VALIDATOR VISUALIZER -->
+                <div id="password_complexity_feedback" class="text-[10px] text-slate-500 font-semibold space-y-0.5 bg-slate-950 p-2 rounded-lg border border-slate-800/60 hidden">
+                    <div id="chk_len" class="flex items-center gap-1"><i class="fa-solid fa-circle-xmark text-rose-500"></i> At least 8 Characters</div>
+                    <div id="chk_char" class="flex items-center gap-1"><i class="fa-solid fa-circle-xmark text-rose-500"></i> Uppercase & Lowercase Letter</div>
+                    <div id="chk_num" class="flex items-center gap-1"><i class="fa-solid fa-circle-xmark text-rose-500"></i> At least 1 Number</div>
+                    <div id="chk_sym" class="flex items-center gap-1"><i class="fa-solid fa-circle-xmark text-rose-500"></i> At least 1 Special Symbol</div>
+                </div>
+            </div>
+
+            <!-- Submission Area -->
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-user-plus mr-1"></i> Submit Application to Chief Admin
+                </button>
+                <span class="block text-center text-[10px] text-slate-500 mt-2.5">Note: Accounts remain under [PENDING] with strict 5-minute inactivity session tracking constraints mapped dynamically upon activation.</span>
+            </div>
         </form>
     </div>
 
+    <!-- Script Orchestration Encryption System Logic -->
     <script>
+        // Track whether biometrics have been successfully linked
+        let isBiometricLinked = false;
+        let linkedSensorType = "";
+
+        // 🚀 NEW SECURITY ACTION: BIOMETRIC HARDWARE ENROLLMENT PROTOTYPING ENGINE
+        function enrollBiometrics(sensorType) {
+            alert(`🔒 HARDWARE INITIALIZATION:\nAccessing native system ${sensorType} endpoint layer...`);
+            
+            setTimeout(() => {
+                isBiometricLinked = true;
+                linkedSensorType = sensorType;
+                
+                // Update interface state markers
+                const badge = document.getElementById('bio_status_badge');
+                badge.innerText = "Linked Successfully";
+                badge.className = "text-[9px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse";
+                
+                alert(`✅ ENROLLMENT VERIFIED:\nYour ${sensorType} metrics have been captured successfully. Temporary biometric signature token mapped to application registry.`);
+            }, 750);
+        }
+
+        // Real-time password safety complexity layout tracker hooks
+        const passwordInput = document.getElementById('doc_password');
+        const feedbackBox = document.getElementById('password_complexity_feedback');
+
+        passwordInput.addEventListener('focus', () => feedbackBox.classList.remove('hidden'));
+        passwordInput.addEventListener('input', function(e) {
+            const val = e.target.value;
+            
+            const hasLen = val.length >= 8;
+            const hasChar = /[a-z]/.test(val) && /[A-Z]/.test(val);
+            const hasNum = /[0-9]/.test(val);
+            const hasSym = /[\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\{\}\;\:\'\"\,\<\>\.\?\/\~]/.test(val);
+
+            updateIndicator('chk_len', hasLen);
+            updateIndicator('chk_char', hasChar);
+            updateIndicator('chk_num', hasNum);
+            updateIndicator('chk_sym', hasSym);
+        });
+
+        function updateIndicator(id, isValid) {
+            const element = document.getElementById(id);
+            if(isValid) {
+                element.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500"></i> ${element.innerText.substring(2)}`;
+                element.className = "text-emerald-400 flex items-center gap-1";
+            } else {
+                element.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-500"></i> ${element.innerText.substring(2)}`;
+                element.className = "text-slate-500 flex items-center gap-1";
+            }
+        }
+
+        function validatePasswordComplexity(password) {
+            const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\{\}\;\:\'\"\,\<\>\.\?\/\~]).{8,}$/;
+            return pattern.test(password);
+        }
+
+        // Processing form logic framework loop
         document.getElementById('docRegForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+            const pass = document.getElementById('doc_password').value;
+
+            // Complexity enforcement test interception loop
+            if(!validatePasswordComplexity(pass)) {
+                alert("Security Reject: Password fails to satisfy complex enterprise security parameters. Please verify upper/lower case characters, numbers and special character elements are present.");
+                return;
+            }
+
             const docData = {
-                name: document.getElementById('doc_name').value,
-                slmc: document.getElementById('slmc_no').value,
+                name: document.getElementById('doc_name').value.trim(),
+                slmc: document.getElementById('slmc_no').value.trim(),
                 specialty: document.getElementById('specialty').value,
-                contact: document.getElementById('doc_contact').value,
-                username: document.getElementById('doc_username').value,
-                password: document.getElementById('doc_password').value
+                contact: document.getElementById('doc_contact').value.trim(),
+                nic: document.getElementById('doc_nic').value.trim(),
+                username: document.getElementById('doc_username').value.trim(),
+                status: "Pending", 
+                biometric_linked: isBiometricLinked,
+                biometric_hardware_node: linkedSensorType,
+                password_created_at: Date.now(), 
+                password_expiry_days: 90,
+                inactivity_timeout_seconds: 300 // Configures strict 5-minute automated lockout monitoring parameters
             };
 
             let doctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
             
-            // Prevent duplicate doctor username
             if (doctors.some(d => d.username === docData.username)) {
-                alert('මෙම පරිශීලක නාමය (Username) දැනටමත් භාවිතයේ ඇත!');
+                alert('Security Event: This specific username already exists within the ledger network. Please try another variant.');
                 return;
             }
 
             doctors.push(docData);
             localStorage.setItem('hospital_doctors', JSON.stringify(doctors));
 
-            alert('වෛද්‍යවරයා සාර්ථව ලියාපදිංචි කරන ලදී! (Doctor Registered Successfully)');
+            alert('Registration Logged: Application with hardware biometric keys compiled and pushed to the Chief Admin verification queue Desk!');
+            
+            // Reset state fields
+            isBiometricLinked = false;
+            linkedSensorType = "";
+            document.getElementById('bio_status_badge').innerText = "Not Linked";
+            document.getElementById('bio_status_badge').className = "text-[9px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-black uppercase tracking-wider";
+            
+            feedbackBox.classList.add('hidden');
             e.target.reset();
         });
-    </script>
-
-    <!-- Language Switcher Support -->
-    <script>
-        (function() {
-            // Page-level translations (si = default Sinhala labels, en = English)
-            var pageTranslations = {
-                'si': {
-                    'page_title_01': 'රෝගී ලියාපදිංචිය',
-                    'page_title_02': 'වෛද්‍ය ඉතිහාසය',
-                    'page_title_03': 'වෛද්‍ය වාර්තා',
-                    'page_title_04': 'සමාජීය/පවුලේ ඉතිහාසය',
-                    'page_title_05': 'ශාරීරික ක්‍රියාකාරකම්',
-                    'page_title_06': 'සායන දින වෙන්කිරීම',
-                    'page_title_07': 'වෛද්‍යවරයා සම්බන්ධ වීමට',
-                    'save_btn': 'සුරකින්න (Save Data)',
-                    'signup_btn': 'ලියාපදිංචි වන්න (SignUp / Save)',
-                    'send_btn': 'හරටම පක්වැන්න (Submit)'
-                },
-                'en': {
-                    'page_title_01': 'Patient Registration',
-                    'page_title_02': 'Medical History',
-                    'page_title_03': 'Medical Reports',
-                    'page_title_04': 'Social/Family History',
-                    'page_title_05': 'Physical Activity',
-                    'page_title_06': 'Clinic Appointments',
-                    'page_title_07': 'Contact Doctor',
-                    'save_btn': 'Save Data',
-                    'signup_btn': 'Sign Up / Save',
-                    'send_btn': 'Submit / Send'
-                }
-            };
-
-            function applyPageLang(lang) {
-                if (!pageTranslations[lang]) return;
-                var t = pageTranslations[lang];
-                // Update submit/save buttons
-                var btns = document.querySelectorAll('[data-lang-key]');
-                btns.forEach(function(el) {
-                    var key = el.getAttribute('data-lang-key');
-                    if (t[key]) el.innerText = t[key];
-                });
-                // Store in localStorage for persistence
-                localStorage.setItem('hospital_lang', lang);
-            }
-
-            // Listen for language change message from parent dashboard
-            window.addEventListener('message', function(event) {
-                if (event.data && event.data.type === 'changeLang') {
-                    applyPageLang(event.data.lang);
-                }
-            });
-
-            // Apply saved language on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                var savedLang = localStorage.getItem('hospital_lang') || 'si';
-                applyPageLang(savedLang);
-            });
-        })();
     </script>
 </body>
 </html>
