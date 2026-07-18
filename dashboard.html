@@ -20,7 +20,7 @@
 </head>
 <body class="bg-slate-950 min-h-screen flex overflow-x-hidden">
 
-    <!-- Left Sidebar Panel (Fixed Flex Properties) -->
+    <!-- Left Sidebar Panel -->
     <div class="w-64 bg-slate-950 text-slate-300 flex flex-col justify-between min-h-screen shadow-2xl border-r border-slate-900 shrink-0">
         <div>
             <!-- Header Identity -->
@@ -91,31 +91,17 @@
         </div>
     </div>
 
-    <!-- Right Workspace Area (Clean Layout Grid Fix) -->
+    <!-- Right Workspace Area -->
     <div class="flex-1 flex flex-col min-h-screen min-w-0">
         
-        <!-- Global Top Header Bar -->
+        <!-- Global Top Header Bar (Clean Trimmed Version) -->
         <header class="bg-gradient-to-r from-blue-900 to-slate-900 text-white shadow-md h-16 flex items-center justify-between px-6 shrink-0">
             <div class="flex items-center space-x-2">
-                <h2 class="text-sm font-bold tracking-wide">Police Hospital Central Management System</h2>
+                <h2 class="text-sm font-bold tracking-wide uppercase">Police Hospital Central Management System</h2>
             </div>
             
-            <div class="flex items-center space-x-4 text-xs">
-                <div class="flex items-center space-x-1.5 bg-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-700">
-                    <i class="fa-solid fa-language text-amber-400 text-sm"></i>
-                    <select id="lang_selector" class="bg-transparent border-none text-white text-xs font-bold focus:outline-none cursor-pointer" style="background-color: transparent !important; border: none !important;">
-                        <option value="en" class="text-slate-900 font-semibold" selected>English (EN)</option>
-                        <option value="si" class="text-slate-900 font-semibold">සිංහල (SI)</option>
-                    </select>
-                </div>
-
-                <div class="text-right">
-                    <p class="font-bold text-amber-400">Administrator</p>
-                    <p class="text-[10px] text-slate-300 font-semibold">System Administrator</p>
-                </div>
-                <div class="w-10 h-10 bg-amber-500 text-slate-950 font-bold rounded-full flex items-center justify-center shadow-md border-2 border-white">
-                    <i class="fa-solid fa-user-gear text-sm"></i>
-                </div>
+            <div class="flex items-center space-x-2 text-xs text-slate-400">
+                <i class="fa-solid fa-shield-halved text-emerald-500 text-sm"></i> Secure Portal System active
             </div>
         </header>
 
@@ -126,15 +112,5 @@
             </div>
         </main>
     </div>
-
-    <!-- Script Block -->
-    <script>
-        document.getElementById('lang_selector').addEventListener('change', function(e) {
-            const iframe = document.querySelector('iframe[name="content-frame"]');
-            if (iframe && iframe.contentWindow) {
-                try { iframe.contentWindow.postMessage({ type: 'changeLang', lang: e.target.value }, '*'); } catch(err) {}
-            }
-        });
-    </script>
 </body>
 </html>
