@@ -38,8 +38,11 @@
                 <input type="text" required placeholder="National Identity Card Number" class="w-full px-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500">
             </div>
             <div>
-                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">05. Police ID No</label>
-                <input type="text" id="reg_police_no" required placeholder="Warrant / Service Number" class="w-full px-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500">
+                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">05. Police ID No (Will be your Username)</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-id-badge text-sm"></i></span>
+                    <input type="text" id="reg_police_no" required placeholder="e.g., PC84489" class="w-full pl-10 pr-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 font-bold uppercase">
+                </div>
             </div>
             <div>
                 <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">06. Gender</label>
@@ -78,12 +81,12 @@
                 <input type="text" required placeholder="Current deployment station" class="w-full px-4 py-2.5 bg-slate-950/40 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500">
             </div>
 
-            <!-- 🔒 Security Setup Fields Added -->
+            <!-- 🔒 Security Setup Fields (Auto-linked via Script) -->
             <div class="p-4 bg-slate-950/60 border border-slate-800 rounded-xl md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2 text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-lock text-sm"></i> Portal Login Account Configuration</div>
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-400 mb-1">13. Portal Username</label>
-                    <input type="text" id="reg_username" required placeholder="Create a unique username" class="w-full px-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1">13. Assigned Username</label>
+                    <input type="text" id="reg_username" readonly placeholder="Auto-generated from Police ID" class="w-full px-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 font-bold tracking-wider text-sm focus:outline-none cursor-not-allowed uppercase">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-400 mb-1">14. Account Password</label>
@@ -99,7 +102,18 @@
         </form>
     </div>
 
+    <!-- Script Node -->
     <script>
+        // Real-time automatic Username generation hook
+        const policeIdInput = document.getElementById('reg_police_no');
+        const usernameInput = document.getElementById('reg_username');
+
+        policeIdInput.addEventListener('input', function(e) {
+            // Converts input characters to uppercase and clones directly to username field
+            const value = e.target.value.trim().toUpperCase();
+            usernameInput.value = value;
+        });
+
         const API_BASE_URL = "https://police-hospital-api.onrender.com";
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -114,15 +128,15 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        police_no: document.getElementById('reg_police_no').value,
-                        username: document.getElementById('reg_username').value,
+                        police_no: policeIdInput.value.trim().toUpperCase(),
+                        username: usernameInput.value.trim().toUpperCase(),
                         password: document.getElementById('reg_password').value,
                         phn: phnField.value
                     })
                 });
             } catch(err) {}
 
-            alert("✅ Patient Account Created Successfully!");
+            alert("✅ Patient Account Created Successfully! Your Username is your Police ID.");
             window.location.href = "patient_login.html";
         });
     </script>
