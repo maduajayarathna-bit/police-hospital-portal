@@ -32,31 +32,34 @@
                 </div>
                 <div>
                     <h2 class="text-sm font-black tracking-wider text-white uppercase">POLICE HOSPITAL</h2>
-                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">MED-CORE SYSTEM</p>
+                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">BIOMETRIC MED-CORE</p>
                 </div>
             </div>
 
             <!-- Dynamic Sidebar Menu Navigation Links -->
             <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-400">
                 <div class="flex items-center justify-between pl-2 mb-1.5">
-                    <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest">SEQUENTIAL FLOW MATRIX</span>
+                    <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest">PATIENT WORKFLOW</span>
                     <span id="step_progress_badge" class="text-[8px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- Unlocked Core Entry Point -->
-                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-right-to-bracket text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
-                    <span>Patient Login / Sign In</span>
+                <!-- 🚀 OPTIMIZED: Unlocked Core Entry Point featuring Biometric Sign-In Alert -->
+                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative border border-cyan-500/20 bg-cyan-950/10">
+                    <i class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
+                    <div class="flex flex-col">
+                        <span>Patient Login / Sign In</span>
+                        <span class="text-[9px] text-cyan-500 font-normal mt-0.5">Biometrics Supported</span>
+                    </div>
                 </a>
 
-                <!-- 🚀 STEP-LOCKED SEQUENTIAL NAVIGATION LINKS -->
-                <!-- Step 1: Active by Default for New Officers -->
+                <!-- STEP-LOCKED SEQUENTIAL NAVIGATION LINKS -->
+                <!-- Step 1: Patient Registration (Armed with Biometrics capturing fields internally) -->
                 <a href="patient_registration.html" id="step_link_1" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-user-injured text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>01. Patient Registration</span>
                 </a>
                 
-                <!-- Step 2: Locked until Step 1 Submission Vector is Triggered -->
+                <!-- Step 2: Locked until Registration Validation Completes -->
                 <a href="medical_history.html" id="step_link_2" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-notes-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>02. Medical History</span>
@@ -94,11 +97,9 @@
             </nav>
         </div>
 
-        <!-- Dynamic Simulation Tools for Testing -->
-        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/60 text-[10px] space-y-1.5">
-            <span class="text-slate-500 block uppercase font-bold"><i class="fa-solid fa-bug mr-1"></i> Flow Simulation Core</span>
-            <button onclick="simulateStepSubmission()" class="w-full bg-emerald-600/20 text-emerald-400 p-1 rounded font-bold hover:bg-emerald-600/40 transition">Simulate Current Step Submit</button>
-            <button onclick="resetFlowProgress()" class="w-full bg-slate-900 text-slate-400 p-1 rounded font-bold hover:bg-slate-800 transition">Reset Pipeline Back to 1</button>
+        <!-- 🚀 Dev Sandbox / Simulation Core has been completely purged from here as requested for production clean code -->
+        <div class="border-t border-slate-800 pt-3 text-center text-[10px] text-slate-600 font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved text-cyan-500/50 mr-1"></i> Sri Lanka Police Hospital Network
         </div>
     </aside>
 
@@ -109,24 +110,42 @@
         <div class="w-full bg-slate-900/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
             <div>
                 <h1 class="text-2xl font-black text-white tracking-wide uppercase">Hospital Patient Portal</h1>
-                <p class="text-xs text-slate-400 mt-0.5">Sequential medical profiling matrix validation engine</p>
+                <p class="text-xs text-slate-400 mt-0.5">Sequential medical profiling matrix validation engine equipped with biometric passkeys</p>
             </div>
             <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-right">
-                <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Current Lock Status</span>
+                <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Current Pipeline Node</span>
                 <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
             </div>
         </div>
 
-        <!-- Sequential Informational Banner Notice -->
-        <div id="flow_notice_panel" class="w-full bg-slate-900/60 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-start gap-4">
-            <i class="fa-solid fa-route text-cyan-400 text-xl mt-0.5 animate-bounce"></i>
-            <div class="text-xs space-y-1">
-                <span class="text-white font-bold uppercase tracking-wide block">Data Entry Directive Control</span>
-                <p class="text-slate-400 leading-relaxed">To ensure cryptographic safety and avoid partial database logs, you must complete each medical information section sequentially. Submitting the active form automatically authorizes and unlocks the immediate subsequent node module.</p>
+        <!-- 🚀 NEW INTERACTIVE DUAL BIOMETRIC OPTIONS CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Registration Portal Card -->
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3 relative overflow-hidden group hover:border-cyan-500/30 transition-all">
+                <div class="text-cyan-400 text-xl flex items-center justify-between">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-fingerprint text-xs text-cyan-500 animate-pulse"></i>
+                </div>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wide">01. New Patient Registration</h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Enroll new police officers into the central health network. **Biometric Vault Capture** triggers automatically to capture fingerprint/face hashes during configuration.</p>
+                <a href="patient_registration.html" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Open Registration</a>
             </div>
+
+            <!-- Login Access Card -->
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3 relative overflow-hidden group hover:border-emerald-500/30 transition-all">
+                <div class="text-emerald-400 text-xl flex items-center justify-between">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <i class="fa-solid fa-face-viewfinder text-xs text-emerald-500 animate-pulse"></i>
+                </div>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wide">Patient Login Access Node</h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Already registered? Bypass traditional typing. You can now securely log in instantly using your **Fingerprint Scan or Face Unlock** passkeys.</p>
+                <a href="patient_login.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Biometric / Secure Login</a>
+            </div>
+
         </div>
 
-        <!-- Dynamic Progress Tracker Visualization Graph -->
+        <!-- Overall Pipeline Completion Progress Bar -->
         <div class="w-full bg-slate-900/40 border border-slate-800 p-5 rounded-2xl shadow-xl">
             <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider mb-3">Overall Pipeline Completion Status</span>
             <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
@@ -136,17 +155,14 @@
 
     </main>
 
-    <!-- Client-side Pipeline Automation Interactivity Script Logic -->
+    <!-- Pipeline Automation Script Control Logic -->
     <script>
-        // Check current milestone position or fallback default index initialization
         let currentUnlockedStep = parseInt(localStorage.getItem('hospital_flow_step') || '1');
 
         function enforceStepLockArchitecture() {
-            // Re-verify range boundaries safely
             if (currentUnlockedStep > 7) currentUnlockedStep = 7;
             if (currentUnlockedStep < 1) currentUnlockedStep = 1;
 
-            // Sync state numbers inside data badges
             document.getElementById('step_progress_badge').innerText = `Step ${currentUnlockedStep}/7`;
             
             if(currentUnlockedStep === 7) {
@@ -156,25 +172,20 @@
                 document.getElementById('global_status_badge').innerText = `FILLING STEP ${currentUnlockedStep}`;
             }
 
-            // Calculate exact width ratio string for graphic representation progress bar
             const progressionPercentage = (currentUnlockedStep / 7) * 100;
             document.getElementById('flow_progress_bar').style.width = `${progressionPercentage}%`;
 
-            // Loop parameters logic processing through links to toggle the block parameters
             for (let i = 1; i <= 7; i++) {
                 const linkNode = document.getElementById(`step_link_${i}`);
                 if (linkNode) {
                     if (i <= currentUnlockedStep) {
-                        // Allow access to unlocked or passed historical steps
                         linkNode.classList.remove('menu-locked');
                     } else {
-                        // Deadlock future vectors strictly
                         linkNode.classList.add('menu-locked');
                     }
                 }
             }
 
-            // Auto-highlight the current targeted focus link object block
             const currentActiveMenu = document.getElementById(`step_link_${currentUnlockedStep}`);
             if (currentActiveMenu) {
                 switchActiveMenu(currentActiveMenu);
@@ -194,26 +205,15 @@
             clickedElement.insertAdjacentHTML('afterbegin', barHtml);
         }
 
-        // 🚀 TRIGGER POINT: Call this method inside individual sub-page form submit hooks!
-        function simulateStepSubmission() {
+        // Automatic orchestration hook for global submission mapping
+        window.executePipelineAdvance = function() {
             if (currentUnlockedStep < 7) {
                 currentUnlockedStep++;
                 localStorage.setItem('hospital_flow_step', currentUnlockedStep);
-                alert(`✅ Step Data Pushed Successfully!\n\nModule ${currentUnlockedStep - 1} encrypted. Submodule 0${currentUnlockedStep} is now officially unlocked inside your navigation stack!`);
                 enforceStepLockArchitecture();
-            } else {
-                alert("🎉 Success: All 7 corporate medical pipeline steps have already been mapped and verified for this session ledger!");
             }
-        }
+        };
 
-        function resetFlowProgress() {
-            currentUnlockedStep = 1;
-            localStorage.setItem('hospital_flow_step', '1');
-            alert("Sandbox Management Notification: Pipeline progress reset back to initial step state parameters.");
-            enforceStepLockArchitecture();
-        }
-
-        // Trigger configuration rendering stack instantly on execution lifecycle load loop
         document.addEventListener('DOMContentLoaded', () => {
             enforceStepLockArchitecture();
         });
