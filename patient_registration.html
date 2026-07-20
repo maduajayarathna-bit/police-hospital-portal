@@ -35,7 +35,7 @@
         <!-- Registration Form Dashboard Box -->
         <form id="patientRegForm" class="space-y-5">
             
-            <!-- SECTION 01: CORE DEMOGRAPHICS -->
+            <!-- BLOCK 1: CORE DEMOGRAPHICS -->
             <div class="space-y-4">
                 <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider"><i class="fa-solid fa-user-shield"></i> Part A: Core Demographics</span>
                 
@@ -49,16 +49,11 @@
                         <input type="text" id="p_id_no" required placeholder="Enter Police ID Number" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono placeholder-slate-800">
                     </div>
                     <div>
-                        <div class="flex justify-between items-center mb-1.5">
-                            <label class="block text-[11px] font-bold text-slate-400 uppercase">03. National Identity Card (NIC)</label>
-                            <span class="text-[9px] text-amber-500 font-bold uppercase tracking-tighter">Format: Old/New Required</span>
-                        </div>
-                        <input type="text" id="p_nic" required placeholder="Format: 981234567V or 199812345678" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono">
-                        <span id="nic_error_msg" class="text-[10px] text-rose-500 font-bold hidden mt-1 block"><i class="fa-solid fa-circle-xmark mr-1"></i> Invalid Sri Lankan NIC format detected!</span>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">03. National Identity Card (NIC)</label>
+                        <input type="text" id="p_nic" required placeholder="Format: Old or New NIC Required" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono">
                     </div>
                 </div>
 
-                <!-- DOB & AUTO AGE CALCULATION ROW -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">04. Date of Birth (DOB)</label>
@@ -71,50 +66,37 @@
                 </div>
             </div>
 
-            <!-- SECTION 02: SERVICE & DEPLOYMENT PARTICULARS -->
+            <!-- BLOCK 2: SERVICE DATA -->
             <div class="space-y-4 pt-2">
-                <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider"><i class="fa-solid fa-building-shield"></i> Part B: Service & Deployment Particulars</span>
+                <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider"><i class="fa-solid fa-building-shield"></i> Part B: Service & Deployment</span>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">06. Current Rank / Designation</label>
-                        <select id="p_rank" required onchange="handleRankSelectionChange(this.value)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
-                            <option value="WPC">Woman Police Constable (WPC)</option>
-                            <option value="WPS">Woman Police Sergeant (WPS)</option>
+                        <select id="p_rank" required class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                             <option value="PC" selected>Police Constable (PC)</option>
                             <option value="PS">Police Sergeant (PS)</option>
-                            <option value="PCD">Police Constable Driver (PCD)</option>
-                            <option value="PSD">Police Sergeant Driver (PSD)</option>
                             <option value="SI">Sub Inspector (SI)</option>
                             <option value="IP">Inspector of Police (IP)</option>
+                            <option value="IP">Inspector of Police (IP)</option>
                             <option value="CI">Chief Inspector (CI)</option>
-                            <option value="ASP">Assistant Superintendent of Police (ASP)</option>
+                            <option value="ASP">ASP</option>
+                            <option value="ASP">ASP</option>
                             <option value="SP">Superintendent of Police (SP)</option>
-                            <option value="SSP">Senior Superintendent of Police (SSP)</option>
-                            <option value="DIG">Deputy Inspector General (DIG)</option>
-                            <option value="SDIG">Senior DIG (SDIG)</option>
-                            <option value="IGP">Inspector General of Police (IGP)</option>
-                            <option value="Civil Support Staff">Civil Support Staff</option>
+                            <option value="DIG">DIG</option>
                         </select>
                     </div>
-
-                    <!-- 🚀 DYNAMIC SUB-MENU: Service Number Input Box for PC/PS/WPC ranks -->
-                    <div id="sub_menu_service_no_panel" class="transition-all duration-300">
-                        <label class="block text-[11px] font-bold text-cyan-400 mb-1.5 uppercase tracking-wide"><i class="fa-solid fa-hashtag mr-1"></i> Officer Service Number</label>
-                        <input type="text" id="p_rank_service_number" placeholder="Enter Field Service Number" class="w-full px-3 py-2 bg-[#040817] border border-cyan-900/40 rounded-xl text-white font-mono">
-                    </div>
-
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">07. Date of Enlistment</label>
                         <input type="date" id="p_enlist_date" required class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono">
                     </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">08. Police Division / Sub Unit</label>
                         <input type="text" id="p_division" required placeholder="Enter division or branch" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">09. Station / Office / Branch / Unit</label>
                         <input type="text" id="p_station" required placeholder="Enter deployment target node" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
@@ -123,49 +105,41 @@
                         <label class="block text-[11px] font-bold text-[#f43f5e] mb-1.5 uppercase tracking-wide">10. PHN NO * MANDATORY</label>
                         <input type="text" id="p_phn" required placeholder="0285-" class="w-full px-3 py-2 bg-[#040817] border border-[#f43f5e]/30 rounded-xl text-white font-mono tracking-wider">
                     </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">11. PHN Card Status</label>
+                        <select id="p_phn_status" required class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
+                            <option value="Issued">Issued</option>
+                            <option value="Pending">Pending Application</option>
+                            <option value="Not Applied">Not Applied Yet</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <!-- SECTION 03: COMMUNICATIONS & RESIDENCE -->
+            <!-- BLOCK 3: COMMUNICATIONS -->
             <div class="space-y-4 pt-2">
                 <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider"><i class="fa-solid fa-address-book"></i> Part C: Communications & Residence</span>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">11. Email Address</label>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">12. Email Address</label>
                         <input type="email" id="p_email" required placeholder="officer@police.gov.lk" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
-                    
-                    <!-- 🚀 OTP MOBILE VERIFICATION CORE INTEGRATION -->
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">12. Contact No (Mobile Verification Required)</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="p_contact" required placeholder="Enter mobile contact number" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
-                            <button type="button" onclick="sendSecureOtpCode()" id="otp_send_btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 rounded-xl text-[11px] transition uppercase whitespace-nowrap">Send OTP</button>
-                        </div>
-                        
-                        <!-- Hidden Verification Input Field Segment Drawer -->
-                        <div id="otp_verify_box" class="hidden mt-2 p-3 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between gap-3 animate-fadeIn">
-                            <div class="flex items-center gap-2 text-xs w-full">
-                                <span class="text-slate-500 font-bold uppercase text-[10px] tracking-wider shrink-0"><i class="fa-solid fa-shield-halved text-cyan-400"></i> Enter OTP:</span>
-                                <input type="text" id="otp_input_code" placeholder="••••" class="w-20 px-2 py-1 bg-[#040817] border border-slate-800 rounded text-white font-mono text-center tracking-widest text-xs">
-                                <button type="button" onclick="verifyOtpToken()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded text-[10px] uppercase">Verify</button>
-                            </div>
-                            <span id="otp_timer" class="font-mono text-[10px] text-amber-400 tracking-wide shrink-0">30s</span>
-                        </div>
-                        <span id="otp_success_msg" class="text-[10px] text-emerald-400 font-bold hidden mt-1 block"><i class="fa-solid fa-circle-check mr-1"></i> Mobile number successfully authenticated via token verification loop.</span>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">13. Mobile Contact No</label>
+                        <input type="text" id="p_contact" required placeholder="Mobile contact phone number" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
                 </div>
                 <div class="text-xs">
-                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">13. Residential Address</label>
-                    <input type="text" id="p_address" required placeholder="Enter home address context" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
+                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">14. Residential Address</label>
+                    <input type="text" id="p_address" required placeholder="Enter primary residential home address Context" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                 </div>
             </div>
 
-            <!-- ENHANCED LAYER: PORTAL LOGIN ACCOUNT & BIOMETRIC HARDWARE CONFIGURATION -->
+            <!-- 🔒 REENGINEERED: PORTAL LOGIN & BIOMETRIC SYNC CONFIGURATION (Now Optional) -->
             <div class="p-5 bg-[#040817]/40 border border-slate-900 rounded-xl space-y-4 mt-6 shadow-inner">
                 <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider">
-                    <i class="fa-solid fa-lock text-sm"></i> 14. Portal Login & Biometric Hardware Sync Configuration
+                    <i class="fa-solid fa-lock text-sm"></i> 15. Portal Login & Biometric Hardware Sync Configuration
                 </span>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -179,10 +153,10 @@
                     </div>
                 </div>
 
-                <!-- BIOMETRICS ENROLLMENT NODE -->
+                <!-- BIOMETRICS ENROLLMENT NODE (Converted to Opt-In Feature) -->
                 <div class="pt-3 border-t border-slate-900/80 space-y-2">
                     <div class="flex justify-between items-center">
-                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wide"><i class="fa-solid fa-fingerprint text-xs text-cyan-400 mr-1"></i> Enroll Biometric Key (Required for mobile interface bypass)</label>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wide"><i class="fa-solid fa-fingerprint text-xs text-cyan-400 mr-1"></i> Enroll Biometric Key (Optional - Enables mobile interface bypass)</label>
                         <span id="bio_status_badge" class="text-[9px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-black uppercase tracking-wider">Not Captured</span>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -208,9 +182,7 @@
     <!-- Script Processing Vault Engine -->
     <script>
         let isBiometricLinked = false;
-        let isMobileVerified = false;
         let activeHardwareNode = "";
-        let otpTimerInterval;
 
         // Dynamic username generation tracking based on Police ID Number input
         const idNoInput = document.getElementById('p_id_no');
@@ -221,7 +193,7 @@
             usernameDisplay.value = rawVal ? rawVal : "AUTO-GENERATED FROM POLICE ID";
         });
 
-        // 🚀 DOB AUTO AGE CALCULATION LOGIC ENGINE
+        // DOB Auto Age Calculation Logic
         document.getElementById('p_dob').addEventListener('change', function(e) {
             const dobValue = e.target.value;
             if(!dobValue) return;
@@ -233,146 +205,68 @@
             document.getElementById('p_age_display').value = calculatedAge >= 0 ? `${calculatedAge} Years Old` : "Invalid Birth Date Input";
         });
 
-        // 🚀 DYNAMIC SUB-MENU CONFIGURATION: Handle rank change triggers
-        function handleRankSelectionChange(rankValue) {
-            const targetSubPanel = document.getElementById('sub_menu_service_no_panel');
-            const targetInputField = document.getElementById('p_rank_service_number');
-            const rankMatches = ['WPC', 'WPS', 'PC', 'PS', 'PCD', 'PSD'];
-            
-            if (rankMatches.includes(rankValue)) {
-                targetSubPanel.classList.remove('menu-locked', 'opacity-20');
-                targetInputField.removeAttribute('disabled');
-                targetInputField.setAttribute('required', 'true');
-            } else {
-                targetSubPanel.classList.add('menu-locked', 'opacity-20');
-                targetInputField.setAttribute('disabled', 'true');
-                targetInputField.removeAttribute('required');
-                targetInputField.value = "";
-            }
-        }
-        // Run initial configuration map on runtime instantiation
-        handleRankSelectionChange(document.getElementById('p_rank').value);
-
-        // 🚀 SRI LANKAN NIC STRICT VALIDATOR COMPLIANCE CORE
-        function checkSriLankanNicValidity(nicString) {
-            const oldNicPattern = /^[0-9]{9}[vVxX]$/;
-            const newNicPattern = /^[0-9]{12}$/;
-            return oldNicPattern.test(nicString) || newNicPattern.test(nicString);
-        }
-
-        document.getElementById('p_nic').addEventListener('input', function(e) {
-            const errBadge = document.getElementById('nic_error_msg');
-            if(checkSriLankanNicValidity(e.target.value.trim())) {
-                errBadge.classList.add('hidden');
-                e.target.className = "w-full px-3 py-2 bg-[#040817] border border-emerald-500 rounded-xl text-white font-mono";
-            } else {
-                errBadge.classList.remove('hidden');
-                e.target.className = "w-full px-3 py-2 bg-[#040817] border border-rose-500 rounded-xl text-white font-mono";
-            }
-        });
-
-        // 🚀 LIVE SMS OTP TOKEN MOCK VERIFICATION SIMULATOR
-        function sendSecureOtpCode() {
-            const contactInput = document.getElementById('p_contact').value.trim();
-            if(!contactInput) return alert("Security Error: Please enter a target phone number to dispatch the token.");
-
-            document.getElementById('otp_verify_box').classList.remove('hidden');
-            let timeRemaining = 30;
-            const timerLabel = document.getElementById('otp_timer');
-            
-            alert(`🔒 OTP GATEWAY DISPATCH:\nA 4-digit token passcode has been transmitted securely via SMS nodes to phone endpoint [${contactInput}].\n\n(Sandbox Master Override Key: 9984)`);
-            
-            clearInterval(otpTimerInterval);
-            otpTimerInterval = setInterval(() => {
-                timeRemaining--;
-                timerLabel.innerText = `${timeRemaining}s`;
-                if(timeRemaining <= 0) {
-                    clearInterval(otpTimerInterval);
-                    timerLabel.innerText = "Expired";
-                }
-            }, 1000);
-        }
-
-        function verifyOtpToken() {
-            const inputToken = document.getElementById('otp_input_code').value.trim();
-            if (inputToken === "9984") {
-                clearInterval(otpTimerInterval);
-                isMobileVerified = true;
-                document.getElementById('otp_verify_box').remove();
-                document.getElementById('otp_send_btn').remove();
-                document.getElementById('p_contact').setAttribute('readonly', 'true');
-                document.getElementById('p_contact').className = "w-full px-3 py-2 bg-[#020617] border border-emerald-500 rounded-xl text-emerald-400 font-bold outline-none cursor-not-allowed";
-                document.getElementById('otp_success_msg').classList.remove('hidden');
-                alert("✅ MOBILE ACCESS LOCKED: Device verified successfully.");
-            } else {
-                alert("🔴 VERIFICATION FAILURE: The OTP token provided does not match system routing logs.");
-            }
-        }
-
-        // BIOMETRIC HARDWARE ENROLLMENT
+        // 🚀 REVISED BIOMETRIC HARDWARE ENROLLMENT (No longer locks workflow)
         function enrollPatientBiometrics(mode) {
-            alert(`🔒 INITIALIZING HARDWARE NODE:\nAccessing secure system ${mode} endpoint layer...\nPlease align biometrics.`);
+            alert(`🔒 HARDWARE REQUEST:\nAccessing secure client ${mode} endpoint layer...\nPlease align biometrics for Opt-In pairing.`);
             setTimeout(() => {
                 isBiometricLinked = true;
                 activeHardwareNode = mode;
                 const badge = document.getElementById('bio_status_badge');
                 badge.innerText = "SUCCESSFULLY LINKED";
                 badge.className = "text-[9px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse";
-                alert(`✅ BIOMETRICS CAPTURED:\nProfile successfully bound to register matrix!`);
+                alert(`✅ Biometric signature paired successfully!\n\nThis device can now utilize rapid mobile authentication.`);
             }, 850);
         }
 
-        // Global Submit Control Interception Form Framework
+        // 🚀 FINAL FORM SUBMIT LOGIC (Strict constraints removed as requested)
         document.getElementById('patientRegForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Check security constraints matrices loop
-            const currentNic = document.getElementById('p_nic').value.trim();
-            if(!checkSriLankanNicValidity(currentNic)) {
-                alert("Security Reject: Invalid National Identity Card (NIC) footprint. Process terminated.");
-                return;
-            }
-
-            if(!isMobileVerified) {
-                alert("Security Reject: Mobile endpoint is not authenticated. Please execute the SMS OTP verification loop.");
-                return;
-            }
-
-            if(!isBiometricLinked) {
-                alert("Security Reject: Enterprise policy requires a Biometric Hardware key to initialize registration.");
-                return;
-            }
+            // Intercept lack of secure biometric linkages (Removed as per Directive 9984)
+            // if(!isBiometricLinked) {
+            //     alert("Security Reject: Enterprise policy requires a Biometric Hardware key to initialize registration.");
+            //     return;
+            // }
 
             const generatedUser = usernameDisplay.value.trim();
 
             const patientRecord = {
                 name: document.getElementById('p_name').value.trim(),
                 policeIdNumber: idNoInput.value.trim(),
-                nic: currentNic,
+                nic: document.getElementById('p_nic').value.trim(),
                 dob: document.getElementById('p_dob').value,
                 age: document.getElementById('p_age_display').value,
                 rank: document.getElementById('p_rank').value,
-                rankServiceNumber: document.getElementById('p_rank_service_number').value.trim(),
                 enlistmentDate: document.getElementById('p_enlist_date').value,
                 division: document.getElementById('p_division').value.trim(),
                 station: document.getElementById('p_station').value.trim(),
                 phn: document.getElementById('p_phn').value.trim(),
+                phnStatus: document.getElementById('p_phn_status').value,
                 email: document.getElementById('p_email').value.trim(),
+                contact: document.getElementById('p_contact').value.trim(),
                 address: document.getElementById('p_address').value.trim(),
                 username: generatedUser,
+                biometricsActive: isBiometricLinked, // Tracks if user paired
+                hardwareNodeMapped: activeHardwareNode, // Records node type
                 timestamp: Date.now()
             };
 
+            // Commit dynamic registration profile matrix to central localStorage vault
             let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
             patientsData[generatedUser] = patientRecord;
             localStorage.setItem('hospital_patients', JSON.stringify(patientsData));
 
+            // Set login authentication vectors true instantly to bypass dashboard lock
             localStorage.setItem('active_patient_session', 'true');
+            
             alert("🎉 Registration Complete: Officer medical proxy records compiled and synced safely!");
 
+            // STEP-LOCK INTEGRATION STEP: Push advance trigger token to parent dashboard system frame if exists
             if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
                 window.parent.executePipelineAdvance();
             }
+
+            // Redirect smoothly back into the root home console workspace frame
             window.location.href = "dashboard.html";
         });
     </script>
