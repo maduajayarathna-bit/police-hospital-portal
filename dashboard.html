@@ -17,6 +17,7 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        .menu-locked { pointer-events: none !important; opacity: 0.20 !important; filter: blur(1px) !important; }
     </style>
 </head>
 <body class="min-h-screen flex text-slate-100 !bg-slate-950">
@@ -31,68 +32,73 @@
                 </div>
                 <div>
                     <h2 class="text-sm font-black tracking-wider text-white uppercase">POLICE HOSPITAL</h2>
-                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">MED-CORE NETWORK</p>
+                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">MED-CORE SYSTEM</p>
                 </div>
             </div>
 
             <!-- Dynamic Sidebar Menu Navigation Links -->
             <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-400">
-                <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 mb-1.5">PATIENT PORTAL LAYER</span>
+                <div class="flex items-center justify-between pl-2 mb-1.5">
+                    <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest">SEQUENTIAL FLOW MATRIX</span>
+                    <span id="step_progress_badge" class="text-[8px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Step 1/7</span>
+                </div>
                 
-                <!-- 🚀 RESTORED: Patient Login Menu Segment -->
-                <a href="patient_login.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <!-- Unlocked Core Entry Point -->
+                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-right-to-bracket text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
-                    <span>Patient Login</span>
+                    <span>Patient Login / Sign In</span>
                 </a>
-                <a href="patient_registration.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+
+                <!-- 🚀 STEP-LOCKED SEQUENTIAL NAVIGATION LINKS -->
+                <!-- Step 1: Active by Default for New Officers -->
+                <a href="patient_registration.html" id="step_link_1" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-user-injured text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>01. Patient Registration</span>
                 </a>
-                <a href="medical_history.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 2: Locked until Step 1 Submission Vector is Triggered -->
+                <a href="medical_history.html" id="step_link_2" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-notes-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>02. Medical History</span>
                 </a>
-                <a href="medical_reports.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 3: Locked -->
+                <a href="medical_reports.html" id="step_link_3" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-file-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>03. Medical Reports</span>
                 </a>
-                <a href="social_history.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 4: Locked -->
+                <a href="social_history.html" id="step_link_4" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-people-roof text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>04. Social/Family History</span>
                 </a>
-                <a href="physical_activity.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 5: Locked -->
+                <a href="physical_activity.html" id="step_link_5" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-person-running text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>05. Physical Activity Matrix</span>
                 </a>
-                <a href="clinical_calendar.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 6: Locked -->
+                <a href="clinical_calendar.html" id="step_link_6" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-calendar-check text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>06. Clinic Appointments</span>
                 </a>
-                <a href="contact_doctor.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                
+                <!-- Step 7: Locked (Final Phase) -->
+                <a href="contact_doctor.html" id="step_link_7" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-phone-flip text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>07. Contact Doctor Desk</span>
-                </a>
-
-                <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 pt-4 mb-1.5">CLINICAL CONTROL LAYER</span>
-                <a href="doctor_login.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-user-doctor text-sm w-4 text-slate-500 group-hover:text-purple-400"></i>
-                    <span>Doctor Portal Login</span>
-                </a>
-                <a href="doctor_registration.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-signature text-sm w-4 text-slate-500 group-hover:text-purple-400"></i>
-                    <span>Doctor Registration</span>
-                </a>
-
-                <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 pt-4 mb-1.5">SYSTEM COMMAND NODE</span>
-                <a href="admin_login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-950/40 border border-slate-800/60 hover:bg-slate-800/60 hover:text-amber-400 transition group relative">
-                    <i class="fa-solid fa-user-shield text-sm w-4 text-amber-500/70 group-hover:text-amber-400"></i>
-                    <span class="text-slate-300 group-hover:text-amber-400 font-black">Chief Admin Portal</span>
                 </a>
             </nav>
         </div>
 
-        <div class="border-t border-slate-800 pt-3 text-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-network-wired text-cyan-500 mr-1"></i> Node Terminal: Node-048
+        <!-- Dynamic Simulation Tools for Testing -->
+        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/60 text-[10px] space-y-1.5">
+            <span class="text-slate-500 block uppercase font-bold"><i class="fa-solid fa-bug mr-1"></i> Flow Simulation Core</span>
+            <button onclick="simulateStepSubmission()" class="w-full bg-emerald-600/20 text-emerald-400 p-1 rounded font-bold hover:bg-emerald-600/40 transition">Simulate Current Step Submit</button>
+            <button onclick="resetFlowProgress()" class="w-full bg-slate-900 text-slate-400 p-1 rounded font-bold hover:bg-slate-800 transition">Reset Pipeline Back to 1</button>
         </div>
     </aside>
 
@@ -102,92 +108,79 @@
         <!-- Header Console Banner -->
         <div class="w-full bg-slate-900/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
             <div>
-                <h1 class="text-2xl font-black text-white tracking-wide uppercase">Hospital Command Console</h1>
-                <p class="text-xs text-slate-400 mt-0.5">Central metric analysis, real-time database vectors tracking, and node connectivity management</p>
+                <h1 class="text-2xl font-black text-white tracking-wide uppercase">Hospital Patient Portal</h1>
+                <p class="text-xs text-slate-400 mt-0.5">Sequential medical profiling matrix validation engine</p>
             </div>
             <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-right">
-                <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Authentication Profile</span>
-                <span class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase"><i class="fa-solid fa-circle-nodes text-[10px] mr-1 animate-pulse"></i> Administrator</span>
+                <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Current Lock Status</span>
+                <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
             </div>
         </div>
 
-        <!-- LIVE ANALYTICS WIDGET CARDS MATRIX -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Card 1 -->
-            <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-emerald-500/30 transition-all">
-                <div class="absolute top-0 bottom-0 left-0 w-1 bg-emerald-500"></div>
-                <div>
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Network Core</span>
-                    <span class="text-sm font-black text-white mt-1 block uppercase tracking-wide">Systems Online</span>
-                    <span class="text-[10px] text-emerald-400 font-mono font-bold mt-0.5 block"><i class="fa-solid fa-circle text-[6px] mr-1 animate-ping"></i> Latency: 12ms</span>
-                </div>
-                <i class="fa-solid fa-server text-slate-800 text-3xl group-hover:text-emerald-500/10 transition-colors"></i>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-purple-500/30 transition-all">
-                <div class="absolute top-0 bottom-0 left-0 w-1 bg-purple-500"></div>
-                <div>
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Authorized Doctors</span>
-                    <span id="live_doctors_count" class="text-2xl font-black font-mono text-white mt-1 block">04</span>
-                    <span class="text-[10px] text-purple-400 font-semibold mt-0.5 block">SLMC Specialists</span>
-                </div>
-                <i class="fa-solid fa-user-doctor text-slate-800 text-3xl group-hover:text-purple-500/10 transition-colors"></i>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-amber-500/30 transition-all">
-                <div class="absolute top-0 bottom-0 left-0 w-1 bg-amber-500"></div>
-                <div>
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Management Nodes</span>
-                    <span id="live_admins_count" class="text-2xl font-black font-mono text-white mt-1 block">01</span>
-                    <span class="text-[10px] text-amber-400 font-semibold mt-0.5 block">Chief + Proxy Vaults</span>
-                </div>
-                <i class="fa-solid fa-users-gear text-slate-800 text-3xl group-hover:text-amber-500/10 transition-colors"></i>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-cyan-500/30 transition-all">
-                <div class="absolute top-0 bottom-0 left-0 w-1 bg-cyan-500"></div>
-                <div>
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Registered Patients</span>
-                    <span id="live_patients_count" class="text-2xl font-black font-mono text-white mt-1 block">12</span>
-                    <span class="text-[10px] text-cyan-400 font-semibold mt-0.5 block">Active Medical Profiles</span>
-                </div>
-                <i class="fa-solid fa-hospital-user text-slate-800 text-3xl group-hover:text-cyan-500/10 transition-colors"></i>
+        <!-- Sequential Informational Banner Notice -->
+        <div id="flow_notice_panel" class="w-full bg-slate-900/60 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-start gap-4">
+            <i class="fa-solid fa-route text-cyan-400 text-xl mt-0.5 animate-bounce"></i>
+            <div class="text-xs space-y-1">
+                <span class="text-white font-bold uppercase tracking-wide block">Data Entry Directive Control</span>
+                <p class="text-slate-400 leading-relaxed">To ensure cryptographic safety and avoid partial database logs, you must complete each medical information section sequentially. Submitting the active form automatically authorizes and unlocks the immediate subsequent node module.</p>
             </div>
         </div>
 
-        <!-- 🚀 RESTORED: Dynamic Quick Access Menu Segment Layout Panels -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
-                <div class="text-cyan-400 text-xl"><i class="fa-solid fa-user-plus"></i></div>
-                <h3 class="text-sm font-bold text-white uppercase">New Patient Registration</h3>
-                <p class="text-[11px] text-slate-400 leading-relaxed">Enroll new police officers into the central health database system instantly.</p>
-                <a href="patient_registration.html" class="inline-block bg-cyan-600 hover:bg-cyan-750 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Open Form</a>
+        <!-- Dynamic Progress Tracker Visualization Graph -->
+        <div class="w-full bg-slate-900/40 border border-slate-800 p-5 rounded-2xl shadow-xl">
+            <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider mb-3">Overall Pipeline Completion Status</span>
+            <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                <div id="flow_progress_bar" class="bg-gradient-to-r from-cyan-500 to-emerald-500 h-full w-[14.28%] transition-all duration-500 shadow-[0_0_8px_#06b6d4]"></div>
             </div>
-
-            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
-                <div class="text-purple-400 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
-                <h3 class="text-sm font-bold text-white uppercase">Clinic Appointments</h3>
-                <p class="text-[11px] text-slate-400 leading-relaxed">Schedule specialized consultant clinics and auto-generate patient tokens.</p>
-                <a href="clinical_calendar.html" class="inline-block bg-purple-600 hover:bg-purple-750 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">View Calendar</a>
-            </div>
-
-            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
-                <div class="text-amber-400 text-xl"><i class="fa-solid fa-clipboard-check"></i></div>
-                <h3 class="text-sm font-bold text-white uppercase">Medical Reports</h3>
-                <p class="text-[11px] text-slate-400 leading-relaxed">Upload, audit and distribute clinical laboratory results securely.</p>
-                <a href="medical_reports.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Audit Logs</a>
-            </div>
-
         </div>
 
     </main>
 
-    <!-- Real-time Active System Data & Highlight Controller Logic -->
+    <!-- Client-side Pipeline Automation Interactivity Script Logic -->
     <script>
+        // Check current milestone position or fallback default index initialization
+        let currentUnlockedStep = parseInt(localStorage.getItem('hospital_flow_step') || '1');
+
+        function enforceStepLockArchitecture() {
+            // Re-verify range boundaries safely
+            if (currentUnlockedStep > 7) currentUnlockedStep = 7;
+            if (currentUnlockedStep < 1) currentUnlockedStep = 1;
+
+            // Sync state numbers inside data badges
+            document.getElementById('step_progress_badge').innerText = `Step ${currentUnlockedStep}/7`;
+            
+            if(currentUnlockedStep === 7) {
+                document.getElementById('global_status_badge').innerText = "ALL STEPS COMPLETED";
+                document.getElementById('global_status_badge').className = "text-xs font-black text-emerald-400 font-mono tracking-wider uppercase";
+            } else {
+                document.getElementById('global_status_badge').innerText = `FILLING STEP ${currentUnlockedStep}`;
+            }
+
+            // Calculate exact width ratio string for graphic representation progress bar
+            const progressionPercentage = (currentUnlockedStep / 7) * 100;
+            document.getElementById('flow_progress_bar').style.width = `${progressionPercentage}%`;
+
+            // Loop parameters logic processing through links to toggle the block parameters
+            for (let i = 1; i <= 7; i++) {
+                const linkNode = document.getElementById(`step_link_${i}`);
+                if (linkNode) {
+                    if (i <= currentUnlockedStep) {
+                        // Allow access to unlocked or passed historical steps
+                        linkNode.classList.remove('menu-locked');
+                    } else {
+                        // Deadlock future vectors strictly
+                        linkNode.classList.add('menu-locked');
+                    }
+                }
+            }
+
+            // Auto-highlight the current targeted focus link object block
+            const currentActiveMenu = document.getElementById(`step_link_${currentUnlockedStep}`);
+            if (currentActiveMenu) {
+                switchActiveMenu(currentActiveMenu);
+            }
+        }
+
         function switchActiveMenu(clickedElement) {
             const allLinks = document.querySelectorAll('#sidebar_nav a');
             allLinks.forEach(link => {
@@ -201,23 +194,28 @@
             clickedElement.insertAdjacentHTML('afterbegin', barHtml);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Calculate Real Live Patients
-            const patientsMatrix = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-            const calculatedPatientsCount = Object.keys(patientsMatrix).length;
-            document.getElementById('live_patients_count').innerText = calculatedPatientsCount > 0 ? calculatedPatientsCount : "12";
-
-            // Calculate Real Live Doctors
-            const doctorsMatrix = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
-            const calculatedDoctorsCount = doctorsMatrix.length;
-            document.getElementById('live_doctors_count').innerText = calculatedDoctorsCount > 0 ? String(calculatedDoctorsCount).padStart(2, '0') : "04";
-
-            // Map current path to auto-highlight active elements naturally
-            const currentPath = window.location.pathname.split("/").pop();
-            const matchingLink = document.querySelector(`#sidebar_nav a[href="${currentPath}"]`);
-            if (matchingLink) {
-                switchActiveMenu(matchingLink);
+        // 🚀 TRIGGER POINT: Call this method inside individual sub-page form submit hooks!
+        function simulateStepSubmission() {
+            if (currentUnlockedStep < 7) {
+                currentUnlockedStep++;
+                localStorage.setItem('hospital_flow_step', currentUnlockedStep);
+                alert(`✅ Step Data Pushed Successfully!\n\nModule ${currentUnlockedStep - 1} encrypted. Submodule 0${currentUnlockedStep} is now officially unlocked inside your navigation stack!`);
+                enforceStepLockArchitecture();
+            } else {
+                alert("🎉 Success: All 7 corporate medical pipeline steps have already been mapped and verified for this session ledger!");
             }
+        }
+
+        function resetFlowProgress() {
+            currentUnlockedStep = 1;
+            localStorage.setItem('hospital_flow_step', '1');
+            alert("Sandbox Management Notification: Pipeline progress reset back to initial step state parameters.");
+            enforceStepLockArchitecture();
+        }
+
+        // Trigger configuration rendering stack instantly on execution lifecycle load loop
+        document.addEventListener('DOMContentLoaded', () => {
+            enforceStepLockArchitecture();
         });
     </script>
 </body>
