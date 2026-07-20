@@ -39,6 +39,11 @@
             <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-400">
                 <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 mb-1.5">PATIENT PORTAL LAYER</span>
                 
+                <!-- 🚀 RESTORED: Patient Login Menu Segment -->
+                <a href="patient_login.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                    <i class="fa-solid fa-right-to-bracket text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                    <span>Patient Login</span>
+                </a>
                 <a href="patient_registration.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-user-injured text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>01. Patient Registration</span>
@@ -78,7 +83,6 @@
                     <span>Doctor Registration</span>
                 </a>
 
-                <!-- 🚀 FIXED: Secret Chief Admin Root Login Node Linked Directly Here -->
                 <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 pt-4 mb-1.5">SYSTEM COMMAND NODE</span>
                 <a href="admin_login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-950/40 border border-slate-800/60 hover:bg-slate-800/60 hover:text-amber-400 transition group relative">
                     <i class="fa-solid fa-user-shield text-sm w-4 text-amber-500/70 group-hover:text-amber-400"></i>
@@ -154,12 +158,30 @@
             </div>
         </div>
 
-        <!-- Workspace Module Frame Container -->
-        <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-6 min-h-[420px] flex items-center justify-center shadow-2xl backdrop-blur-sm">
-            <div class="text-center text-slate-600 space-y-2">
-                <i class="fa-solid fa-chart-line text-4xl text-slate-800 animate-pulse"></i>
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Select a workspace target segment module from the left navigation panel</p>
+        <!-- 🚀 RESTORED: Dynamic Quick Access Menu Segment Layout Panels -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
+                <div class="text-cyan-400 text-xl"><i class="fa-solid fa-user-plus"></i></div>
+                <h3 class="text-sm font-bold text-white uppercase">New Patient Registration</h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Enroll new police officers into the central health database system instantly.</p>
+                <a href="patient_registration.html" class="inline-block bg-cyan-600 hover:bg-cyan-750 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Open Form</a>
             </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
+                <div class="text-purple-400 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
+                <h3 class="text-sm font-bold text-white uppercase">Clinic Appointments</h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Schedule specialized consultant clinics and auto-generate patient tokens.</p>
+                <a href="clinical_calendar.html" class="inline-block bg-purple-600 hover:bg-purple-750 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">View Calendar</a>
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3">
+                <div class="text-amber-400 text-xl"><i class="fa-solid fa-clipboard-check"></i></div>
+                <h3 class="text-sm font-bold text-white uppercase">Medical Reports</h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Upload, audit and distribute clinical laboratory results securely.</p>
+                <a href="medical_reports.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Audit Logs</a>
+            </div>
+
         </div>
 
     </main>
@@ -167,8 +189,6 @@
     <!-- Real-time Active System Data & Highlight Controller Logic -->
     <script>
         function switchActiveMenu(clickedElement) {
-            // Note: If you want standard sub-page loading inside GitHub architecture without full page reload, 
-            // you can later introduce iframe nodes here. For now, links direct to raw files.
             const allLinks = document.querySelectorAll('#sidebar_nav a');
             allLinks.forEach(link => {
                 link.classList.remove('bg-slate-950', 'border', 'text-cyan-400', 'font-black');
