@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Forces external white templates to crash and locks the premium cyber background */
         html, body {
             background-color: #020617 !important;
             background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgODAwIDYwMCc+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9JyMwMjA2MTcnLz4KPGRlZnM+CjxyYWRpYWxHcmFkaWVudCBpZD0nZHN0JyBjeD0nNTAlJyBjeT0nNTAlJyByPyc3MCUnPgo8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMGYxNzJhJyBzdG9wLW9wYWNpdHk9JzAuNicvPgo8c3RvcCBvZmZzZXQ9JzEwMCUnIHN0b3AtY29sb3I9JyMwMjA2MTcnJyBzdG9wLW9wYWNpdHk9JzAuOScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8cGF0dGVybiBpZD0nZ3JpZCcgd2lkdGg9JzQwJyBoZWlnaHQ9JzQwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJz4KPHBhdGggZD0nTSA0MCAwIEwgMCAwIDAgNDAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzFlMjkzYicgc3Ryb2tleC13aWR0aD0nMC41Jy8+CjwvcGF0dGVybj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPSd1cmwoI2RzdCknLz4KcmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPSd1cmwoI2dyaWQpJy8+CjxjaXJjbGUgY3g9JzQwMCcgY3y9JzMwMCcgcj0nMjUwJyBmaWxsPScjMWQ0ZWQ4JyBvcGFjaXR5PScwLjA4JyBmaWx0ZXI9J2JsdXIoNDBweCknLz4KPC9zdmc+") !important;
@@ -40,43 +39,50 @@
             <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-400">
                 <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 mb-1.5">PATIENT PORTAL LAYER</span>
                 
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="patient_registration.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-user-injured text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>01. Patient Registration</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="medical_history.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-notes-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>02. Medical History</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="medical_reports.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-file-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>03. Medical Reports</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="social_history.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-people-roof text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>04. Social/Family History</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="physical_activity.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-person-running text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>05. Physical Activity Matrix</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="clinical_calendar.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-calendar-check text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>06. Clinic Appointments</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="contact_doctor.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-phone-flip text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
                     <span>07. Contact Doctor Desk</span>
                 </a>
 
                 <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 pt-4 mb-1.5">CLINICAL CONTROL LAYER</span>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="doctor_login.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-user-doctor text-sm w-4 text-slate-500 group-hover:text-purple-400"></i>
                     <span>Doctor Portal Login</span>
                 </a>
-                <a href="#" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
+                <a href="doctor_registration.html" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
                     <i class="fa-solid fa-signature text-sm w-4 text-slate-500 group-hover:text-purple-400"></i>
                     <span>Doctor Registration</span>
+                </a>
+
+                <!-- 🚀 FIXED: Secret Chief Admin Root Login Node Linked Directly Here -->
+                <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest block pl-2 pt-4 mb-1.5">SYSTEM COMMAND NODE</span>
+                <a href="admin_login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-950/40 border border-slate-800/60 hover:bg-slate-800/60 hover:text-amber-400 transition group relative">
+                    <i class="fa-solid fa-user-shield text-sm w-4 text-amber-500/70 group-hover:text-amber-400"></i>
+                    <span class="text-slate-300 group-hover:text-amber-400 font-black">Chief Admin Portal</span>
                 </a>
             </nav>
         </div>
@@ -86,7 +92,7 @@
         </div>
     </aside>
 
-    <!-- Main Dynamic Content Workspace Viewport (Overridden to dark forced parameters) -->
+    <!-- Main Dynamic Content Workspace Viewport -->
     <main class="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto !bg-slate-950/40 relative z-10">
         
         <!-- Header Console Banner -->
@@ -101,7 +107,7 @@
             </div>
         </div>
 
-        <!-- LIVE RE-ENGINEERED ANALYTICS WIDGET CARDS MATRIX -->
+        <!-- LIVE ANALYTICS WIDGET CARDS MATRIX -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Card 1 -->
             <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-2xl relative overflow-hidden group hover:border-emerald-500/30 transition-all">
@@ -161,32 +167,37 @@
     <!-- Real-time Active System Data & Highlight Controller Logic -->
     <script>
         function switchActiveMenu(clickedElement) {
+            // Note: If you want standard sub-page loading inside GitHub architecture without full page reload, 
+            // you can later introduce iframe nodes here. For now, links direct to raw files.
             const allLinks = document.querySelectorAll('#sidebar_nav a');
             allLinks.forEach(link => {
-                link.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative";
+                link.classList.remove('bg-slate-950', 'border', 'text-cyan-400', 'font-black');
                 const indicator = link.querySelector('.active-bar');
                 if (indicator) indicator.remove();
             });
 
-            clickedElement.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-cyan-400 font-black transition relative group";
+            clickedElement.className += " bg-slate-950 border border-slate-800 text-cyan-400 font-black";
             const barHtml = `<div class="active-bar absolute left-0 top-2.5 bottom-2.5 w-1 bg-cyan-500 rounded-r shadow-[0_0_8px_#06b6d4]"></div>`;
             clickedElement.insertAdjacentHTML('afterbegin', barHtml);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Calculate Real Live Patients
+            // Calculate Real Live Patients
             const patientsMatrix = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
             const calculatedPatientsCount = Object.keys(patientsMatrix).length;
             document.getElementById('live_patients_count').innerText = calculatedPatientsCount > 0 ? calculatedPatientsCount : "12";
 
-            // 2. Calculate Real Live Doctors
+            // Calculate Real Live Doctors
             const doctorsMatrix = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
             const calculatedDoctorsCount = doctorsMatrix.length;
             document.getElementById('live_doctors_count').innerText = calculatedDoctorsCount > 0 ? String(calculatedDoctorsCount).padStart(2, '0') : "04";
 
-            // 3. Set Default Highlighting
-            const defaultHomeMenu = document.querySelector('#sidebar_nav a');
-            if (defaultHomeMenu) switchActiveMenu(defaultHomeMenu);
+            // Map current path to auto-highlight active elements naturally
+            const currentPath = window.location.pathname.split("/").pop();
+            const matchingLink = document.querySelector(`#sidebar_nav a[href="${currentPath}"]`);
+            if (matchingLink) {
+                switchActiveMenu(matchingLink);
+            }
         });
     </script>
 </body>
