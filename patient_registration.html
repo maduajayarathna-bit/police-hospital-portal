@@ -33,6 +33,12 @@
             <p class="text-[11px] text-blue-400 font-mono tracking-widest uppercase mt-0.5">Sri Lanka Police Hospital</p>
         </div>
 
+        <!-- Dynamic Collision Error Messages Console Panel -->
+        <div id="collision_error_box" class="hidden w-full bg-rose-500/10 border border-rose-500/30 p-4 rounded-xl mb-5 space-y-1 animate-pulse">
+            <span class="text-xs font-black text-rose-500 uppercase block"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Data Collision Blockade Activated</span>
+            <p id="collision_error_text" class="text-[11px] text-slate-300 leading-relaxed"></p>
+        </div>
+
         <!-- Registration Form Dashboard Box -->
         <form id="patientRegForm" class="space-y-5">
             
@@ -99,7 +105,6 @@
                         </select>
                     </div>
 
-                    <!-- 🚀 DYNAMIC SUB-MENU RESIDENT: Officer Service Number for PC/PS ranks -->
                     <div id="sub_menu_service_no_panel" class="transition-all duration-300">
                         <label class="block text-[11px] font-bold text-cyan-400 mb-1.5 uppercase tracking-wide"><i class="fa-solid fa-hashtag mr-1"></i> Officer Service Number</label>
                         <input type="text" id="p_rank_service_number" placeholder="Enter Field Service Number" class="w-full px-3 py-2 bg-[#040817] border border-cyan-900/40 rounded-xl text-white font-mono">
@@ -137,7 +142,7 @@
                         <input type="email" id="p_email" required placeholder="officer@police.gov.lk" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
                     
-                    <!-- 🚀 RESTORED MOBILE OTP GATEWAY SYSTEM -->
+                    <!-- MOBILE OTP GATEWAY SYSTEM -->
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">12. Contact No (Mobile Verification Required)</label>
                         <div class="flex gap-2">
@@ -145,7 +150,6 @@
                             <button type="button" onclick="sendSecureOtpCode()" id="otp_send_btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 rounded-xl text-[11px] transition uppercase whitespace-nowrap">Send OTP</button>
                         </div>
                         
-                        <!-- Hidden Verification Window Drawer Segment -->
                         <div id="otp_verify_box" class="hidden mt-2 p-3 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between gap-3 animate-fadeIn">
                             <div class="flex items-center gap-2 text-xs w-full">
                                 <span class="text-slate-500 font-bold uppercase text-[10px] tracking-wider shrink-0"><i class="fa-solid fa-shield-halved text-cyan-400"></i> Enter OTP:</span>
@@ -163,7 +167,7 @@
                 </div>
             </div>
 
-            <!-- PORTAL LOGIN ACCOUNT & BIOMETRIC CONFIGURATION (Biometrics completely optional) -->
+            <!-- PORTAL LOGIN ACCOUNT & BIOMETRIC CONFIGURATION -->
             <div class="p-5 bg-[#040817]/40 border border-slate-900 rounded-xl space-y-4 mt-6 shadow-inner">
                 <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider">
                     <i class="fa-solid fa-lock text-sm"></i> 14. Portal Login & Biometric Hardware Sync Configuration
@@ -183,7 +187,7 @@
                 <!-- BIOMETRICS OPTIONAL LOGICAL FIELD LAYER -->
                 <div class="pt-3 border-t border-slate-900/80 space-y-2">
                     <div class="flex justify-between items-center">
-                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wide"><i class="fa-solid fa-fingerprint text-xs text-cyan-400 mr-1"></i> Enroll Biometric Key (Optional - Enables mobile interface bypass)</label>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wide"><i class="fa-solid fa-fingerprint text-xs text-cyan-400 mr-1"></i> Enroll Biometric Key (Optional)</label>
                         <span id="bio_status_badge" class="text-[9px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-black uppercase tracking-wider">Not Captured</span>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -213,7 +217,6 @@
         let activeHardwareNode = "";
         let otpTimerInterval;
 
-        // Dynamic username generation tracking based on Police ID Number input
         const idNoInput = document.getElementById('p_id_no');
         const usernameDisplay = document.getElementById('p_username');
 
@@ -222,7 +225,6 @@
             usernameDisplay.value = rawVal ? rawVal : "AUTO-GENERATED FROM POLICE ID";
         });
 
-        // DOB AUTO AGE CALCULATION LOGIC ENGINE
         document.getElementById('p_dob').addEventListener('change', function(e) {
             const dobValue = e.target.value;
             if(!dobValue) return;
@@ -234,7 +236,6 @@
             document.getElementById('p_age_display').value = calculatedAge >= 0 ? `${calculatedAge} Years Old` : "Invalid Birth Date Input";
         });
 
-        // DYNAMIC SUB-MENU CONFIGURATION: Handle rank change triggers
         function handleRankSelectionChange(rankValue) {
             const targetSubPanel = document.getElementById('sub_menu_service_no_panel');
             const targetInputField = document.getElementById('p_rank_service_number');
@@ -253,7 +254,6 @@
         }
         handleRankSelectionChange(document.getElementById('p_rank').value);
 
-        // SRI LANKAN NIC STRICT VALIDATOR COMPLIANCE CORE
         function checkSriLankanNicValidity(nicString) {
             const oldNicPattern = /^[0-9]{9}[vVxX]$/;
             const newNicPattern = /^[0-9]{12}$/;
@@ -271,7 +271,6 @@
             }
         });
 
-        // LIVE SMS OTP TOKEN VERIFICATION LOOP
         function sendSecureOtpCode() {
             const contactInput = document.getElementById('p_contact').value.trim();
             if(!contactInput) return alert("Security Error: Please enter a phone number to dispatch the token.");
@@ -280,7 +279,7 @@
             let timeRemaining = 30;
             const timerLabel = document.getElementById('otp_timer');
             
-            alert(`🔒 OTP GATEWAY DISPATCH:\nA 4-digit token passcode has been transmitted securely via SMS to [${contactInput}].\n\n(Master Key Loop: 9984)`);
+            alert(`🔒 OTP GATEWAY DISPATCH:\nA 4-digit token passcode has been transmitted securely via SMS.\n\n(Master Key Loop: 9984)`);
             
             clearInterval(otpTimerInterval);
             otpTimerInterval = setInterval(() => {
@@ -309,7 +308,6 @@
             }
         }
 
-        // OPTIONAL BIOMETRIC HARDWARE ENROLLMENT
         function enrollPatientBiometrics(mode) {
             alert(`🔒 HARDWARE PAIRING:\nPlease align biometrics with the system ${mode} for optional authentication mapping...`);
             setTimeout(() => {
@@ -322,13 +320,18 @@
             }, 850);
         }
 
-        // Global Submit Core Intercept
+        // 🚀 GLOBAL DUPLICATION AUDIT ENGINE & FORM SUBMIT CONTEXT
         document.getElementById('patientRegForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            // Cache UI nodes
+            const errorBox = document.getElementById('collision_error_box');
+            const errorText = document.getElementById('collision_error_text');
+            errorBox.classList.add('hidden'); // Reset state
+
             const currentNic = document.getElementById('p_nic').value.trim();
             if(!checkSriLankanNicValidity(currentNic)) {
-                alert("Security Reject: Invalid National Identity Card (NIC) footprint. Process terminated.");
+                alert("Security Reject: Invalid National Identity Card (NIC) footprint.");
                 return;
             }
 
@@ -337,12 +340,46 @@
                 return;
             }
 
-            // 🚀 SUCCESS: Biometrics condition successfully bypassed as optional element!
+            // Fetch absolute form vectors for anti-duplication tracking
+            const enteredIdNo = idNoInput.value.trim().toUpperCase();
+            const enteredContact = document.getElementById('p_contact').value.trim();
+            const enteredPhn = document.getElementById('p_phn').value.trim();
+
+            // Fetch dynamic records currently stored in the central vault
+            let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+
+            // 🚀 INTERCEPT LOOP: Evaluate collision vectors
+            for (let usernameKey in patientsData) {
+                let existingOfficer = patientsData[usernameKey];
+
+                if (existingOfficer.policeIdNumber && existingOfficer.policeIdNumber.toUpperCase() === enteredIdNo) {
+                    errorText.innerText = `ID COLLISION ALERT: The Police ID Number [${enteredIdNo}] is already assigned to a registered medical proxy within this station ledger. Multiple accounts per ID are strictly prohibited.`;
+                    errorBox.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return; // Prevent execution flow instantly
+                }
+
+                if (existingOfficer.contact && existingOfficer.contact === enteredContact) {
+                    errorText.innerText = `MOBILE COLLISION ALERT: The Contact Number [${enteredContact}] is already registered and historically verified for an active profile ledger. Duplicate telephony lines are rejected under security protocol directives.`;
+                    errorBox.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return; 
+                }
+
+                if (existingOfficer.phn && existingOfficer.phn === enteredPhn) {
+                    errorText.innerText = `PHN IDENTITY COLLISION ALERT: The Personal Health Number (PHN) [${enteredPhn}] already exists in the central administrative registry node. Processing duplicate clinical identities is locked out.`;
+                    errorBox.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return; 
+                }
+            }
+
+            // If no data collisions are detected, register the unique account smoothly
             const generatedUser = usernameDisplay.value.trim();
 
             const patientRecord = {
                 name: document.getElementById('p_name').value.trim(),
-                policeIdNumber: idNoInput.value.trim(),
+                policeIdNumber: enteredIdNo,
                 nic: currentNic,
                 dob: document.getElementById('p_dob').value,
                 age: document.getElementById('p_age_display').value,
@@ -351,8 +388,9 @@
                 enlistmentDate: document.getElementById('p_enlist_date').value,
                 division: document.getElementById('p_division').value.trim(),
                 station: document.getElementById('p_station').value.trim(),
-                phn: document.getElementById('p_phn').value.trim(),
+                phn: enteredPhn,
                 email: document.getElementById('p_email').value.trim(),
+                contact: enteredContact,
                 address: document.getElementById('p_address').value.trim(),
                 username: generatedUser,
                 biometricsActive: isBiometricLinked,
@@ -360,12 +398,11 @@
                 timestamp: Date.now()
             };
 
-            let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
             patientsData[generatedUser] = patientRecord;
             localStorage.setItem('hospital_patients', JSON.stringify(patientsData));
 
             localStorage.setItem('active_patient_session', 'true');
-            alert("🎉 Registration Complete: Officer medical proxy records compiled and synced safely!");
+            alert("🎉 Unique Profile Verified & Account Provisioned Successfully!");
 
             if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
                 window.parent.executePipelineAdvance();
