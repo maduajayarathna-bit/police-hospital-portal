@@ -8,150 +8,185 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 🎨 VIBRANT GRADIENT SYSTEM */
         html, body {
-            background-color: #020617 !important;
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgODAwIDYwMCc+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9JyMwMjA2MTcnLz4KPGRlZnM+CjxyYWRpYWxHcmFkaWVudCBpZD0nZHN0JyBjeD0nNTAlJyBjeT0nNTAlJyByPyc3MCUnPgo8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMGYxNzJhJyBzdG9wLW9wYWNpdHk9JzAuNicvPgo8c3RvcCBvZmZzZXQ9JzEwMCUnIHN0b3AtY29sb3I9JyMwMjA2MTcnJyBzdG9wLW9wYWNpdHk9JzAuOScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8cGF0dGVybiBpZD0nZ3JpZCcgd2lkdGg9JzQwJyBoZWlnaHQ9JzQwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJz4KPHBhdGggZD0nTSA0MCAwIEwgMCAwIDAgNDAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzFlMjkzYicgc3Ryb2tleC13aWR0aD0nMC41Jy8+CjwvcGF0dGVybj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPSd1cmwoI2RzdCknLz4KcmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPSd1cmwoI2dyaWQpJy8+CjxjaXJjbGUgY3g9JzQwMCcgY3y9JzMwMCcgcj0nMjUwJyBmaWxsPScjMWQ0ZWQ4JyBvcGFjaXR5PScwLjA4JyBmaWx0ZXI9J2JsdXIoNDBweCknLz4KPC9zdmc+") !important;
+            background-color: #0b1536 !important;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgODAwIDYwMCc+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9JyMwYjE1MzYnLz4KPGRlZnM+CjxyYWRpYWxHcmFkaWVudCBpZD0nZHN0JyBjeD0nNTAlJyBjeT0nNTAlJyByPyc4MCUnPgo8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMTAyTLVlJyBzdG9wLW9wYWNpdHk9JzAuNycvPgo8c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nIzBkMTY0MScgc3RvcC1vcGFjaXR5PScwLjgnLz4KPHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjMDUwYTI0JyBzdG9wLW9wYWNpdHk9JzAuOScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8cGF0dGVybiBpZD0nZ3JpZCcgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJz4KPHBhdGggZD0nTSA1MCAwIEwgMCAwIDAgNTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzE0MjU1Yycgc3Ryb2tleC13aWR0aD0nMC43NScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8L3BhdHRlcm4+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0ndXJsKCNkc3QpJy8+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9J3VybCgjZ3JpZCknLz4KPGNpcmNsZSBjeD0nMjAwJyBjeT0nMjAwJyByPSczMDAnIGZpbGw9JyMxZTQwYWYnIG9wYWNpdHk9JzAuMTUnIGZpbHRlcj0nYmx1cig1MHB4KScvPgo8Y2lyY2xlIGN4PSc2MDAnIGN5PSc0MDAnIHI9JzIwMCcgZmlsbD0nIzAyODRjNycgb3BhY2l0eT0nMC4xMicgZmlsdGVyPSdibHVyKDQwcHgpJy8+Cjwvc3ZnPg==") !important;
             background-size: cover !important;
             background-attachment: fixed !important;
         }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
-        .menu-locked { pointer-events: none !important; opacity: 0.20 !important; filter: blur(1px) !important; }
+        ::-webkit-scrollbar-track { background: #050a24; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 10px; }
+        
+        /* Strict explicit scoping to avoid deadlocking open menus */
+        .link-disabled { pointer-events: none !important; opacity: 0.25 !important; filter: blur(0.8px) !important; }
     </style>
 </head>
-<body class="min-h-screen flex text-slate-100 !bg-slate-950">
+<body class="min-h-screen flex text-slate-100">
 
     <!-- Sidebar Navigation Shell -->
-    <aside class="w-72 bg-slate-900/95 border-r border-slate-800 p-5 flex flex-col justify-between backdrop-blur-md shrink-0 z-10">
+    <aside class="w-72 bg-[#0a1336]/95 border-r border-blue-900/40 p-5 flex flex-col justify-between backdrop-blur-md shrink-0 z-10 shadow-2xl">
         <div class="space-y-6">
             <!-- Medical Hub Branding -->
-            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-                <div class="p-2 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-xl text-xl">
+            <div class="flex items-center gap-3 border-b border-blue-900/30 pb-4">
+                <div class="p-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-xl text-xl shadow-[0_0_12px_rgba(6,182,212,0.2)]">
                     <i class="fa-solid fa-house-medical"></i>
                 </div>
                 <div>
                     <h2 class="text-sm font-black tracking-wider text-white uppercase">POLICE HOSPITAL</h2>
-                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">BIOMETRIC MED-CORE</p>
+                    <p class="text-[10px] text-cyan-400 font-bold tracking-widest uppercase">BIOMETRIC CORE</p>
                 </div>
             </div>
 
             <!-- Dynamic Sidebar Menu Navigation Links -->
-            <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-400">
+            <nav id="sidebar_nav" class="space-y-1 text-xs font-bold text-slate-300">
                 <div class="flex items-center justify-between pl-2 mb-1.5">
-                    <span class="text-[9px] text-slate-600 font-black uppercase tracking-widest">PATIENT WORKFLOW</span>
-                    <span id="step_progress_badge" class="text-[8px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Step 1/7</span>
+                    <span class="text-[9px] text-blue-400 font-black uppercase tracking-widest">PATIENT WORKFLOW</span>
+                    <span id="step_progress_badge" class="text-[8px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-black uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- 🚀 OPTIMIZED: Unlocked Core Entry Point featuring Biometric Sign-In Alert -->
-                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative border border-cyan-500/20 bg-cyan-950/10">
+                <!-- 🚀 ALWAYS UNLOCKED ENTRY POINTERS (Fixed and safely detached from disabled classes) -->
+                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/40 text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer">
                     <i class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
                     <div class="flex flex-col">
-                        <span>Patient Login / Sign In</span>
-                        <span class="text-[9px] text-cyan-500 font-normal mt-0.5">Biometrics Supported</span>
+                        <span class="font-black">Patient Login / Sign In</span>
+                        <span class="text-[9px] text-cyan-400 font-normal mt-0.5">Biometrics Active</span>
                     </div>
                 </a>
 
-                <!-- STEP-LOCKED SEQUENTIAL NAVIGATION LINKS -->
-                <!-- Step 1: Patient Registration (Armed with Biometrics capturing fields internally) -->
-                <a href="patient_registration.html" id="step_link_1" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-user-injured text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <!-- Step 1: Patient Registration (Always active for initial data dispatch) -->
+                <a href="patient_registration.html" id="step_link_1" onclick="switchActiveMenu(this)" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative cursor-pointer">
+                    <i class="fa-solid fa-user-injured text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>01. Patient Registration</span>
                 </a>
                 
-                <!-- Step 2: Locked until Registration Validation Completes -->
-                <a href="medical_history.html" id="step_link_2" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-notes-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <!-- 02 - 07 Context Steps under Strict Lock Stack Governance -->
+                <a href="medical_history.html" id="step_link_2" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-notes-medical text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>02. Medical History</span>
                 </a>
                 
-                <!-- Step 3: Locked -->
-                <a href="medical_reports.html" id="step_link_3" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-file-medical text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <a href="medical_reports.html" id="step_link_3" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-file-medical text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>03. Medical Reports</span>
                 </a>
                 
-                <!-- Step 4: Locked -->
-                <a href="social_history.html" id="step_link_4" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-people-roof text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <a href="social_history.html" id="step_link_4" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-people-roof text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>04. Social/Family History</span>
                 </a>
                 
-                <!-- Step 5: Locked -->
-                <a href="physical_activity.html" id="step_link_5" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-person-running text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <a href="physical_activity.html" id="step_link_5" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-person-running text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>05. Physical Activity Matrix</span>
                 </a>
                 
-                <!-- Step 6: Locked -->
-                <a href="clinical_calendar.html" id="step_link_6" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-calendar-check text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <a href="clinical_calendar.html" id="step_link_6" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-calendar-check text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>06. Clinic Appointments</span>
                 </a>
                 
-                <!-- Step 7: Locked (Final Phase) -->
-                <a href="contact_doctor.html" id="step_link_7" onclick="switchActiveMenu(this)" class="menu-locked flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800/60 hover:text-white transition group relative">
-                    <i class="fa-solid fa-phone-flip text-sm w-4 text-slate-500 group-hover:text-cyan-400"></i>
+                <a href="contact_doctor.html" id="step_link_7" onclick="switchActiveMenu(this)" class="link-disabled flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/30 hover:text-white transition group relative">
+                    <i class="fa-solid fa-phone-flip text-sm w-4 text-slate-400 group-hover:text-cyan-400"></i>
                     <span>07. Contact Doctor Desk</span>
                 </a>
             </nav>
         </div>
 
-        <!-- 🚀 Dev Sandbox / Simulation Core has been completely purged from here as requested for production clean code -->
-        <div class="border-t border-slate-800 pt-3 text-center text-[10px] text-slate-600 font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-shield-halved text-cyan-500/50 mr-1"></i> Sri Lanka Police Hospital Network
+        <div class="border-t border-blue-900/30 pt-3 text-center text-[10px] text-blue-400/60 font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved text-cyan-400/50 mr-1"></i> Sri Lanka Police Hospital
         </div>
     </aside>
 
     <!-- Main Dynamic Content Workspace Viewport -->
-    <main class="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto !bg-slate-950/40 relative z-10">
+    <main class="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto relative z-10 flex flex-col justify-between">
         
-        <!-- Header Console Banner -->
-        <div class="w-full bg-slate-900/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
-            <div>
-                <h1 class="text-2xl font-black text-white tracking-wide uppercase">Hospital Patient Portal</h1>
-                <p class="text-xs text-slate-400 mt-0.5">Sequential medical profiling matrix validation engine equipped with biometric passkeys</p>
-            </div>
-            <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-right">
-                <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Current Pipeline Node</span>
-                <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
-            </div>
-        </div>
-
-        <!-- 🚀 NEW INTERACTIVE DUAL BIOMETRIC OPTIONS CARDS -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Registration Portal Card -->
-            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3 relative overflow-hidden group hover:border-cyan-500/30 transition-all">
-                <div class="text-cyan-400 text-xl flex items-center justify-between">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <i class="fa-solid fa-fingerprint text-xs text-cyan-500 animate-pulse"></i>
+        <div class="space-y-6 w-full">
+            <!-- Header Console Banner -->
+            <div class="w-full bg-[#0a143c]/80 border border-blue-900/40 rounded-2xl p-6 backdrop-blur-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-2xl">
+                <div>
+                    <h1 class="text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-hospital text-cyan-400"></i> Hospital Patient Portal
+                    </h1>
                 </div>
-                <h3 class="text-sm font-bold text-white uppercase tracking-wide">01. New Patient Registration</h3>
-                <p class="text-[11px] text-slate-400 leading-relaxed">Enroll new police officers into the central health network. **Biometric Vault Capture** triggers automatically to capture fingerprint/face hashes during configuration.</p>
-                <a href="patient_registration.html" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Open Registration</a>
-            </div>
-
-            <!-- Login Access Card -->
-            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-3 relative overflow-hidden group hover:border-emerald-500/30 transition-all">
-                <div class="text-emerald-400 text-xl flex items-center justify-between">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    <i class="fa-solid fa-face-viewfinder text-xs text-emerald-500 animate-pulse"></i>
+                <div class="bg-[#050b24] border border-blue-900/40 px-4 py-2 rounded-xl text-right">
+                    <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Current Pipeline Node</span>
+                    <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
                 </div>
-                <h3 class="text-sm font-bold text-white uppercase tracking-wide">Patient Login Access Node</h3>
-                <p class="text-[11px] text-slate-400 leading-relaxed">Already registered? Bypass traditional typing. You can now securely log in instantly using your **Fingerprint Scan or Face Unlock** passkeys.</p>
-                <a href="patient_login.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all">Biometric / Secure Login</a>
             </div>
 
-        </div>
+            <!-- QUAD QUICK ACCESS MENU CARDS MATRIX -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Card 1 -->
+                <div class="bg-[#0a143c]/90 border border-cyan-500/30 p-5 rounded-2xl flex flex-col justify-between shadow-2xl group hover:border-cyan-400 transition-all min-h-[170px]">
+                    <div class="flex justify-between items-start">
+                        <div class="text-cyan-400 text-2xl"><i class="fa-solid fa-user-plus"></i></div>
+                        <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-black">01</span>
+                    </div>
+                    <div class="mt-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wide">Patient Registration</h3>
+                        <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Enroll new police officers into the central health network repository.</p>
+                    </div>
+                    <a href="patient_registration.html" class="mt-3 block text-center bg-cyan-600 hover:bg-cyan-500 text-white font-black text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all shadow-md">Open Form</a>
+                </div>
 
-        <!-- Overall Pipeline Completion Progress Bar -->
-        <div class="w-full bg-slate-900/40 border border-slate-800 p-5 rounded-2xl shadow-xl">
-            <span class="text-[10px] text-slate-500 font-bold block uppercase tracking-wider mb-3">Overall Pipeline Completion Status</span>
-            <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
-                <div id="flow_progress_bar" class="bg-gradient-to-r from-cyan-500 to-emerald-500 h-full w-[14.28%] transition-all duration-500 shadow-[0_0_8px_#06b6d4]"></div>
+                <!-- Card 2 -->
+                <div id="card_step_2" class="bg-[#0a143c]/90 border border-emerald-500/20 p-5 rounded-2xl flex flex-col justify-between shadow-2xl opacity-40 transition-all min-h-[170px] link-disabled">
+                    <div class="flex justify-between items-start">
+                        <div class="text-emerald-400 text-2xl"><i class="fa-solid fa-notes-medical"></i></div>
+                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-black">02</span>
+                    </div>
+                    <div class="mt-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wide">Medical History</h3>
+                        <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Map persistent diagnoses, clinical history parameters and chronic records.</p>
+                    </div>
+                    <a href="medical_history.html" class="mt-3 block text-center bg-[#050b24] text-slate-500 font-bold text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all">Locked</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div id="card_step_3" class="bg-[#0a143c]/90 border border-amber-500/20 p-5 rounded-2xl flex flex-col justify-between shadow-2xl opacity-40 transition-all min-h-[170px] link-disabled">
+                    <div class="flex justify-between items-start">
+                        <div class="text-amber-400 text-2xl"><i class="fa-solid fa-file-medical"></i></div>
+                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-black">03</span>
+                    </div>
+                    <div class="mt-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wide">Medical Reports</h3>
+                        <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Audit laboratory diagnostic outputs and verified clinical pathology profiles.</p>
+                    </div>
+                    <a href="medical_reports.html" class="mt-3 block text-center bg-[#050b24] text-slate-500 font-bold text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all">Locked</a>
+                </div>
+
+                <!-- Card 4 -->
+                <div id="card_step_4" class="bg-[#0a143c]/90 border border-fuchsia-500/20 p-5 rounded-2xl flex flex-col justify-between shadow-2xl opacity-40 transition-all min-h-[170px] link-disabled">
+                    <div class="flex justify-between items-start">
+                        <div class="text-fuchsia-400 text-2xl"><i class="fa-solid fa-calendar-check"></i></div>
+                        <span class="text-[10px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-black">04</span>
+                    </div>
+                    <div class="mt-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wide">Clinic Appointments</h3>
+                        <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Secure consultant clinical event schedules and active queue generation.</p>
+                    </div>
+                    <a href="clinical_calendar.html" class="mt-3 block text-center bg-[#050b24] text-slate-500 font-bold text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all">Locked</a>
+                </div>
+            </div>
+
+            <!-- OVERALL COMPLETION STATUS PROGRESS BAR -->
+            <div class="w-full bg-[#0a143c]/80 border border-blue-900/40 p-5 rounded-2xl shadow-2xl space-y-2.5 backdrop-blur-md">
+                <div class="flex justify-between items-center text-xs font-black uppercase tracking-wider">
+                    <span class="text-slate-300">Overall   Completion   Status</span>
+                    <span id="flow_percent_label" class="text-cyan-400 font-mono text-sm bg-cyan-950/40 border border-cyan-500/20 px-2.5 py-0.5 rounded">14%</span>
+                </div>
+                <div class="w-full bg-[#050b24] h-3.5 rounded-full overflow-hidden border border-blue-950 p-0.5">
+                    <div id="flow_progress_bar" class="bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-500 h-full w-[14.28%] rounded-full transition-all duration-500 shadow-[0_0_15px_#06b6d4]"></div>
+                </div>
             </div>
         </div>
+
+        <!-- COPYRIGHT POLICY BAR BLOCK -->
+        <footer class="w-full text-center text-[10px] text-slate-500 border-t border-blue-900/30 pt-4 mt-8">
+            <p>© 2026 Sri Lanka Police Hospital. Central Administration Cryptographic Network nodes. All Rights Reserved. Access restricted to authorized statutory profiles under medical data security compliance directives.</p>
+        </footer>
 
     </main>
 
@@ -172,16 +207,50 @@
                 document.getElementById('global_status_badge').innerText = `FILLING STEP ${currentUnlockedStep}`;
             }
 
-            const progressionPercentage = (currentUnlockedStep / 7) * 100;
+            const progressionPercentage = Math.round((currentUnlockedStep / 7) * 100);
             document.getElementById('flow_progress_bar').style.width = `${progressionPercentage}%`;
+            document.getElementById('flow_percent_label').innerText = currentUnlockedStep === 7 ? "100% Fully Uploaded" : `${progressionPercentage}%`;
 
-            for (let i = 1; i <= 7; i++) {
+            // 🚀 EXPLICIT LINKS CONDITION: Keep Step 1 always completely detached from blocking variables
+            for (let i = 2; i <= 7; i++) {
                 const linkNode = document.getElementById(`step_link_${i}`);
                 if (linkNode) {
                     if (i <= currentUnlockedStep) {
-                        linkNode.classList.remove('menu-locked');
+                        linkNode.classList.remove('link-disabled');
                     } else {
-                        linkNode.classList.add('menu-locked');
+                        linkNode.classList.add('link-disabled');
+                    }
+                }
+            }
+
+            // Cards verification loop
+            const colorThemes = {
+                2: { border: 'border-emerald-500/40', text: 'text-emerald-400', btn: 'bg-emerald-600 hover:bg-emerald-500' },
+                3: { border: 'border-amber-500/40', text: 'text-amber-400', btn: 'bg-amber-600 hover:bg-amber-500' },
+                4: { border: 'border-fuchsia-500/40', text: 'text-fuchsia-400', btn: 'bg-fuchsia-600 hover:bg-fuchsia-500' }
+            };
+
+            for (let cardIdx = 2; cardIdx <= 4; cardIdx++) {
+                const cardNode = document.getElementById(`card_step_${cardIdx}`);
+                if(cardNode) {
+                    const cardBtn = cardNode.querySelector('a');
+                    const badge = cardNode.querySelector('span');
+                    
+                    if (cardIdx <= currentUnlockedStep) {
+                        cardNode.classList.remove('link-disabled', 'opacity-40');
+                        cardNode.className = cardNode.className.replace(/border-slate-850|border-.*\/20/, colorThemes[cardIdx].border);
+                        if(badge) badge.className = `text-[10px] ${colorThemes[cardIdx].text} bg-slate-900 px-2 py-0.5 rounded font-black`;
+                        if(cardBtn) {
+                            cardBtn.className = `mt-3 block text-center ${colorThemes[cardIdx].btn} text-white font-black text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all shadow-md`;
+                            cardBtn.innerText = "Open Form";
+                        }
+                    } else {
+                        cardNode.classList.add('link-disabled', 'opacity-40');
+                        if(badge) badge.className = "text-[10px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-black";
+                        if(cardBtn) {
+                            cardBtn.className = "mt-3 block text-center bg-[#050b24] text-slate-500 font-bold text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all";
+                            cardBtn.innerText = "Locked";
+                        }
                     }
                 }
             }
@@ -195,17 +264,16 @@
         function switchActiveMenu(clickedElement) {
             const allLinks = document.querySelectorAll('#sidebar_nav a');
             allLinks.forEach(link => {
-                link.classList.remove('bg-slate-950', 'border', 'text-cyan-400', 'font-black');
+                link.classList.remove('bg-[#050b24]', 'border', 'border-blue-900/40', 'text-cyan-400', 'font-black');
                 const indicator = link.querySelector('.active-bar');
                 if (indicator) indicator.remove();
             });
 
-            clickedElement.className += " bg-slate-950 border border-slate-800 text-cyan-400 font-black";
-            const barHtml = `<div class="active-bar absolute left-0 top-2.5 bottom-2.5 w-1 bg-cyan-500 rounded-r shadow-[0_0_8px_#06b6d4]"></div>`;
+            clickedElement.className += " bg-[#050b24] border border-blue-900/40 text-cyan-400 font-black shadow-inner";
+            const barHtml = `<div class="active-bar absolute left-0 top-2.5 bottom-2.5 w-1 bg-cyan-400 rounded-r shadow-[0_0_10px_#22d3ee]"></div>`;
             clickedElement.insertAdjacentHTML('afterbegin', barHtml);
         }
 
-        // Automatic orchestration hook for global submission mapping
         window.executePipelineAdvance = function() {
             if (currentUnlockedStep < 7) {
                 currentUnlockedStep++;
