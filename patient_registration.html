@@ -29,11 +29,11 @@
             <div class="w-16 h-16 mx-auto mb-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl">
                 <i class="fa-solid fa-hospital-user animate-pulse"></i>
             </div>
-            <h2 class="text-xl font-black text-white tracking-wide uppercase">Patient Officer Enrollment Portal</h2>
+            <h2 id="page_main_title" class="text-xl font-black text-white tracking-wide uppercase">Patient Officer Enrollment Portal</h2>
             <p class="text-[11px] text-blue-400 font-mono tracking-widest uppercase mt-0.5">Sri Lanka Police Hospital</p>
         </div>
 
-        <!-- Dynamic Collision Error Messages Console Panel -->
+        <!-- Collision Error Messages Console -->
         <div id="collision_error_box" class="hidden w-full bg-rose-500/10 border border-rose-500/30 p-4 rounded-xl mb-5 space-y-1 animate-pulse">
             <span class="text-xs font-black text-rose-500 uppercase block"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Data Collision Blockade Activated</span>
             <p id="collision_error_text" class="text-[11px] text-slate-300 leading-relaxed"></p>
@@ -184,7 +184,6 @@
                     </div>
                 </div>
 
-                <!-- BIOMETRICS OPTIONAL LOGICAL FIELD LAYER -->
                 <div class="pt-3 border-t border-slate-900/80 space-y-2">
                     <div class="flex justify-between items-center">
                         <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wide"><i class="fa-solid fa-fingerprint text-xs text-cyan-400 mr-1"></i> Enroll Biometric Key (Optional)</label>
@@ -203,7 +202,7 @@
 
             <!-- Submission Area -->
             <div class="flex justify-end pt-3">
-                <button type="submit" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1">
+                <button type="submit" id="submit_form_btn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1">
                     <i class="fa-solid fa-user-check"></i> Register Account
                 </button>
             </div>
@@ -215,14 +214,18 @@
         let isBiometricLinked = false;
         let isMobileVerified = false;
         let activeHardwareNode = "";
+        let isEditMode = false;
+        let editingUserId = "";
         let otpTimerInterval;
 
         const idNoInput = document.getElementById('p_id_no');
         const usernameDisplay = document.getElementById('p_username');
 
         idNoInput.addEventListener('input', function(e) {
-            const rawVal = e.target.value.trim().toLowerCase();
-            usernameDisplay.value = rawVal ? rawVal : "AUTO-GENERATED FROM POLICE ID";
+            if(!isEditMode) {
+                const rawVal = e.target.value.trim().toLowerCase();
+                usernameDisplay.value = rawVal ? rawVal : "AUTO-GENERATED FROM POLICE ID";
+            }
         });
 
         document.getElementById('p_dob').addEventListener('change', function(e) {
@@ -320,14 +323,62 @@
             }, 850);
         }
 
-        // 🚀 GLOBAL DUPLICATION AUDIT ENGINE & FORM SUBMIT CONTEXT
+        // 🚀 CHECK IF IN "EDIT MODE" ON PAGE LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('edit') === 'true') {
+                isEditMode = true;
+                isMobileVerified = true; // Bypass OTP check when editing existing verified profile
+
+                document.getElementById('page_main_title').innerText = "Edit Officer Profile Particulars";
+                document.getElementById('submit_form_btn').innerHTML = `<i class="fa-solid fa-[#000] fa-floppy-disk"></i> Save Profile Changes`;
+                document.getElementById('submit_form_btn').className = "bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1";
+
+                // Hide OTP Button
+                const sendBtn = document.getElementById('otp_send_btn');
+                if(sendBtn) sendBtn.remove();
+
+                // Fetch latest profile from vault
+                let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+                const keys = Object.keys(patientsData);
+                if (keys.length > 0) {
+                    keys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
+                    editingUserId = keys[0];
+                    const rec = patientsData[editingUserId];
+
+                    // Pre-fill fields
+                    document.getElementById('p_name').value = rec.name || "";
+                    idNoInput.value = rec.policeIdNumber || "";
+                    idNoInput.setAttribute('readonly', 'true');
+                    idNoInput.className = "w-full px-3 py-2 bg-[#020617] border border-slate-800 rounded-xl text-slate-400 font-mono cursor-not-allowed";
+                    
+                    document.getElementById('p_nic').value = rec.nic || "";
+                    document.getElementById('p_dob').value = rec.dob || "";
+                    document.getElementById('p_dob').dispatchEvent(new Event('change'));
+                    
+                    document.getElementById('p_rank').value = rec.rank || "PC";
+                    handleRankSelectionChange(rec.rank || "PC");
+                    document.getElementById('p_rank_service_number').value = rec.rankServiceNumber || "";
+                    
+                    document.getElementById('p_enlist_date').value = rec.enlistmentDate || "";
+                    document.getElementById('p_division').value = rec.division || "";
+                    document.getElementById('p_station').value = rec.station || "";
+                    document.getElementById('p_phn').value = rec.phn || "";
+                    document.getElementById('p_email').value = rec.email || "";
+                    document.getElementById('p_contact').value = rec.contact || "";
+                    document.getElementById('p_address').value = rec.address || "";
+                    usernameDisplay.value = rec.username || editingUserId;
+                }
+            }
+        });
+
+        // FORM SUBMIT INTERCEPT
         document.getElementById('patientRegForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Cache UI nodes
             const errorBox = document.getElementById('collision_error_box');
             const errorText = document.getElementById('collision_error_text');
-            errorBox.classList.add('hidden'); // Reset state
+            errorBox.classList.add('hidden');
 
             const currentNic = document.getElementById('p_nic').value.trim();
             if(!checkSriLankanNicValidity(currentNic)) {
@@ -335,46 +386,45 @@
                 return;
             }
 
-            if(!isMobileVerified) {
+            if(!isMobileVerified && !isEditMode) {
                 alert("Security Reject: Mobile endpoint is not authenticated. Please execute the SMS OTP verification loop.");
                 return;
             }
 
-            // Fetch absolute form vectors for anti-duplication tracking
             const enteredIdNo = idNoInput.value.trim().toUpperCase();
             const enteredContact = document.getElementById('p_contact').value.trim();
             const enteredPhn = document.getElementById('p_phn').value.trim();
 
-            // Fetch dynamic records currently stored in the central vault
             let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
 
-            // 🚀 INTERCEPT LOOP: Evaluate collision vectors
-            for (let usernameKey in patientsData) {
-                let existingOfficer = patientsData[usernameKey];
+            // Collision check only if NOT editing
+            if (!isEditMode) {
+                for (let usernameKey in patientsData) {
+                    let existingOfficer = patientsData[usernameKey];
 
-                if (existingOfficer.policeIdNumber && existingOfficer.policeIdNumber.toUpperCase() === enteredIdNo) {
-                    errorText.innerText = `ID COLLISION ALERT: The Police ID Number [${enteredIdNo}] is already assigned to a registered medical proxy within this station ledger. Multiple accounts per ID are strictly prohibited.`;
-                    errorBox.classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return; // Prevent execution flow instantly
-                }
+                    if (existingOfficer.policeIdNumber && existingOfficer.policeIdNumber.toUpperCase() === enteredIdNo) {
+                        errorText.innerText = `ID COLLISION ALERT: The Police ID Number [${enteredIdNo}] is already assigned to a registered medical proxy within this station ledger.`;
+                        errorBox.classList.remove('hidden');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                    }
 
-                if (existingOfficer.contact && existingOfficer.contact === enteredContact) {
-                    errorText.innerText = `MOBILE COLLISION ALERT: The Contact Number [${enteredContact}] is already registered and historically verified for an active profile ledger. Duplicate telephony lines are rejected under security protocol directives.`;
-                    errorBox.classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return; 
-                }
+                    if (existingOfficer.contact && existingOfficer.contact === enteredContact) {
+                        errorText.innerText = `MOBILE COLLISION ALERT: The Contact Number [${enteredContact}] is already registered.`;
+                        errorBox.classList.remove('hidden');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return; 
+                    }
 
-                if (existingOfficer.phn && existingOfficer.phn === enteredPhn) {
-                    errorText.innerText = `PHN IDENTITY COLLISION ALERT: The Personal Health Number (PHN) [${enteredPhn}] already exists in the central administrative registry node. Processing duplicate clinical identities is locked out.`;
-                    errorBox.classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return; 
+                    if (existingOfficer.phn && existingOfficer.phn === enteredPhn) {
+                        errorText.innerText = `PHN IDENTITY COLLISION ALERT: The Personal Health Number (PHN) [${enteredPhn}] already exists in the registry.`;
+                        errorBox.classList.remove('hidden');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return; 
+                    }
                 }
             }
 
-            // If no data collisions are detected, register the unique account smoothly
             const generatedUser = usernameDisplay.value.trim();
 
             const patientRecord = {
@@ -400,11 +450,15 @@
 
             patientsData[generatedUser] = patientRecord;
             localStorage.setItem('hospital_patients', JSON.stringify(patientsData));
-
             localStorage.setItem('active_patient_session', 'true');
-            alert("🎉 Unique Profile Verified & Account Provisioned Successfully!");
 
-            if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
+            if(isEditMode) {
+                alert("🎉 Profile Updated: Officer profile particulars updated successfully!");
+            } else {
+                alert("🎉 Unique Profile Verified & Account Provisioned Successfully!");
+            }
+
+            if (window.parent && typeof window.parent.executePipelineAdvance === 'function' && !isEditMode) {
                 window.parent.executePipelineAdvance();
             }
             window.location.href = "dashboard.html";
