@@ -8,188 +8,211 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Arial', sans-serif; }
+        body { font-family: 'Arial', sans-serif; background-color: #020617; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        input:focus, select:focus, textarea:focus { border-color: #10b981 !important; outline: none; }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen p-4 md:p-6 flex items-center justify-center">
+<body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
 
     <!-- Main Dynamic Card Container -->
-    <div class="w-full max-w-4xl bg-slate-900/70 border border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden my-auto">
+    <div class="w-full max-w-5xl bg-[#090d1f] border border-slate-900 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden my-auto">
         
-        <!-- Top Neon Accent Line (Emerald themed for Medical contexts) -->
+        <!-- Top Neon Accent Line -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-600 to-cyan-500"></div>
 
         <!-- Section Header -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-5 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-900 pb-5 mb-6">
             <div>
-                <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-notes-medical text-emerald-500"></i> 02. Update Medical History
-                </h1>
-                <p class="text-xs text-slate-400 mt-1">Chronic conditions, historical parameters, and symptomatic screening checklist</p>
+                <h2 class="text-xl font-black text-white tracking-wide uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-square-plus text-emerald-400"></i> 02. Update Medical History
+                </h2>
+                <p class="text-xs text-slate-400 mt-0.5">Chronic conditions, historical parameters, and symptomatic screening checklist</p>
             </div>
-            <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-file-shield animate-pulse"></i> SECURE HEALTH RECORD DATA LAYER
-            </div>
-        </div>
-
-        <!-- Registration Context Verification Box -->
-        <div class="mb-6 bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 max-w-md">
-            <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Police Hospital Registration No.</label>
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-hashtag text-sm"></i></span>
-                <input type="text" id="reg_no_input" placeholder="e.g., PH-1234" required class="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-600 font-bold tracking-wider text-sm focus:outline-none focus:border-emerald-500 transition-all">
+            <div class="bg-emerald-950/40 border border-emerald-500/20 px-3 py-1.5 rounded-xl text-emerald-400 font-bold text-[10px] uppercase tracking-wider flex items-center gap-1">
+                <i class="fa-solid fa-circle-nodes animate-pulse"></i> Secure Health Record Data Layer
             </div>
         </div>
 
-        <!-- System Submission Form Matrix -->
-        <form id="historyForm" class="space-y-6">
+        <!-- Medical History Master Form -->
+        <form id="medicalHistoryForm" class="space-y-6">
             
-            <div class="border-t border-slate-800/60 pt-4">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-square-check text-emerald-500"></i> Check all pre-existing conditions that apply:
-                </h3>
+            <!-- CENTRAL REGISTRY SYSTEM AUTO-SYNC PANEL -->
+            <div class="p-5 bg-[#040817]/60 border border-slate-900 rounded-2xl max-w-md">
+                <label class="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Police Hospital Registration No. / ID</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-hashtag text-xs"></i></span>
+                    <input type="text" id="sync_police_id" readonly placeholder="e.g., PH-1234" class="w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-emerald-400 font-bold font-mono outline-none cursor-not-allowed tracking-wider shadow-inner text-sm">
+                </div>
+                <span class="text-[9px] text-emerald-500/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically locked to your unique authenticated profile node.</span>
+            </div>
+
+            <!-- 🚀 REFINED CHRONIC CONDITIONS MATRIX WITH UPDATED MEDICAL TERMINOLOGY -->
+            <div class="space-y-3 pt-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide">
+                    <i class="fa-solid fa-square-check text-emerald-400 text-sm"></i> Check all pre-existing conditions that apply:
+                </div>
                 
-                <!-- Medical Multi-Grid Matrix -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-slate-300 font-semibold">
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="high_blood_pressure" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>High Blood Pressure</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                    <!-- Row 1 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="High Blood Pressure" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">High Blood Pressure <span class="text-slate-500 font-normal">(අධික රුධිර පීඩනය)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="diabetes" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Diabetes (Type 1 / Type 2)</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Diabetes" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Diabetes <span class="text-slate-500 font-normal">(දියවැඩියාව)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="heart_attack" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Heart Attack</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Cardiovascular Diseases" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Cardiovascular Diseases <span class="text-slate-500 font-normal">(හෘදය ආශ්‍රිත රෝග)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="heart_failure" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Heart Failure</span>
+
+                    <!-- Row 2 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Heart Failure" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Heart Failure <span class="text-slate-500 font-normal">(හෘදය අක්‍රිය වීම්)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="thyroid_disorder" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Thyroid Disorder</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Thyroid Disorder" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Thyroid Disorder <span class="text-slate-500 font-normal">(තයිරොයිඩ් ආබාධ)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="kidney_disease" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Kidney Disease</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Kidney Disease" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Kidney Disease <span class="text-slate-500 font-normal">(වකුගඩු රෝග)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="high_cholesterol" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>High Cholesterol</span>
+
+                    <!-- Row 3 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Cholesterol" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Cholesterol <span class="text-slate-500 font-normal">(කොලෙස්ටරෝල්)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="liver_disease" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Liver Disease</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Liver Disease" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Liver Disease <span class="text-slate-500 font-normal">(අක්මා රෝග)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="asthma" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Asthma</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Asthma" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Asthma <span class="text-slate-500 font-normal">(ඇදුම)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="stroke_tia" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Stroke / TIA</span>
+
+                    <!-- Row 4 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Stroke / TIA" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Stroke / TIA <span class="text-slate-500 font-normal">(අංශභාගය / අඝාතය)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="severe_allergies" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Severe Allergies</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Severe Allergies" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Severe Allergies <span class="text-slate-500 font-normal">(දැඩි අසාත්මිකතා)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="chronic_bronchitis" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Chronic Bronchitis</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Epilepsy / Seizures" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Epilepsy / Seizures <span class="text-slate-500 font-normal">(වලිප්පුව)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="epilepsy_seizures" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Epilepsy / Seizures</span>
+
+                    <!-- Row 5 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Depression / Anxiety" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Depression / Anxiety <span class="text-slate-500 font-normal">(විෂාදය / කාංසාව)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="depression_anxiety" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Depression / Anxiety</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Migraine" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Migraine <span class="text-slate-500 font-normal">(ඉරුවාරදය)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="migraine_headaches" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Migraine / Headaches</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Gastritis" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Gastritis <span class="text-slate-500 font-normal">(ගැස්ට්‍රයිටිස්)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="gastritis" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Gastritis</span>
+
+                    <!-- Row 6 -->
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Cancer / Tumor" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Cancer / Tumor <span class="text-slate-500 font-normal">(පිළිකා / ගෙඩි)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="cancer_tumor" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Cancer / Tumor</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Arthritis" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Arthritis <span class="text-slate-500 font-normal">(ආතරයිටිස්)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="arthritis_joint" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Arthritis / Joint Pains</span>
-                    </label>
-                    <label class="flex items-center space-x-3 bg-slate-950/30 border border-slate-800/60 p-3 rounded-xl hover:bg-emerald-500/5 hover:border-emerald-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="tuberculosis" class="w-4 h-4 text-emerald-600 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500/40 focus:ring-offset-slate-900">
-                        <span>Tuberculosis (TB)</span>
+                    <label class="flex items-center gap-3 bg-[#040817] border border-slate-800/80 p-3 rounded-xl cursor-pointer hover:border-emerald-500/40 transition-all">
+                        <input type="checkbox" name="illness" value="Tuberculosis (TB)" class="w-4 h-4 rounded text-emerald-500 bg-[#020617] border-slate-800 focus:ring-0">
+                        <span class="text-slate-300">Tuberculosis (TB) <span class="text-slate-500 font-normal">(ක්ෂය රෝගය)</span></span>
                     </label>
                 </div>
             </div>
 
-            <!-- Descriptive Notes Module -->
-            <div class="pt-2">
-                <label class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Any Other Chronic Illness / Medical Notes</label>
-                <textarea id="any_other" rows="3" placeholder="Specify details if any other clinical condition exists..." class="w-full p-3 bg-slate-950/40 border border-slate-800 rounded-xl text-white placeholder-slate-700 text-sm focus:outline-none focus:border-emerald-500 transition-all"></textarea>
+            <!-- ANY OTHER CHRONIC ILLNESS / MEDICAL NOTES -->
+            <div class="text-xs pt-2">
+                <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Any Other Chronic Illness / Medical Notes</label>
+                <textarea id="med_notes" rows="4" placeholder="Specify details if any other clinical condition exists..." class="w-full px-4 py-3 bg-[#040817] border border-slate-800 rounded-xl text-white resize-none text-sm"></textarea>
             </div>
 
-            <!-- Form Submissions Box -->
-            <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span class="text-[11px] text-slate-500 text-center sm:text-left">Ensure medical tracking variables are logged accurately before processing transmission.</span>
-                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-sm min-w-[180px]">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Save Medical Data
+            <!-- Submission Area -->
+            <div class="flex justify-end pt-3 border-t border-slate-900">
+                <button type="submit" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-shield"></i> Save & Submit History
                 </button>
             </div>
         </form>
-
-        <!-- Footer Module -->
-        <div class="text-center text-[10px] text-slate-600 mt-8 border-t border-slate-800/60 pt-4">
-            <p>© 2026 Sri Lanka Police Hospital. All Operational Rights Reserved.</p>
-        </div>
     </div>
 
-    <!-- Script Orchestration Architecture -->
+    <!-- Script Processing Vault Engine -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const savedRegNo = localStorage.getItem('current_patient_reg_no');
-            if (savedRegNo) {
-                document.getElementById('reg_no_input').value = savedRegNo;
+            const idInputContainer = document.getElementById('sync_police_id');
+            
+            let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            let resolvedId = "";
+
+            const registryKeys = Object.keys(patientsData);
+            
+            if(registryKeys.length > 0) {
+                registryKeys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
+                resolvedId = patientsData[registryKeys[0]].policeIdNumber;
+            }
+
+            if (resolvedId) {
+                idInputContainer.value = resolvedId.toUpperCase();
+            } else {
+                idInputContainer.value = "PH-NOT-FOUND";
+                idInputContainer.className = "w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-rose-950 rounded-xl text-rose-500 font-bold font-mono outline-none cursor-not-allowed text-sm";
             }
         });
 
-        document.getElementById('historyForm').addEventListener('submit', function(e) {
+        document.getElementById('medicalHistoryForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const regNo = document.getElementById('reg_no_input').value.trim();
-            if(!regNo) {
-                alert('Input Action Failed: Please enter a valid Hospital Registration Number.');
+
+            const activeTargetId = document.getElementById('sync_police_id').value;
+            if(activeTargetId === "PH-NOT-FOUND" || activeTargetId === "") {
+                alert("Security Interrupt: Medical history mapping requires an active validated registry node.");
                 return;
             }
 
-            let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-            if(!patients[regNo]) {
-                alert('Verification Alert: No registered patient found matching this ID number.');
-                return;
-            }
+            const checkedIllnessesArray = [];
+            const checkboxNodes = document.querySelectorAll('input[name="illness"]:checked');
+            checkboxNodes.forEach(node => {
+                checkedIllnessesArray.push(node.value);
+            });
 
-            const history = {
-                high_blood_pressure: document.getElementById('high_blood_pressure').checked,
-                diabetes: document.getElementById('diabetes').checked,
-                heart_attack: document.getElementById('heart_attack').checked,
-                other: document.getElementById('any_other').value
+            const historyRecord = {
+                policeHospitalRegistrationNo: activeTargetId,
+                chronicIllnessChecklist: checkedIllnessesArray,
+                otherMedicalNotes: document.getElementById('med_notes').value.trim(),
+                timestamp: Date.now()
             };
 
-            patients[regNo].medical_history = history;
-            localStorage.setItem('hospital_patients', JSON.stringify(patients));
+            let historyVault = JSON.parse(localStorage.getItem('hospital_medical_records') || '{}');
+            historyVault[activeTargetId] = historyRecord;
+            localStorage.setItem('hospital_medical_records', JSON.stringify(historyVault));
 
-            alert('Success: Medical history matrix securely updated in the database!');
+            alert("🎉 Success: Refined Medical History Screening Matrix updated and secured!");
+
+            if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
+                window.parent.executePipelineAdvance();
+            }
+
+            window.location.href = "dashboard.html";
         });
     </script>
 </body>
