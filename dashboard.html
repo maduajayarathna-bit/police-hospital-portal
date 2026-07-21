@@ -44,7 +44,7 @@
                     <span id="step_progress_badge" class="text-[8px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-black uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- Login Link (Will lock automatically once authenticated) -->
+                <!-- Login Link -->
                 <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/40 text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer">
                     <i class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
                     <div class="flex flex-col">
@@ -109,7 +109,6 @@
                 </div>
                 
                 <div class="flex items-center gap-3">
-                    <!-- 🚀 DYNAMIC EDIT PROFILE BUTTON: Appears when logged in -->
                     <a href="patient_registration.html?edit=true" id="edit_profile_btn" class="hidden bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md">
                         <i class="fa-solid fa-pen-to-square"></i> Edit Officer Profile
                     </a>
@@ -179,7 +178,7 @@
             <!-- OVERALL COMPLETION STATUS PROGRESS BAR -->
             <div class="w-full bg-[#0a143c]/80 border border-blue-900/40 p-5 rounded-2xl shadow-2xl space-y-2.5 backdrop-blur-md">
                 <div class="flex justify-between items-center text-xs font-black uppercase tracking-wider">
-                    <span class="text-slate-300">Overall   Completion   Status</span>
+                    <span class="text-slate-300">Overall Completion Status</span>
                     <span id="flow_percent_label" class="text-cyan-400 font-mono text-sm bg-cyan-950/40 border border-cyan-500/20 px-2.5 py-0.5 rounded">14%</span>
                 </div>
                 <div class="w-full bg-[#050b24] h-3.5 rounded-full overflow-hidden border border-blue-950 p-0.5">
@@ -188,7 +187,6 @@
             </div>
         </div>
 
-        <!-- COPYRIGHT POLICY BLOCK -->
         <footer class="w-full text-center text-[10px] text-slate-500 border-t border-blue-900/30 pt-4 mt-8">
             <p>© 2026 Sri Lanka Police Hospital. Central Administration Cryptographic Network nodes. All Rights Reserved. Access restricted to authorized statutory profiles under medical data security compliance directives.</p>
         </footer>
@@ -200,26 +198,21 @@
         let currentUnlockedStep = parseInt(localStorage.getItem('hospital_flow_step') || '1');
         const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
 
-        // 🚀 SESSION GOVERNANCE: Lock Login & Step 1 if logged in
         if (hasActiveSession) {
             if (currentUnlockedStep === 1) {
                 currentUnlockedStep = 2;
                 localStorage.setItem('hospital_flow_step', '2');
             }
 
-            // Lock Login Link
             const loginLink = document.getElementById('menu_login');
             loginLink.classList.add('link-disabled');
             document.getElementById('login_status_sub').innerText = "Session Active (Authenticated)";
 
-            // Lock Step 1 Link (Registration) so they don't create new accounts over existing session
             const step1Link = document.getElementById('step_link_1');
             step1Link.classList.add('link-disabled');
 
-            // Show Edit Profile Button in Header
             document.getElementById('edit_profile_btn').classList.remove('hidden');
 
-            // Lock Card 1 in Workspace Grid
             const card1 = document.getElementById('card_step_1');
             const cardBtn1 = document.getElementById('card_btn_1');
             card1.classList.add('link-disabled', 'opacity-40');
@@ -229,28 +222,31 @@
             }
         }
 
+        // 🚀 SMART UNLOCK ENGINE: Automatically unlock Step 06 & 07 if Step 05 is finished
         function enforceStepLockArchitecture() {
             if (currentUnlockedStep > 7) currentUnlockedStep = 7;
             if (currentUnlockedStep < 1) currentUnlockedStep = 1;
 
             document.getElementById('step_progress_badge').innerText = `Step ${currentUnlockedStep}/7`;
             
-            if(currentUnlockedStep === 7) {
-                document.getElementById('global_status_badge').innerText = "ALL STEPS COMPLETED";
+            if(currentUnlockedStep >= 5) {
+                document.getElementById('global_status_badge').innerText = "CORE PROFILE COMPLETE (OPTIONAL STEPS UNLOCKED)";
                 document.getElementById('global_status_badge').className = "text-xs font-black text-emerald-400 font-mono tracking-wider uppercase";
             } else {
                 document.getElementById('global_status_badge').innerText = `FILLING STEP ${currentUnlockedStep}`;
             }
 
-            const progressionPercentage = Math.round((currentUnlockedStep / 7) * 100);
-            document.getElementById('flow_progress_bar').style.width = `${progressionPercentage}%`;
-            document.getElementById('flow_percent_label').innerText = currentUnlockedStep === 7 ? "100% Fully Uploaded" : `${progressionPercentage}%`;
+            const progressionPercentage = Math.round((currentUnlockedStep / 5) * 100);
+            const displayPercentage = progressionPercentage > 100 ? 100 : progressionPercentage;
+            document.getElementById('flow_progress_bar').style.width = `${displayPercentage}%`;
+            document.getElementById('flow_percent_label').innerText = displayPercentage === 100 ? "100% Core Data Completed" : `${displayPercentage}%`;
 
-            // Explicit loop locks mapping for steps 2 to 7
+            // Dynamic Sidebar Locking
             for (let i = 2; i <= 7; i++) {
                 const linkNode = document.getElementById(`step_link_${i}`);
                 if (linkNode) {
-                    if (i <= currentUnlockedStep) {
+                    // If current step reached 5, unlock 6 and 7 as well
+                    if (i <= currentUnlockedStep || (currentUnlockedStep >= 5 && (i === 6 || i === 7))) {
                         linkNode.classList.remove('link-disabled');
                     } else {
                         linkNode.classList.add('link-disabled');
@@ -258,7 +254,7 @@
                 }
             }
 
-            // Workspace cards verification
+            // Cards Grid Locking
             const colorThemes = {
                 2: { border: 'border-emerald-500/40', text: 'text-emerald-400', btn: 'bg-emerald-600 hover:bg-emerald-500' },
                 3: { border: 'border-amber-500/40', text: 'text-amber-400', btn: 'bg-amber-600 hover:bg-amber-500' },
