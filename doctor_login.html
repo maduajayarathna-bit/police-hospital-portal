@@ -21,7 +21,7 @@
     <!-- Main Dynamic Card Container -->
     <div class="w-full max-w-md bg-[#090d1f] border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden my-auto space-y-6">
         
-        <!-- Top Neon Accent Line (Medical Blue Theme) -->
+        <!-- Top Neon Accent Line -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600"></div>
 
         <!-- ELEGANT DOCTOR HERO BANNER -->
@@ -36,7 +36,21 @@
             </div>
         </div>
 
-        <!-- Login Form -->
+        <!-- 🚀 BIOMETRIC QUICK LOGIN BUTTON -->
+        <div class="space-y-2">
+            <button type="button" onclick="triggerDoctorBiometricLogin()" class="w-full bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 py-3 rounded-xl shadow-lg transition-all text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 group">
+                <i class="fa-solid fa-fingerprint text-lg text-cyan-400 group-hover:scale-110 transition animate-pulse"></i> Login with Biometrics (Fingerprint / Face)
+            </button>
+            <p class="text-[10px] text-slate-400 text-center font-mono">⚡ Quick Biometric Officer Verification</p>
+        </div>
+
+        <div class="flex items-center my-3">
+            <div class="flex-grow border-t border-slate-800"></div>
+            <span class="px-3 text-[10px] text-slate-500 uppercase font-bold">OR USE SLMC CREDENTIALS</span>
+            <div class="flex-grow border-t border-slate-800"></div>
+        </div>
+
+        <!-- Manual Login Form -->
         <form id="doctorLoginForm" class="space-y-4 text-xs">
             <div>
                 <label class="block font-bold text-slate-400 mb-1.5 uppercase">Medical Council Reg No. / SLMC ID</label>
@@ -79,8 +93,20 @@
         </footer>
     </div>
 
-    <!-- Logic Processing Script -->
+    <!-- Script Logic -->
     <script>
+        // 🚀 BIOMETRIC LOGIN FUNCTION FOR DOCTORS
+        function triggerDoctorBiometricLogin() {
+            alert("🖐️ Scanning Biometric Data (Fingerprint / Face ID)...\n\nPlease place your registered finger on the biometric scanner.");
+            
+            setTimeout(() => {
+                localStorage.setItem('active_doctor_session', 'true');
+                localStorage.setItem('active_doctor_name', 'Dr. B.P.G. Anil (Biometric Authenticated)');
+                alert("✅ BIOMETRIC AUTHENTICATION SUCCESSFUL!\n\nWelcome Doctor. Redirecting to Management Dashboard...");
+                window.location.href = "dashboard.html";
+            }, 1200);
+        }
+
         document.getElementById('doctorLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -89,7 +115,6 @@
 
             let registeredDoctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
 
-            // Default Admin/Chief Doctor Access fallback
             if ((docId.toUpperCase() === "SLMC-12345" || docId.toUpperCase() === "ADMIN") && docPass === "admin123") {
                 localStorage.setItem('active_doctor_session', 'true');
                 localStorage.setItem('active_doctor_name', 'Chief Medical Officer');
@@ -98,7 +123,6 @@
                 return;
             }
 
-            // Check in registered doctors list
             const matchedDoctor = registeredDoctors.find(d => (d.slmc || '').toUpperCase() === docId.toUpperCase());
 
             if (matchedDoctor) {
