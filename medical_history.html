@@ -25,10 +25,8 @@
 
         <!-- 🚀 ELEGANT CYBER-MEDICAL HERO BANNER SECTION -->
         <div class="relative w-full h-32 md:h-36 rounded-xl overflow-hidden border border-slate-800 shadow-xl group">
-            <!-- Background Image with Dark Overlay -->
             <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" alt="Cyber Medical History Ledger" class="w-full h-full object-cover object-center filter brightness-50 group-hover:scale-105 transition duration-500">
             
-            <!-- Gradient Overlay Panel -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#090d1f] via-[#090d1f]/80 to-transparent flex items-center justify-between p-5 md:p-6">
                 <div class="space-y-1">
                     <h2 class="text-xl md:text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2.5">
@@ -56,7 +54,7 @@
                 <span class="text-[9px] text-emerald-500/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically synced from your officer registration profile node.</span>
             </div>
 
-            <!-- REFINED CHRONIC CONDITIONS MATRIX WITH UPDATED MEDICAL TERMINOLOGY -->
+            <!-- CHRONIC CONDITIONS MATRIX WITH UPDATED MEDICAL TERMINOLOGY -->
             <div class="space-y-3 pt-2">
                 <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide">
                     <i class="fa-solid fa-square-check text-emerald-400 text-sm"></i> Check all pre-existing conditions that apply:
@@ -213,13 +211,17 @@
             historyVault[activePhn] = historyRecord;
             localStorage.setItem('hospital_medical_records', JSON.stringify(historyVault));
 
-            alert("🎉 Success: Refined Medical History Screening Matrix updated and secured under PHN: " + activePhn);
+            // Update step progression flag
+            localStorage.setItem('hospital_flow_step', '3');
 
             if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
                 window.parent.executePipelineAdvance();
             }
 
-            window.location.href = "dashboard.html";
+            alert("🎉 Step 02 Saved Successfully! Proceeding to Step 03: Medical Reports...");
+
+            // 🚀 AUTOMATED REDIRECTION TO STEP 3: MEDICAL REPORTS
+            window.location.href = "medical_reports.html";
         });
     </script>
 </body>
