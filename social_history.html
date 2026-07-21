@@ -8,41 +8,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Arial', sans-serif; }
+        body { font-family: 'Arial', sans-serif; background-color: #020617; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+        input:focus, select:focus, textarea:focus { border-color: #6366f1 !important; outline: none; }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen p-4 md:p-6 flex items-center justify-center">
+<body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
 
     <!-- Main Dynamic Card Container -->
-    <div class="w-full max-w-4xl bg-slate-900/70 border border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden my-auto">
+    <div class="w-full max-w-5xl bg-[#090d1f] border border-slate-900 rounded-2xl shadow-2xl relative overflow-hidden my-auto p-6 md:p-8 space-y-6">
         
-        <!-- Top Neon Accent Line (Indigo/Purple themed for Social/Family Context) -->
+        <!-- Top Neon Accent Line -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500"></div>
 
-        <!-- Section Header -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-5 mb-6">
-            <div>
-                <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-users-line text-indigo-400"></i> 04. Social & Family History
-                </h1>
-                <p class="text-xs text-slate-400 mt-1">Lifestyle choices, dietary patterns, occupational shifts, and genetic health mapping</p>
-            </div>
-            <div class="bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-house-chimney-medical animate-pulse"></i> EPIDEMIOLOGICAL MATRIX LAYER
+        <!-- HERO BANNER SECTION -->
+        <div class="relative w-full h-32 md:h-36 rounded-xl overflow-hidden border border-slate-800 shadow-xl group">
+            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=80" alt="Family & Social Health Genetics" class="w-full h-full object-cover object-center filter brightness-50 group-hover:scale-105 transition duration-500">
+            
+            <div class="absolute inset-0 bg-gradient-to-r from-[#090d1f] via-[#090d1f]/80 to-transparent flex items-center justify-between p-5 md:p-6">
+                <div class="space-y-1">
+                    <h1 class="text-xl md:text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2.5">
+                        <i class="fa-solid fa-users-line text-indigo-400"></i> 04. Social & Family History
+                    </h1>
+                    <p class="text-[11px] text-indigo-400 font-mono tracking-widest uppercase"><i class="fa-solid fa-hospital-user mr-1"></i> Sri Lanka Police Hospital Portal</p>
+                </div>
+
+                <div class="hidden sm:flex bg-indigo-950/60 border border-indigo-500/30 backdrop-blur-md px-3.5 py-2 rounded-xl text-indigo-400 font-bold text-[10px] uppercase tracking-wider items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-house-chimney-medical text-sm animate-pulse"></i> EPIDEMIOLOGICAL MATRIX
+                </div>
             </div>
         </div>
 
-        <!-- Patient Mapping Context Area -->
-        <div class="mb-6 bg-slate-950/40 p-4 rounded-xl border border-slate-800/80 max-w-md">
-            <label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Police Hospital Registration No.</label>
+        <!-- Patient Mapping Context Area (PHN LOCKED) -->
+        <div class="p-5 bg-[#040817]/60 border border-slate-900 rounded-2xl max-w-md">
+            <label class="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Personal Health Number (PHN)</label>
             <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500"><i class="fa-solid fa-hashtag text-sm"></i></span>
-                <input type="text" id="reg_no_input" placeholder="e.g., PH-1234" required class="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white placeholder-slate-600 font-bold tracking-wider text-sm focus:outline-none focus:border-indigo-500 transition-all">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-heart-pulse text-xs text-indigo-400"></i></span>
+                <input type="text" id="reg_no_input" readonly placeholder="FETCHING PHN..." class="w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-indigo-400 font-bold font-mono outline-none cursor-not-allowed tracking-wider shadow-inner text-sm">
             </div>
+            <span class="text-[9px] text-indigo-400/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically synced from your officer registration profile node.</span>
         </div>
 
         <!-- Multi-Segment History Form -->
@@ -51,134 +58,155 @@
             <!-- Grid Layout for Habits and Shift Logs -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
-                <!-- 1. Smoking Habits -->
-                <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-smoking"></i> 1. Smoking Profile
-                    </h3>
+                <!-- 1. Smoking Habits (MANDATORY) -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-smoking"></i> 1. Smoking Profile <span class="text-[#f43f5e]">*</span>
+                        </h3>
+                        <span class="text-[9px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-800/50">දුම්පානය</span>
+                    </div>
                     <div class="space-y-2 text-xs font-semibold text-slate-300">
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="smoking" value="Never" checked class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Never Smoked</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="smoking" value="Never" checked class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Never Smoked <span class="text-slate-500 font-normal">(කවදාවත් දුම්පානය කර නැත)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="smoking" value="Current Smoker" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Current Smoker</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="smoking" value="Current Smoker" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Current Smoker <span class="text-slate-500 font-normal">(දැනට දුම්පානය කරයි)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="smoking" value="Ex-Smoker" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Ex-Smoker</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="smoking" value="Ex-Smoker" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Ex-Smoker <span class="text-slate-500 font-normal">(පෙර දුම්පානය කර නවතා ඇත)</span></span>
                         </label>
                     </div>
                 </div>
 
-                <!-- 2. Alcohol Habits -->
-                <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-beer-mug-empty"></i> 2. Alcohol Consumption
-                    </h3>
+                <!-- 2. Alcohol Habits (MANDATORY) -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-beer-mug-empty"></i> 2. Alcohol Consumption <span class="text-[#f43f5e]">*</span>
+                        </h3>
+                        <span class="text-[9px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-800/50">මධ්‍යසාර භාවිතය</span>
+                    </div>
                     <div class="space-y-2 text-xs font-semibold text-slate-300">
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="alcohol" value="Never" checked class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Never / Abstainer</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="alcohol" value="Never" checked class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Never / Abstainer <span class="text-slate-500 font-normal">(භාවිතා කර නැත)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="alcohol" value="Occasional" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Occasional / Social</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="alcohol" value="Occasional" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Occasional / Social <span class="text-slate-500 font-normal">(කලාතුරකින් / උත්සව අවස්ථාවලදී පමණි)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="alcohol" value="Regular" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Regular Intake</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="alcohol" value="Regular" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Regular Intake <span class="text-slate-500 font-normal">(නිතර භාවිතා කරයි)</span></span>
                         </label>
                     </div>
                 </div>
 
-                <!-- 🚀 NEW ADDITION: 3. Dietary Patterns & Intake Profiles -->
-                <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-utensils"></i> 3. Dietary & Nutrition Pattern
-                    </h3>
+                <!-- 3. Dietary Patterns (MANDATORY) -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-utensils"></i> 3. Dietary & Nutrition Pattern <span class="text-[#f43f5e]">*</span>
+                        </h3>
+                        <span class="text-[9px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-800/50">ආහාර රටාව</span>
+                    </div>
                     <div class="space-y-2 text-xs font-semibold text-slate-300">
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="diet" value="Balanced" checked class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Balanced / Home Cooked</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="diet" value="Balanced" checked class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Balanced / Home Cooked <span class="text-slate-500 font-normal">(සමබර / නිවසේ පිසූ ආහාර)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="diet" value="High Sugar Salt" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>High Sugar / High Salt Intake</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="diet" value="High Sugar Salt" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>High Sugar / High Salt <span class="text-slate-500 font-normal">(අධික සීනි / ලුණු සහිත ආහාර)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="radio" name="diet" value="Frequent Fast Food" class="text-indigo-600 focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Frequent Fast Food / Oily Meal</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="radio" name="diet" value="Frequent Fast Food" class="text-indigo-600 focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Frequent Fast Food / Oily Meal <span class="text-slate-500 font-normal">(තෙල් / කඩචෝරු ආහාර)</span></span>
                         </label>
                     </div>
                 </div>
 
-                <!-- 🚀 NEW ADDITION: 4. Sleep Pattern & Night Shift Duties (Crucial for Police Officers) -->
-                <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
-                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-moon"></i> 4. Sleep & Shift Routine
-                    </h3>
+                <!-- 4. Sleep Pattern & Night Shift Duties (MANDATORY) -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-moon"></i> 4. Sleep & Shift Routine <span class="text-[#f43f5e]">*</span>
+                        </h3>
+                        <span class="text-[9px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-800/50">නින්ද සහ රාජකාරි රටාව</span>
+                    </div>
                     <div class="space-y-2 text-xs font-semibold text-slate-300">
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="checkbox" id="night_shifts" class="text-indigo-600 rounded focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Frequent Night Duty Shifts</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="checkbox" id="night_shifts" class="text-indigo-600 rounded focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Frequent Night Duty Shifts <span class="text-slate-500 font-normal">(නිතර රාත්‍රී රාජකාරි තිබේද)</span></span>
                         </label>
-                        <label class="flex items-center space-x-2.5 p-2 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                            <input type="checkbox" id="sleep_disturbance" class="text-indigo-600 rounded focus:ring-0 bg-slate-950 border-slate-800">
-                            <span>Insomnia / Sleep Disturbances</span>
+                        <label class="flex items-center space-x-2.5 p-2 bg-[#040817] border border-slate-800 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+                            <input type="checkbox" id="sleep_disturbance" class="text-indigo-600 rounded focus:ring-0 bg-[#020617] border-slate-800">
+                            <span>Insomnia / Sleep Disturbances <span class="text-slate-[#64748b] font-normal">(නින්ද නොයාම / බාධා පැමිණීම)</span></span>
                         </label>
                         <div class="pt-1">
-                            <label class="block text-[10px] text-slate-500 mb-1 uppercase font-bold">Average Daily Sleep (Hours)</label>
-                            <input type="number" step="0.5" placeholder="e.g., 6.5" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-indigo-500">
+                            <label class="block text-[11px] text-indigo-300 mb-1 uppercase font-bold">
+                                Average Daily Sleep (Hours) <span class="text-[#f43f5e]">*</span>
+                                <span class="text-slate-400 font-normal lowercase">(දිනකට ලබන සාමාන්‍ය නින්ද පැය ගණන)</span>
+                            </label>
+                            <input type="number" step="0.5" min="1" max="24" id="sleep_hours" required placeholder="e.g., 6.5" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-indigo-500">
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Segment 5: Family Medical History Matrix -->
-            <div class="p-4 bg-slate-950/30 border border-slate-800 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-dna"></i> 5. Family Medical Genetics / Hereditary History
-                </h3>
-                <p class="text-[11px] text-slate-500">Check if any immediate blood relatives (Parents, Siblings) have historical records of:</p>
+            <!-- Segment 5: Family Medical History Matrix (OPTIONAL) -->
+            <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-dna"></i> 5. Family Medical Genetics / Hereditary History <span class="text-slate-500 font-normal">(Optional)</span>
+                    </h3>
+                    <span class="text-[9px] bg-purple-950 text-purple-300 px-1.5 py-0.5 rounded border border-purple-800/50">පවුලේ රෝග ඉතිහාසය</span>
+                </div>
+                <p class="text-[11px] text-slate-400">Check if any immediate blood relatives (Parents, Siblings) have historical records of <span class="text-slate-500">(පවුලේ ලේ ඥාතීන්ට මෙම රෝග ඇත්නම් පමණක් සලකුණු කරන්න, නැතහොත් හිස්ව තබන්න)</span>:</p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 font-semibold">
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_heart" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Heart Disease / Premature Cardiac Attacks</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_heart" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Heart Disease / Cardiac Attacks <span class="text-slate-500 font-normal">(හෘදයාබාධ)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_stroke" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Stroke / Cerebrovascular Accidents (Paralysis)</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_stroke" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Stroke / Paralysis <span class="text-slate-500 font-normal">(අංශභාගය / අඝාතය)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_diabetes" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Diabetes Mellitus (Hereditary Glycemia)</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_diabetes" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Diabetes Mellitus <span class="text-slate-500 font-normal">(දියවැඩියාව)</span></span>
                     </label>
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_cancer" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Malignant Carcinomas / Tumors (Cancers)</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_cancer" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Malignant Carcinomas / Cancers <span class="text-slate-500 font-normal">(පිළිකා)</span></span>
                     </label>
-                    <!-- 🚀 NEW ADDITION: Genetic Hypertension -->
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_hypertension" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Chronic Hypertension (High BP)</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_hypertension" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Chronic Hypertension <span class="text-slate-500 font-normal">(අධික රුධිර පීඩනය)</span></span>
                     </label>
-                    <!-- 🚀 NEW ADDITION: CKD (Chronic Kidney Disease) -->
-                    <label class="flex items-center space-x-3 p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
-                        <input type="checkbox" id="fam_ckd" class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0">
-                        <span>Chronic Kidney Disease (CKD / Renal Failures)</span>
+                    <label class="flex items-center space-x-3 p-3 bg-[#040817] border border-slate-800/80 rounded-xl hover:bg-indigo-500/5 hover:border-indigo-500/30 cursor-pointer transition select-none">
+                        <input type="checkbox" id="fam_ckd" class="w-4 h-4 text-indigo-600 bg-[#020617] border-slate-700 rounded focus:ring-0">
+                        <span>Chronic Kidney Disease <span class="text-slate-500 font-normal">(වකුගඩු රෝග)</span></span>
                     </label>
                 </div>
             </div>
 
-            <!-- Submission Box -->
+            <!-- BOTTOM NAVIGATION CONTROLS (PREVIOUS & SAVE) -->
             <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span class="text-[11px] text-slate-500 text-center sm:text-left">By submitting, lifestyle metrics are integrated into the predictive health module.</span>
-                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-sm min-w-[200px]">
-                    <i class="fa-solid fa-floppy-disk"></i> Save History Data
+                <!-- Previous Step Button -->
+                <a href="medical_reports.html" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 px-6 rounded-xl transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-arrow-left"></i> Previous Step (03. Medical Reports)
+                </a>
+
+                <!-- Save & Proceed Button -->
+                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider min-w-[220px] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i> Save History Data <i class="fa-solid fa-arrow-right ml-1"></i>
                 </button>
             </div>
         </form>
@@ -191,28 +219,83 @@
 
     <!-- Script Orchestration Architecture -->
     <script>
+        // AUTO-FETCH PHN NUMBER ON LOAD
         document.addEventListener('DOMContentLoaded', () => {
-            const savedRegNo = localStorage.getItem('current_patient_reg_no');
-            if (savedRegNo) {
-                document.getElementById('reg_no_input').value = savedRegNo;
+            const phnInputField = document.getElementById('reg_no_input');
+            
+            let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            let resolvedPhn = "";
+
+            const registryKeys = Object.keys(patientsData);
+            
+            if(registryKeys.length > 0) {
+                registryKeys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
+                resolvedPhn = patientsData[registryKeys[0]].phn;
+            }
+
+            if (resolvedPhn) {
+                phnInputField.value = resolvedPhn.toUpperCase();
+            } else {
+                phnInputField.value = "PHN-NOT-FOUND";
+                phnInputField.className = "w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-rose-950 rounded-xl text-rose-500 font-bold font-mono outline-none cursor-not-allowed text-sm";
             }
         });
 
+        // FORM SUBMIT HANDLER WITH MANDATORY VALIDATION
         document.getElementById('socialForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const regNo = document.getElementById('reg_no_input').value.trim();
-            if(!regNo) {
-                alert('Input Action Failed: Please enter a valid Hospital Registration Number.');
+            
+            const activePhn = document.getElementById('reg_no_input').value.trim();
+            if(!activePhn || activePhn === "PHN-NOT-FOUND") {
+                alert('Input Action Failed: Please register an officer profile to generate a valid PHN.');
                 return;
             }
 
-            let patients = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-            if(patients[regNo]) {
-                patients[regNo].has_social_history = true;
-                localStorage.setItem('hospital_patients', JSON.stringify(patients));
+            // 🚀 MANDATORY VALIDATION FOR SEGMENT 4 (SLEEP HOURS)
+            const sleepHours = document.getElementById('sleep_hours').value.trim();
+            if (!sleepHours || parseFloat(sleepHours) <= 0) {
+                alert('⚠️ Validation Alert:\n\nකරුණාකර 4 වන කොටසේ දිනකට ලබන සාමාන්‍ය නින්ද පැය ගණන (Average Daily Sleep Hours) ඇතුළත් කරන්න.');
+                document.getElementById('sleep_hours').focus();
+                return;
             }
 
-            alert('Success: Social habit vectors and hereditary parameters committed successfully!');
+            const socialData = {
+                phnNumber: activePhn,
+                smoking: document.querySelector('input[name="smoking"]:checked')?.value || "Never",
+                alcohol: document.querySelector('input[name="alcohol"]:checked')?.value || "Never",
+                diet: document.querySelector('input[name="diet"]:checked')?.value || "Balanced",
+                sleep: {
+                    nightShifts: document.getElementById('night_shifts').checked,
+                    sleepDisturbance: document.getElementById('sleep_disturbance').checked,
+                    avgHours: sleepHours
+                },
+                familyGenetics: {
+                    heartDisease: document.getElementById('fam_heart').checked,
+                    stroke: document.getElementById('fam_stroke').checked,
+                    diabetes: document.getElementById('fam_diabetes').checked,
+                    cancer: document.getElementById('fam_cancer').checked,
+                    hypertension: document.getElementById('fam_hypertension').checked,
+                    ckd: document.getElementById('fam_ckd').checked
+                },
+                timestamp: Date.now()
+            };
+
+            // Commit data into LocalStorage Vault
+            let socialVault = JSON.parse(localStorage.getItem('hospital_social_history') || '{}');
+            socialVault[activePhn] = socialData;
+            localStorage.setItem('hospital_social_history', JSON.stringify(socialVault));
+
+            // Set pipeline step flag to 5
+            localStorage.setItem('hospital_flow_step', '5');
+
+            if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
+                window.parent.executePipelineAdvance();
+            }
+
+            alert(`🎉 Step 04 Saved Successfully under PHN: ${activePhn}!\nProceeding to Step 05: Physical Activity Matrix...`);
+
+            // AUTOMATED REDIRECTION TO STEP 05
+            window.location.href = "physical_activity.html";
         });
     </script>
 </body>
