@@ -14,6 +14,7 @@
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
         input:focus, select:focus, textarea:focus { border-color: #f43f5e !important; outline: none; }
+        .form-disabled { opacity: 0.35 !important; pointer-events: none !important; filter: grayscale(100%); }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
@@ -24,12 +25,10 @@
         <!-- Top Neon Accent Line (Rose/Red themed for Lab/Blood reports) -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-500 via-red-600 to-orange-500"></div>
 
-        <!-- 🚀 ELEGANT BIOCHEMICAL / LAB HERO BANNER SECTION -->
+        <!-- ELEGANT BIOCHEMICAL / LAB HERO BANNER SECTION -->
         <div class="relative w-full h-32 md:h-36 rounded-xl overflow-hidden border border-slate-800 shadow-xl group">
-            <!-- Background Image with Dark Overlay -->
             <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200&q=80" alt="Biochemical Laboratory Data" class="w-full h-full object-cover object-center filter brightness-50 group-hover:scale-105 transition duration-500">
             
-            <!-- Gradient Overlay Panel -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#090d1f] via-[#090d1f]/80 to-transparent flex items-center justify-between p-5 md:p-6">
                 <div class="space-y-1">
                     <h1 class="text-xl md:text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2.5">
@@ -54,114 +53,132 @@
             <span class="text-[9px] text-rose-500/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically synced from your officer registration profile node.</span>
         </div>
 
-        <!-- Multi-Segment Medical Metrics Form -->
+        <!-- 🚀 NEW OPTIONAL BYPASS CHECKBOX PANEL -->
+        <div class="p-4 bg-slate-900/60 border border-amber-500/30 rounded-xl flex items-center gap-3">
+            <input type="checkbox" id="no_reports_checkbox" onchange="toggleReportsFormBypass(this.checked)" class="w-5 h-5 rounded text-amber-500 bg-[#020617] border-slate-700 focus:ring-0 cursor-pointer">
+            <div>
+                <label for="no_reports_checkbox" class="text-xs font-bold text-amber-300 cursor-pointer block uppercase tracking-wide">
+                    <i class="fa-solid fa-clipboard-check mr-1 text-amber-400"></i> No medical / laboratory reports ordered by doctor 
+                    <span class="text-slate-400 font-normal lowercase">(වෛද්‍යවරයා විසින් ලේ/රසායනාගාර පරීක්ෂණ නියම කර නැත)</span>
+                </label>
+                <span class="text-[10px] text-slate-400 block mt-0.5">Check this box if no laboratory test reports exist to skip entering values and proceed directly to Step 04.</span>
+            </div>
+        </div>
+
+        <!-- Multi-Segment Medical Metrics Form Container -->
         <form id="reportsForm" class="space-y-5">
-            
-            <!-- Segment 1: Vitals / Blood Pressure -->
-            <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-heart-pulse"></i> 1. Blood Pressure & Cardiovascular Vitals
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Date</label>
-                        <input type="date" id="bp_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+            <div id="forms_wrapper" class="space-y-5 transition-all duration-300">
+                <!-- Segment 1: Vitals / Blood Pressure -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-heart-pulse"></i> 1. Blood Pressure & Cardiovascular Vitals
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Date</label>
+                            <input type="date" id="bp_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Time</label>
+                            <input type="time" id="bp_time" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Systolic Level (mmHg)</label>
+                            <input type="number" id="bp_systolic" placeholder="e.g., 120" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Diastolic Level (mmHg)</label>
+                            <input type="number" id="bp_diastolic" placeholder="e.g., 80" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Check Time</label>
-                        <input type="time" id="bp_time" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                </div>
+
+                <!-- Segment 2: Blood Sugar Tests -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-dna"></i> 2. Glycemic / Blood Sugar Screening
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
+                            <input type="date" id="sugar_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">FBS (mg/dL)</label>
+                            <input type="number" step="0.1" id="sugar_fbs" placeholder="Fasting Sugar" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">PPBS (mg/dL)</label>
+                            <input type="number" step="0.1" id="sugar_ppbs" placeholder="Post Prandial" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">HbA1c (%)</label>
+                            <input type="number" step="0.1" id="sugar_hba1c" placeholder="3-Month Average" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Systolic Level (mmHg)</label>
-                        <input type="number" id="bp_systolic" placeholder="e.g., 120" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                </div>
+
+                <!-- Segment 3: Lipid Profile -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-flask text-sm"></i> 3. Lipid Profile / Cholesterol Values
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
+                            <input type="date" id="lipid_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Total Cholesterol</label>
+                            <input type="number" id="lipid_total" placeholder="Total (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">HDL (Good)</label>
+                            <input type="number" id="lipid_hdl" placeholder="HDL (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">LDL (Bad)</label>
+                            <input type="number" id="lipid_ldl" placeholder="LDL (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Diastolic Level (mmHg)</label>
-                        <input type="number" id="bp_diastolic" placeholder="e.g., 80" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                </div>
+
+                <!-- Segment 4: Advanced Metabolic Lab Panel -->
+                <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-microscope text-sm"></i> 4. Advanced Clinical & Organ Function Metrics
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Hemoglobin - FBC (g/dL)</label>
+                            <input type="number" step="0.1" id="organ_fbc" placeholder="e.g., 14.2" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Creatinine (mg/dL)</label>
+                            <input type="number" step="0.01" id="organ_creatinine" placeholder="Kidney (0.6 - 1.2)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">SGPT / ALT (U/L)</label>
+                            <input type="number" id="organ_sgpt" placeholder="Liver (up to 50)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Uric Acid (mg/dL)</label>
+                            <input type="number" step="0.1" id="organ_uric" placeholder="Gout (3.5 - 7.2)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Segment 2: Blood Sugar Tests -->
-            <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-dna"></i> 2. Glycemic / Blood Sugar Screening
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
-                        <input type="date" id="sugar_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">FBS (mg/dL)</label>
-                        <input type="number" step="0.1" id="sugar_fbs" placeholder="Fasting Sugar" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">PPBS (mg/dL)</label>
-                        <input type="number" step="0.1" id="sugar_ppbs" placeholder="Post Prandial" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">HbA1c (%)</label>
-                        <input type="number" step="0.1" id="sugar_hba1c" placeholder="3-Month Average" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Segment 3: Lipid Profile -->
-            <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-flask text-sm"></i> 3. Lipid Profile / Cholesterol Values
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Test Date</label>
-                        <input type="date" id="lipid_date" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500" style="color-scheme: dark;">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Total Cholesterol</label>
-                        <input type="number" id="lipid_total" placeholder="Total (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">HDL (Good)</label>
-                        <input type="number" id="lipid_hdl" placeholder="HDL (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">LDL (Bad)</label>
-                        <input type="number" id="lipid_ldl" placeholder="LDL (mg/dL)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Segment 4: Advanced Metabolic Lab Panel -->
-            <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <i class="fa-solid fa-microscope text-sm"></i> 4. Advanced Clinical & Organ Function Metrics
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Hemoglobin - FBC (g/dL)</label>
-                        <input type="number" step="0.1" id="organ_fbc" placeholder="e.g., 14.2" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Creatinine (mg/dL)</label>
-                        <input type="number" step="0.01" id="organ_creatinine" placeholder="Kidney (0.6 - 1.2)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">SGPT / ALT (U/L)</label>
-                        <input type="number" id="organ_sgpt" placeholder="Liver (up to 50)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Serum Uric Acid (mg/dL)</label>
-                        <input type="number" step="0.1" id="organ_uric" placeholder="Gout (3.5 - 7.2)" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs focus:outline-none focus:border-rose-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submission Area -->
+            <!-- 🚀 BOTTOM NAVIGATION CONTROLS (PREVIOUS & SUBMIT / SKIP) -->
             <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span class="text-[11px] text-slate-500 text-center sm:text-left">By saving, laboratory parameters are automatically committed into the cloud ledger.</span>
-                <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-sm min-w-[200px]">
-                    <i class="fa-solid fa-square-plus mr-1"></i> Save Medical Reports
+                <!-- Previous Step Link -->
+                <a href="medical_history.html" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 px-6 rounded-xl transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-arrow-left"></i> Previous Step (02. Medical History)
+                </a>
+
+                <!-- Action Button -->
+                <button type="submit" id="submit_action_btn" class="w-full sm:w-auto bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider min-w-[220px] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-square-plus"></i> <span id="submit_btn_text">Save Medical Reports</span> <i class="fa-solid fa-arrow-right ml-1"></i>
                 </button>
             </div>
         </form>
@@ -184,7 +201,6 @@
             const registryKeys = Object.keys(patientsData);
             
             if(registryKeys.length > 0) {
-                // Fetch the latest registered profile
                 registryKeys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
                 resolvedPhn = patientsData[registryKeys[0]].phn;
             }
@@ -197,7 +213,24 @@
             }
         });
 
-        // FORM SUBMIT HANDLER
+        // Toggle Form Bypass Action
+        function toggleReportsFormBypass(isChecked) {
+            const wrapper = document.getElementById('forms_wrapper');
+            const submitBtnText = document.getElementById('submit_btn_text');
+            const submitBtn = document.getElementById('submit_action_btn');
+
+            if (isChecked) {
+                wrapper.classList.add('form-disabled');
+                submitBtnText.innerText = "Skip & Proceed to Step 04";
+                submitBtn.className = "w-full sm:w-auto bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider min-w-[220px] flex items-center justify-center gap-2";
+            } else {
+                wrapper.classList.remove('form-disabled');
+                submitBtnText.innerText = "Save Medical Reports";
+                submitBtn.className = "w-full sm:w-auto bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider min-w-[220px] flex items-center justify-center gap-2";
+            }
+        }
+
+        // FORM SUBMIT & VALIDATION HANDLER
         document.getElementById('reportsForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -207,27 +240,44 @@
                 return;
             }
 
+            const isSkipped = document.getElementById('no_reports_checkbox').checked;
+
+            // Check if user entered any report data when NOT skipped
+            if (!isSkipped) {
+                const systolic = document.getElementById('bp_systolic').value.trim();
+                const fbs = document.getElementById('sugar_fbs').value.trim();
+                const chol = document.getElementById('lipid_total').value.trim();
+                const fbc = document.getElementById('organ_fbc').value.trim();
+
+                // If all main fields are empty
+                if (!systolic && !fbs && !chol && !fbc) {
+                    alert('⚠️ Validation Warning:\n\nකරුණාකර රසායනාගාර වාර්තා දත්ත ඇතුළත් කරන්න.\n\nවෛද්‍යවරයා විසින් වාර්තා ලබාගැනීමට දන්වා නැත්නම්, "No medical / laboratory reports ordered by doctor" යන්න සලකුණු කර (Check කර) ඊළඟ පිටුවට යන්න.');
+                    return;
+                }
+            }
+
             const reportsData = {
                 phnNumber: activePhn,
-                vitals: {
+                noReportsOrdered: isSkipped,
+                vitals: isSkipped ? {} : {
                     date: document.getElementById('bp_date').value,
                     time: document.getElementById('bp_time').value,
                     systolic: document.getElementById('bp_systolic').value,
                     diastolic: document.getElementById('bp_diastolic').value
                 },
-                sugar: {
+                sugar: isSkipped ? {} : {
                     date: document.getElementById('sugar_date').value,
                     fbs: document.getElementById('sugar_fbs').value,
                     ppbs: document.getElementById('sugar_ppbs').value,
                     hba1c: document.getElementById('sugar_hba1c').value
                 },
-                lipid: {
+                lipid: isSkipped ? {} : {
                     date: document.getElementById('lipid_date').value,
                     total: document.getElementById('lipid_total').value,
                     hdl: document.getElementById('lipid_hdl').value,
                     ldl: document.getElementById('lipid_ldl').value
                 },
-                organMetrics: {
+                organMetrics: isSkipped ? {} : {
                     fbc: document.getElementById('organ_fbc').value,
                     creatinine: document.getElementById('organ_creatinine').value,
                     sgpt: document.getElementById('organ_sgpt').value,
@@ -248,9 +298,13 @@
                 window.parent.executePipelineAdvance();
             }
 
-            alert(`🎉 Step 03 Saved Successfully under PHN: ${activePhn}!\nProceeding to Step 04: Social & Family History...`);
+            if (isSkipped) {
+                alert(`ℹ️ Notice: Medical reports skipped as per setup.\nProceeding to Step 04: Social & Family History...`);
+            } else {
+                alert(`🎉 Step 03 Saved Successfully under PHN: ${activePhn}!\nProceeding to Step 04: Social & Family History...`);
+            }
 
-            // 🚀 AUTOMATED REDIRECTION TO STEP 04
+            // AUTOMATED REDIRECTION TO STEP 04
             window.location.href = "social_history.html";
         });
     </script>
