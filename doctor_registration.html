@@ -65,15 +65,22 @@
                     <input type="text" id="doc_slmc" placeholder="e.g., SLMC-12345" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-cyan-400 font-mono font-bold tracking-wider focus:outline-none focus:border-cyan-500">
                 </div>
 
-                <!-- Specialization / Department -->
+                <!-- Specialization / Department Dropdown (UPDATED WITH MOI & NEW CLINICS) -->
                 <div>
                     <label class="block font-bold text-slate-400 mb-1.5 uppercase">Specialization / Department <span class="text-rose-500">*</span></label>
                     <select id="doc_dept" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500 appearance-none">
-                        <option value="General OPD Desk">General OPD (Out-Patient Care)</option>
-                        <option value="Diabetic Care Clinic">Diabetic Clinic (Endocrinology)</option>
-                        <option value="Cardiology Department">Cardiology Clinic (Heart Care)</option>
-                        <option value="Dental Surgery Unit">Dental Clinic (Oral Maxillofacial)</option>
-                        <option value="Emergency Room Unit">Emergency Room (ER Unit)</option>
+                        <option value="MOI - Medical Officer Incharge">MOI - Medical Officer In-Charge (භාරකාර වෛද්‍ය නිලධාරී)</option>
+                        <option value="General OPD Desk">General OPD (සාමාන්‍ය බාහිර රෝගී අංශය)</option>
+                        <option value="Psychiatry & Mental Health Clinic">Psychiatry & Mental Health (මානසික සෞඛ්‍ය සායනය)</option>
+                        <option value="Respiratory & Chest Clinic">Respiratory & Chest Clinic (සෙම රෝග හා ශ්වසන සායනය)</option>
+                        <option value="Diabetic & Endocrinology Clinic">Diabetic & Endocrinology (දියවැඩියා හා හෝමෝන සායනය)</option>
+                        <option value="Cardiology Department">Cardiology Clinic (හෘද රෝග සායනය)</option>
+                        <option value="Orthopedic & Rheumatology Clinic">Orthopedic Clinic (අස්ථි හා සන්ධි රෝග සායනය)</option>
+                        <option value="Dermatology & Skin Clinic">Dermatology Clinic (චර්ම රෝග සායනය)</option>
+                        <option value="ENT Specialty Unit">ENT Unit (කන, නාසය, උගුර සායනය)</option>
+                        <option value="Ophthalmology Eye Clinic">Ophthalmology Clinic (ඇස් සායනය)</option>
+                        <option value="Dental Surgery Unit">Dental Surgery Unit (දන්ත වෛද්‍ය අංශය)</option>
+                        <option value="Emergency Medicine Unit">Emergency Room (අතිහදිසි ප්‍රතිකාර ඒකකය)</option>
                     </select>
                 </div>
             </div>
@@ -182,7 +189,7 @@
             doctorVault.push(newDoctorPayload);
             localStorage.setItem('hospital_doctors', JSON.stringify(doctorVault));
 
-            alert(`✅ SUCCESSFUL REGISTRATION!\n\nවෛද්‍ය ${name} නිලධාරීතුමනි, ඔබගේ NIC (${nic.toUpperCase()}) සහ Biometric දත්ත සාර්ථකව ලියාපදිංචි විය.`);
+            alert(`✅ SUCCESSFUL REGISTRATION!\n\nවෛද්‍ය ${name} නිලධාරීතුමනි (${dept}), ඔබගේ ගිණුම සහ Biometric දත්ත සාර්ථකව ලියාපදිංචි විය.`);
             
             window.location.href = "doctor_login.html";
         });
