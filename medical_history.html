@@ -18,38 +18,45 @@
 <body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
 
     <!-- Main Dynamic Card Container -->
-    <div class="w-full max-w-5xl bg-[#090d1f] border border-slate-900 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden my-auto">
+    <div class="w-full max-w-5xl bg-[#090d1f] border border-slate-900 rounded-2xl shadow-2xl relative overflow-hidden my-auto p-6 md:p-8 space-y-6">
         
         <!-- Top Neon Accent Line -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-600 to-cyan-500"></div>
 
-        <!-- Section Header -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-900 pb-5 mb-6">
-            <div>
-                <h2 class="text-xl font-black text-white tracking-wide uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-square-plus text-emerald-400"></i> 02. Update Medical History
-                </h2>
-                <p class="text-xs text-slate-400 mt-0.5">Chronic conditions, historical parameters, and symptomatic screening checklist</p>
-            </div>
-            <div class="bg-emerald-950/40 border border-emerald-500/20 px-3 py-1.5 rounded-xl text-emerald-400 font-bold text-[10px] uppercase tracking-wider flex items-center gap-1">
-                <i class="fa-solid fa-circle-nodes animate-pulse"></i> Secure Health Record Data Layer
+        <!-- 🚀 ELEGANT CYBER-MEDICAL HERO BANNER SECTION -->
+        <div class="relative w-full h-32 md:h-36 rounded-xl overflow-hidden border border-slate-800 shadow-xl group">
+            <!-- Background Image with Dark Overlay -->
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" alt="Cyber Medical History Ledger" class="w-full h-full object-cover object-center filter brightness-50 group-hover:scale-105 transition duration-500">
+            
+            <!-- Gradient Overlay Panel -->
+            <div class="absolute inset-0 bg-gradient-to-r from-[#090d1f] via-[#090d1f]/80 to-transparent flex items-center justify-between p-5 md:p-6">
+                <div class="space-y-1">
+                    <h2 class="text-xl md:text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2.5">
+                        <i class="fa-solid fa-notes-medical text-emerald-400"></i> 02. Update Medical History
+                    </h2>
+                    <p class="text-[11px] text-emerald-400 font-mono tracking-widest uppercase"><i class="fa-solid fa-hospital-user mr-1"></i> Sri Lanka Police Hospital Portal</p>
+                </div>
+
+                <div class="hidden sm:flex bg-emerald-950/60 border border-emerald-500/30 backdrop-blur-md px-3.5 py-2 rounded-xl text-emerald-400 font-bold text-[10px] uppercase tracking-wider items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-shield-halved text-sm animate-pulse"></i> SECURE MEDICAL VAULT
+                </div>
             </div>
         </div>
 
         <!-- Medical History Master Form -->
         <form id="medicalHistoryForm" class="space-y-6">
             
-            <!-- CENTRAL REGISTRY SYSTEM AUTO-SYNC PANEL -->
+            <!-- CENTRAL REGISTRY SYSTEM AUTO-SYNC PANEL (PHN LOCKED) -->
             <div class="p-5 bg-[#040817]/60 border border-slate-900 rounded-2xl max-w-md">
-                <label class="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Police Hospital Registration No. / ID</label>
+                <label class="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Personal Health Number (PHN)</label>
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-hashtag text-xs"></i></span>
-                    <input type="text" id="sync_police_id" readonly placeholder="e.g., PH-1234" class="w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-emerald-400 font-bold font-mono outline-none cursor-not-allowed tracking-wider shadow-inner text-sm">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-heart-pulse text-xs text-rose-500"></i></span>
+                    <input type="text" id="sync_police_id" readonly placeholder="FETCHING PHN..." class="w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-emerald-400 font-bold font-mono outline-none cursor-not-allowed tracking-wider shadow-inner text-sm">
                 </div>
-                <span class="text-[9px] text-emerald-500/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically locked to your unique authenticated profile node.</span>
+                <span class="text-[9px] text-emerald-500/80 font-medium mt-1.5 block"><i class="fa-solid fa-circle-check"></i> Dynamically synced from your officer registration profile node.</span>
             </div>
 
-            <!-- 🚀 REFINED CHRONIC CONDITIONS MATRIX WITH UPDATED MEDICAL TERMINOLOGY -->
+            <!-- REFINED CHRONIC CONDITIONS MATRIX WITH UPDATED MEDICAL TERMINOLOGY -->
             <div class="space-y-3 pt-2">
                 <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wide">
                     <i class="fa-solid fa-square-check text-emerald-400 text-sm"></i> Check all pre-existing conditions that apply:
@@ -160,32 +167,32 @@
     <!-- Script Processing Vault Engine -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const idInputContainer = document.getElementById('sync_police_id');
+            const phnInputField = document.getElementById('sync_police_id');
             
             let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-            let resolvedId = "";
+            let resolvedPhn = "";
 
             const registryKeys = Object.keys(patientsData);
             
             if(registryKeys.length > 0) {
                 registryKeys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
-                resolvedId = patientsData[registryKeys[0]].policeIdNumber;
+                resolvedPhn = patientsData[registryKeys[0]].phn;
             }
 
-            if (resolvedId) {
-                idInputContainer.value = resolvedId.toUpperCase();
+            if (resolvedPhn) {
+                phnInputField.value = resolvedPhn.toUpperCase();
             } else {
-                idInputContainer.value = "PH-NOT-FOUND";
-                idInputContainer.className = "w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-rose-950 rounded-xl text-rose-500 font-bold font-mono outline-none cursor-not-allowed text-sm";
+                phnInputField.value = "PHN-NOT-FOUND";
+                phnInputField.className = "w-full pl-9 pr-4 py-2.5 bg-[#040817] border border-rose-950 rounded-xl text-rose-500 font-bold font-mono outline-none cursor-not-allowed text-sm";
             }
         });
 
         document.getElementById('medicalHistoryForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const activeTargetId = document.getElementById('sync_police_id').value;
-            if(activeTargetId === "PH-NOT-FOUND" || activeTargetId === "") {
-                alert("Security Interrupt: Medical history mapping requires an active validated registry node.");
+            const activePhn = document.getElementById('sync_police_id').value;
+            if(activePhn === "PHN-NOT-FOUND" || activePhn === "") {
+                alert("Security Interrupt: Medical history mapping requires an active PHN registration node.");
                 return;
             }
 
@@ -196,17 +203,17 @@
             });
 
             const historyRecord = {
-                policeHospitalRegistrationNo: activeTargetId,
+                phnNumber: activePhn,
                 chronicIllnessChecklist: checkedIllnessesArray,
                 otherMedicalNotes: document.getElementById('med_notes').value.trim(),
                 timestamp: Date.now()
             };
 
             let historyVault = JSON.parse(localStorage.getItem('hospital_medical_records') || '{}');
-            historyVault[activeTargetId] = historyRecord;
+            historyVault[activePhn] = historyRecord;
             localStorage.setItem('hospital_medical_records', JSON.stringify(historyVault));
 
-            alert("🎉 Success: Refined Medical History Screening Matrix updated and secured!");
+            alert("🎉 Success: Refined Medical History Screening Matrix updated and secured under PHN: " + activePhn);
 
             if (window.parent && typeof window.parent.executePipelineAdvance === 'function') {
                 window.parent.executePipelineAdvance();
