@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <!-- 🎯 5. OFFICIAL MEDICAL RECOMMENDATIONS & EXCUSES (යාවත්කාලීන කරන ලද කොටස) -->
+            <!-- 🎯 5. OFFICIAL MEDICAL RECOMMENDATIONS & EXCUSES -->
             <div class="p-4 bg-[#040817]/40 border border-slate-800/80 rounded-xl space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -195,11 +195,31 @@
                     </label>
                 </div>
 
-                <div class="pt-2 max-w-md">
-                    <label class="block text-[11px] font-bold text-amber-300 mb-1">
-                        PHT NO (Physical Health / Tactical Record Number) <span class="text-slate-500 font-normal">(PHT අංකය ඇතුළත් කරන්න)</span>
-                    </label>
-                    <input type="text" id="pht_number" placeholder="e.g., PHT-88489" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs font-mono">
+                <!-- PHT NO & DYNAMIC DATE RANGE SELECTION -->
+                <div class="pt-3 border-t border-slate-800/80 space-y-3">
+                    <div class="max-w-md">
+                        <label class="block text-[11px] font-bold text-amber-300 mb-1">
+                            PHT NO <span class="text-slate-400 font-normal">(PHT අංකය ඇතුළත් කරන්න)</span>
+                        </label>
+                        <input type="text" id="pht_number" oninput="togglePhtDateRange()" placeholder="e.g., PHT-88489" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs font-mono">
+                    </div>
+
+                    <!-- DYNAMIC PHT VALIDITY DATE RANGE MENU -->
+                    <div id="pht_date_range_container" class="hidden p-3.5 bg-[#020617] border border-amber-500/20 rounded-xl space-y-2.5 transition-all duration-300">
+                        <p class="text-[10px] font-bold text-amber-400 uppercase tracking-wide flex items-center gap-1.5">
+                            <i class="fa-solid fa-calendar-days text-amber-400"></i> PHT Exemption Validity Period <span class="text-slate-400 font-normal lowercase">(ලබා දී ඇති කාලසීමාව තෝරන්න)</span>
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] text-slate-400 mb-1 font-semibold">From Date <span class="text-[#f43f5e]">*</span> <span class="text-slate-500 font-normal">(ලබා දුන් දිනය)</span></label>
+                                <input type="date" id="pht_from_date" class="w-full px-3 py-1.5 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs" style="color-scheme: dark;">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-slate-400 mb-1 font-semibold">Valid Until / To Date <span class="text-[#f43f5e]">*</span> <span class="text-slate-500 font-normal">(අවසන් වන දිනය)</span></label>
+                                <input type="date" id="pht_to_date" class="w-full px-3 py-1.5 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs" style="color-scheme: dark;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -311,6 +331,19 @@
             }
         }
 
+        // Toggle PHT Validity Date Range Container
+        function togglePhtDateRange() {
+            const phtVal = document.getElementById('pht_number').value.trim();
+            const dateContainer = document.getElementById('pht_date_range_container');
+            if (phtVal.length > 0) {
+                dateContainer.classList.remove('hidden');
+            } else {
+                dateContainer.classList.add('hidden');
+                document.getElementById('pht_from_date').value = "";
+                document.getElementById('pht_to_date').value = "";
+            }
+        }
+
         // Toggle Retest Date Input
         function toggleRetestDate(show) {
             const container = document.getElementById('retest_date_container');
@@ -324,13 +357,23 @@
             }
         }
 
-        // FORM SUBMIT HANDLER WITH MANDATORY VALIDATIONS
+        // FORM SUBMIT HANDLER WITH VALIDATIONS
         document.getElementById('fitnessForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const activePhn = document.getElementById('reg_no_input').value.trim();
             if(!activePhn || activePhn === "PHN-NOT-FOUND") {
                 alert('Input Action Failed: Please register an officer profile to generate a valid PHN.');
+                return;
+            }
+
+            const phtNumberVal = document.getElementById('pht_number').value.trim();
+            const phtFromDate = document.getElementById('pht_from_date').value;
+            const phtToDate = document.getElementById('pht_to_date').value;
+
+            // PHT Date Range Validation
+            if (phtNumberVal.length > 0 && (!phtFromDate || !phtToDate)) {
+                alert('⚠️ Validation Alert:\n\nPHT අංකය ඇතුළත් කර ඇති බැවින්, කරුණාකර PHT නිර්දේශය ලබා දුන් දිනය (From Date) සහ අවසන් වන දිනය (To Date) ඇතුළත් කරන්න.');
                 return;
             }
 
@@ -361,7 +404,11 @@
                     exParade: document.getElementById('excuse_parade').checked,
                     exNight: document.getElementById('excuse_night').checked,
                     exWeapon: document.getElementById('excuse_weapon').checked,
-                    phtNumber: document.getElementById('pht_number').value.trim()
+                    phtNumber: phtNumberVal,
+                    phtValidity: {
+                        fromDate: phtNumberVal ? phtFromDate : "N/A",
+                        toDate: phtNumberVal ? phtToDate : "N/A"
+                    }
                 },
                 additionalNotes: document.getElementById('fitness_notes').value.trim(),
                 fitnessTestReadiness: {
