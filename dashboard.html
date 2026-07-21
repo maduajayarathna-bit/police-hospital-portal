@@ -8,10 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 🎨 VIBRANT GRADIENT SYSTEM */
         html, body {
             background-color: #0b1536 !important;
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgODAwIDYwMCc+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9JyMwYjE1MzYnLz4KPGRlZnM+CjxyYWRpYWxHcmFkaWVudCBpZD0nZHN0JyBjeD0nNTAlJyBjeT0nNTAlJyByPyc4MCUnPgo8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMTAyTLVlJyBzdG9wLW9wYWNpdHk9JzAuNycvPgo8c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nIzBkMTY0MScgc3RvcC1vcGFjaXR5PScwLjgnLz4KPHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjMDUwYTI0JyBzdG9wLW9wYWNpdHk9JzAuOScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8cGF0dGVybiBpZD0nZ3JpZCcgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJz4KPHBhdGggZD0nTSA1MCAwIEwgMCAwIDAgNDAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzE0MjU1Yycgc3Ryb2tleC13aWR0aD0nMC43NScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8L3BhdHRlcm4+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0ndXJsKCNkc3QpJy8+CjxyZWN0IHdpZHRoPScxMCAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9J3VybCgjZ3JpZCknLz4KPGNpcmNsZSBjeD0nMjAwJyBjeT0nMjAwJyByPSczMDAnIGZpbGw9JyMxZTQwYWYnIG9wYWNpdHk9JzAuMTUnIGZpbHRlcj0nYmx1cig1MHB4KScvPgo8Y2lyY2xlIGN4PSc2MDAnIGN5PSc0MDAnIHI9JzIwMCcgZmlsbD0nIzAyODRjNycgb3BhY2l0eT0nMC4xMicgZmlsdGVyPSdibHVyKDQwcHgpJy8+Cjwvc3ZnPg==") !important;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgODAwIDYwMCc+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9JyMwYjE1MzYnLz4KPGRlZnM+CjxyYWRpYWxHcmFkaWVudCBpZD0nZHN0JyBjeD0nNTAlJyBjeT0nNTAlJyByPyc4MCUnPgo8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMTAyTLVlJyBzdG9wLW9wYWNpdHk9JzAuNycvPgo8c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nIzBkMTY0MScgc3RvcC1vcGFjaXR5PScwLjgnLz4KPHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjMDUwYTI0JyBzdG9wLW9wYWNpdHk9JzAuOScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8cGF0dGVybiBpZD0nZ3JpZCcgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJz4KPHBhdGggZD0nTSA1MCAwIEwgMCAwIDAgNTAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzE0MjU1Yycgc3Ryb2tleC13aWR0aD0nMC43NScvPgo8L3JhZGlhbEdyYWRpZW50Pgo8L3BhdHRlcm4+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0ndXJsKCNkc3QpJy8+CjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9J3VybCgjZ3JpZCknLz4KPGNpcmNsZSBjeD0nMjAwJyBjeT0nMjAwJyByPSczMDAnIGZpbGw9JyMxZTQwYWYnIG9wYWNpdHk9JzAuMTUnIGZpbHRlcj0nYmx1cig1MHB4KScvPgo8Y2lyY2xlIGN4PSc2MDAnIGN5PSc0MDAnIHI9JzIwMCcgZmlsbD0nIzAyODRjNycgb3BhY2l0eT0nMC4xMicgZmlsdGVyPSdibHVyKDQwcHgpJy8+Cjwvc3ZnPg==") !important;
             background-size: cover !important;
             background-attachment: fixed !important;
         }
@@ -45,12 +44,12 @@
                     <span id="step_progress_badge" class="text-[8px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-black uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- Always Available Session Hub -->
+                <!-- Login Link (Will lock automatically once authenticated) -->
                 <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/40 text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer">
                     <i class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
                     <div class="flex flex-col">
                         <span class="font-black">Patient Login / Sign In</span>
-                        <span class="text-[9px] text-cyan-400 font-normal mt-0.5">Biometrics Active</span>
+                        <span id="login_status_sub" class="text-[9px] text-cyan-400 font-normal mt-0.5">Biometrics Active</span>
                     </div>
                 </a>
 
@@ -108,16 +107,24 @@
                         <i class="fa-solid fa-hospital text-cyan-400"></i> Hospital Patient Portal
                     </h1>
                 </div>
-                <div class="bg-[#050b24] border border-blue-900/40 px-4 py-2 rounded-xl text-right">
-                    <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Current Pipeline Node</span>
-                    <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
+                
+                <div class="flex items-center gap-3">
+                    <!-- 🚀 DYNAMIC EDIT PROFILE BUTTON: Appears when logged in -->
+                    <a href="patient_registration.html?edit=true" id="edit_profile_btn" class="hidden bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Officer Profile
+                    </a>
+
+                    <div class="bg-[#050b24] border border-blue-900/40 px-4 py-2 rounded-xl text-right">
+                        <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Current Pipeline Node</span>
+                        <span id="global_status_badge" class="text-xs font-black text-cyan-400 font-mono tracking-wider uppercase">FILLING STEP 1</span>
+                    </div>
                 </div>
             </div>
 
             <!-- QUAD ACCESS CARDS GRID MATRIX -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <!-- Card 1 -->
-                <div class="bg-[#0a143c]/90 border border-cyan-500/30 p-5 rounded-2xl flex flex-col justify-between shadow-2xl group hover:border-cyan-400 transition-all min-h-[170px]">
+                <div id="card_step_1" class="bg-[#0a143c]/90 border border-cyan-500/30 p-5 rounded-2xl flex flex-col justify-between shadow-2xl group hover:border-cyan-400 transition-all min-h-[170px]">
                     <div class="flex justify-between items-start">
                         <div class="text-cyan-400 text-2xl"><i class="fa-solid fa-user-plus"></i></div>
                         <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-black">01</span>
@@ -126,7 +133,7 @@
                         <h3 class="text-xs font-black text-white uppercase tracking-wide">Patient Registration</h3>
                         <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Enroll new police officers into the central health network repository.</p>
                     </div>
-                    <a href="patient_registration.html" class="mt-3 block text-center bg-cyan-600 hover:bg-cyan-500 text-white font-black text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all shadow-md">Open Form</a>
+                    <a href="patient_registration.html" id="card_btn_1" class="mt-3 block text-center bg-cyan-600 hover:bg-cyan-500 text-white font-black text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all shadow-md">Open Form</a>
                 </div>
 
                 <!-- Card 2 -->
@@ -159,7 +166,7 @@
                 <div id="card_step_4" class="bg-[#0a143c]/90 border border-fuchsia-500/20 p-5 rounded-2xl flex flex-col justify-between shadow-2xl opacity-40 transition-all min-h-[170px] link-disabled">
                     <div class="flex justify-between items-start">
                         <div class="text-fuchsia-400 text-2xl"><i class="fa-solid fa-calendar-check"></i></div>
-                        <span class="text-[10px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-black">04</span>
+                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-black">04</span>
                     </div>
                     <div class="mt-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wide">Clinic Appointments</h3>
@@ -190,13 +197,36 @@
 
     <!-- Pipeline Automation Script Control Logic -->
     <script>
-        // 🚀 SMART CHECK: If user is logged in (session active), auto-advance to step 2 instantly
         let currentUnlockedStep = parseInt(localStorage.getItem('hospital_flow_step') || '1');
         const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
 
-        if (hasActiveSession && currentUnlockedStep === 1) {
-            currentUnlockedStep = 2;
-            localStorage.setItem('hospital_flow_step', '2');
+        // 🚀 SESSION GOVERNANCE: Lock Login & Step 1 if logged in
+        if (hasActiveSession) {
+            if (currentUnlockedStep === 1) {
+                currentUnlockedStep = 2;
+                localStorage.setItem('hospital_flow_step', '2');
+            }
+
+            // Lock Login Link
+            const loginLink = document.getElementById('menu_login');
+            loginLink.classList.add('link-disabled');
+            document.getElementById('login_status_sub').innerText = "Session Active (Authenticated)";
+
+            // Lock Step 1 Link (Registration) so they don't create new accounts over existing session
+            const step1Link = document.getElementById('step_link_1');
+            step1Link.classList.add('link-disabled');
+
+            // Show Edit Profile Button in Header
+            document.getElementById('edit_profile_btn').classList.remove('hidden');
+
+            // Lock Card 1 in Workspace Grid
+            const card1 = document.getElementById('card_step_1');
+            const cardBtn1 = document.getElementById('card_btn_1');
+            card1.classList.add('link-disabled', 'opacity-40');
+            if(cardBtn1) {
+                cardBtn1.className = "mt-3 block text-center bg-[#050b24] text-slate-500 font-bold text-[10px] uppercase tracking-wider py-1.5 rounded-lg transition-all";
+                cardBtn1.innerText = "Completed";
+            }
         }
 
         function enforceStepLockArchitecture() {
@@ -216,7 +246,7 @@
             document.getElementById('flow_progress_bar').style.width = `${progressionPercentage}%`;
             document.getElementById('flow_percent_label').innerText = currentUnlockedStep === 7 ? "100% Fully Uploaded" : `${progressionPercentage}%`;
 
-            // Explicit loop locks mapping
+            // Explicit loop locks mapping for steps 2 to 7
             for (let i = 2; i <= 7; i++) {
                 const linkNode = document.getElementById(`step_link_${i}`);
                 if (linkNode) {
@@ -228,7 +258,7 @@
                 }
             }
 
-            // Cards verification matrix
+            // Workspace cards verification
             const colorThemes = {
                 2: { border: 'border-emerald-500/40', text: 'text-emerald-400', btn: 'bg-emerald-600 hover:bg-emerald-500' },
                 3: { border: 'border-amber-500/40', text: 'text-amber-400', btn: 'bg-amber-600 hover:bg-amber-500' },
@@ -260,7 +290,6 @@
                 }
             }
 
-            // Auto-highlight focus state mapping
             const currentActiveMenu = document.getElementById(`step_link_${currentUnlockedStep}`);
             if (currentActiveMenu) {
                 switchActiveMenu(currentActiveMenu);
