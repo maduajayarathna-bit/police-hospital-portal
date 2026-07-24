@@ -44,11 +44,11 @@
                     <span id="step_progress_badge" class="text-[8px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-black uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- Login Link -->
-                <a href="patient_login.html" id="menu_login" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-900/40 text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer">
-                    <i class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
+                <!-- 🚀 DYNAMIC LOGIN / LOGOUT BUTTON (AUTOMATIC TOGGLE) -->
+                <a href="patient_login.html" id="menu_login_btn" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer transition-all">
+                    <i id="login_btn_icon" class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
                     <div class="flex flex-col">
-                        <span class="font-black">Patient Login / Sign In</span>
+                        <span id="login_btn_title" class="font-black">Patient Login / Sign In</span>
                         <span id="login_status_sub" class="text-[9px] text-cyan-400 font-normal mt-0.5">Biometrics Active</span>
                     </div>
                 </a>
@@ -183,7 +183,7 @@
                     <a href="social_history.html" id="card_btn_4" class="mt-3 block text-center bg-[#050b24] text-emerald-400 font-black text-[10px] uppercase tracking-wider py-1.5 rounded-lg border border-emerald-500/30">Completed ✓</a>
                 </div>
 
-                <!-- 🚀 Card 5 (NEWLY ADDED) -->
+                <!-- Card 5 -->
                 <div id="card_step_5" class="bg-[#0a143c]/90 border border-indigo-500/20 p-4 rounded-2xl flex flex-col justify-between shadow-2xl min-h-[170px]">
                     <div class="flex justify-between items-start">
                         <div class="text-indigo-400 text-xl"><i class="fa-solid fa-person-running"></i></div>
@@ -238,9 +238,36 @@
         document.addEventListener('DOMContentLoaded', () => {
             enforceStepLockArchitecture();
             loadEmergencyAlerts();
+            updateLoginLogoutButtonState();
         });
 
-        // 1. STEP LOCKING ENGINE (01-05 LOCKED WHEN REGISTERED, 06 & 07 OPEN)
+        // 1. DYNAMICALLY CONVERT LOGIN BUTTON TO LOGOUT BUTTON WHEN LOGGED IN
+        function updateLoginLogoutButtonState() {
+            const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
+            const loginBtn = document.getElementById('menu_login_btn');
+            const btnTitle = document.getElementById('login_btn_title');
+            const btnSub = document.getElementById('login_status_sub');
+            const btnIcon = document.getElementById('login_btn_icon');
+
+            if (hasActiveSession) {
+                // Officer is Logged In -> Convert to Logout State
+                loginBtn.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl text-rose-200 border border-rose-500/40 bg-rose-950/40 hover:bg-rose-900/60 mb-3 shadow-[0_0_15px_rgba(244,63,94,0.15)] cursor-pointer transition-all";
+                btnIcon.className = "fa-solid fa-power-off text-sm w-4 text-rose-400";
+                btnTitle.innerText = "Logged In: Active Officer";
+                btnSub.innerText = "Click here to Log Out";
+                btnSub.className = "text-[9px] text-rose-400 font-bold mt-0.5";
+
+                loginBtn.onclick = function(e) {
+                    e.preventDefault();
+                    handleOfficerLogout();
+                };
+            } else {
+                // Not Logged In -> Standard Login Link
+                loginBtn.href = "patient_login.html";
+            }
+        }
+
+        // 2. STEP LOCKING ENGINE (01-05 LOCKED WHEN REGISTERED, 06 & 07 OPEN)
         function enforceStepLockArchitecture() {
             const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
 
@@ -269,7 +296,7 @@
             }
         }
 
-        // 2. TOGGLE EDIT PROFILE MODE
+        // 3. TOGGLE EDIT PROFILE MODE
         function toggleEditProfileMode() {
             isEditModeActive = !isEditModeActive;
             const btn = document.getElementById('edit_profile_btn');
@@ -287,7 +314,7 @@
             enforceStepLockArchitecture();
         }
 
-        // 3. LOAD REAL-TIME EMERGENCY ALERTS INTO EMERGENCY CONTROL PANEL
+        // 4. LOAD REAL-TIME EMERGENCY ALERTS INTO EMERGENCY CONTROL PANEL
         function loadEmergencyAlerts() {
             const container = document.getElementById('emergency_alerts_container');
             let emergencyVault = JSON.parse(localStorage.getItem('hospital_emergency_alerts') || '[]');
@@ -323,7 +350,7 @@
             });
         }
 
-        // 4. OFFICER LOGOUT HANDLER
+        // 5. OFFICER LOGOUT HANDLER
         function handleOfficerLogout() {
             if (confirm('ඔබට නිලධාරී ගිණුමෙන් ලොග් අවුට් වීමට අවශ්‍යද?')) {
                 localStorage.removeItem('active_patient_session');
