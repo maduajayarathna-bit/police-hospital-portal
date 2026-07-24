@@ -44,7 +44,7 @@
                     <span id="step_progress_badge" class="text-[8px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-black uppercase tracking-wider">Step 1/7</span>
                 </div>
                 
-                <!-- 🚀 DYNAMIC LOGIN / LOGOUT BUTTON (AUTOMATIC TOGGLE) -->
+                <!-- DYNAMIC LOGIN / LOGOUT BUTTON -->
                 <a href="patient_login.html" id="menu_login_btn" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-white border border-cyan-500/30 bg-cyan-950/20 mb-3 shadow-[0_0_15px_rgba(6,182,212,0.1)] cursor-pointer transition-all">
                     <i id="login_btn_icon" class="fa-solid fa-fingerprint text-sm w-4 text-cyan-400 animate-pulse"></i>
                     <div class="flex flex-col">
@@ -92,12 +92,8 @@
             </nav>
         </div>
 
-        <!-- LOGOUT BUTTON & FOOTER -->
-        <div class="space-y-3 border-t border-blue-900/30 pt-3">
-            <button onclick="handleOfficerLogout()" class="w-full bg-rose-950/60 hover:bg-rose-900 border border-rose-500/30 text-rose-300 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
-                <i class="fa-solid fa-power-off text-rose-400"></i> Log Out (ලොග් අවුට් වන්න)
-            </button>
-
+        <!-- FOOTER ONLY (REMOVED BOTTOM LOGOUT BUTTON) -->
+        <div class="border-t border-blue-900/30 pt-3">
             <div class="text-center text-[10px] text-blue-400/60 font-bold uppercase tracking-wider">
                 <i class="fa-solid fa-shield-halved text-cyan-400/50 mr-1"></i> Sri Lanka Police Hospital
             </div>
@@ -217,7 +213,6 @@
                     <span class="text-[9px] bg-rose-950 text-rose-300 px-2 py-0.5 rounded border border-rose-800 font-mono font-bold">24/7 DISPATCH CORE</span>
                 </div>
 
-                <!-- Emergency Alerts Table / List Container -->
                 <div id="emergency_alerts_container" class="space-y-3">
                     <!-- Dynamic Emergency Alerts Injected via JS -->
                 </div>
@@ -231,7 +226,7 @@
 
     </main>
 
-    <!-- Pipeline Automation & Emergency Control Logic -->
+    <!-- Script Engine -->
     <script>
         let isEditModeActive = false;
 
@@ -241,7 +236,6 @@
             updateLoginLogoutButtonState();
         });
 
-        // 1. DYNAMICALLY CONVERT LOGIN BUTTON TO LOGOUT BUTTON WHEN LOGGED IN
         function updateLoginLogoutButtonState() {
             const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
             const loginBtn = document.getElementById('menu_login_btn');
@@ -250,7 +244,6 @@
             const btnIcon = document.getElementById('login_btn_icon');
 
             if (hasActiveSession) {
-                // Officer is Logged In -> Convert to Logout State
                 loginBtn.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl text-rose-200 border border-rose-500/40 bg-rose-950/40 hover:bg-rose-900/60 mb-3 shadow-[0_0_15px_rgba(244,63,94,0.15)] cursor-pointer transition-all";
                 btnIcon.className = "fa-solid fa-power-off text-sm w-4 text-rose-400";
                 btnTitle.innerText = "Logged In: Active Officer";
@@ -262,29 +255,23 @@
                     handleOfficerLogout();
                 };
             } else {
-                // Not Logged In -> Standard Login Link
                 loginBtn.href = "patient_login.html";
             }
         }
 
-        // 2. STEP LOCKING ENGINE (01-05 LOCKED WHEN REGISTERED, 06 & 07 OPEN)
         function enforceStepLockArchitecture() {
             const hasActiveSession = localStorage.getItem('active_patient_session') === 'true';
 
             if (hasActiveSession && !isEditModeActive) {
-                // Lock 01 to 05 links on Sidebar
                 for (let i = 1; i <= 5; i++) {
                     const linkNode = document.getElementById(`step_link_${i}`);
                     if (linkNode) linkNode.classList.add('link-disabled');
                 }
-
-                // Lock Cards 01 to 05 on Dashboard Grid
                 for (let c = 1; c <= 5; c++) {
                     const cardNode = document.getElementById(`card_step_${c}`);
                     if (cardNode) cardNode.classList.add('link-disabled', 'opacity-50');
                 }
             } else if (isEditModeActive) {
-                // Unlock 01 to 05 for editing
                 for (let i = 1; i <= 5; i++) {
                     const linkNode = document.getElementById(`step_link_${i}`);
                     if (linkNode) linkNode.classList.remove('link-disabled');
@@ -296,7 +283,6 @@
             }
         }
 
-        // 3. TOGGLE EDIT PROFILE MODE
         function toggleEditProfileMode() {
             isEditModeActive = !isEditModeActive;
             const btn = document.getElementById('edit_profile_btn');
@@ -314,7 +300,6 @@
             enforceStepLockArchitecture();
         }
 
-        // 4. LOAD REAL-TIME EMERGENCY ALERTS INTO EMERGENCY CONTROL PANEL
         function loadEmergencyAlerts() {
             const container = document.getElementById('emergency_alerts_container');
             let emergencyVault = JSON.parse(localStorage.getItem('hospital_emergency_alerts') || '[]');
@@ -350,7 +335,6 @@
             });
         }
 
-        // 5. OFFICER LOGOUT HANDLER
         function handleOfficerLogout() {
             if (confirm('ඔබට නිලධාරී ගිණුමෙන් ලොග් අවුට් වීමට අවශ්‍යද?')) {
                 localStorage.removeItem('active_patient_session');
