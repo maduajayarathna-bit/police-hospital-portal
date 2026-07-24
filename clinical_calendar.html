@@ -1,299 +1,597 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Clinical Calendar & Appointments - Sri Lanka Police Hospital</title>
+
     <!-- Tailwind CSS & FontAwesome Icons -->
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
         body { font-family: 'Arial', sans-serif; background-color: #020617; }
+
         ::-webkit-scrollbar { width: 6px; }
+
         ::-webkit-scrollbar-track { background: #0f172a; }
+
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
         input:focus, select:focus { border-color: #3b82f6 !important; outline: none; }
+
     </style>
+
 </head>
+
 <body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
 
+
+
     <!-- Main Dynamic Card Container -->
+
     <div class="w-full max-w-6xl bg-[#090d1f] border border-slate-900 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden my-auto space-y-6">
+
         
+
         <!-- Top Neon Accent Line -->
+
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500"></div>
 
+
+
         <!-- 🚀 HERO BANNER SECTION -->
+
         <div class="relative w-full h-32 md:h-36 rounded-xl overflow-hidden border border-slate-800 shadow-xl group">
+
             <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80" alt="Clinical Calendar & Appointments" class="w-full h-full object-cover object-center filter brightness-50 group-hover:scale-105 transition duration-500">
+
             
+
             <div class="absolute inset-0 bg-gradient-to-r from-[#090d1f] via-[#090d1f]/80 to-transparent flex items-center justify-between p-5 md:p-6">
+
                 <div class="space-y-1">
+
                     <h1 class="text-xl md:text-2xl font-black text-white tracking-wide uppercase flex items-center gap-2.5">
+
                         <i class="fa-solid fa-calendar-check text-blue-400"></i> 06. Clinical Calendar & Appointments
+
                     </h1>
+
                     <p class="text-[11px] text-blue-400 font-mono tracking-widest uppercase"><i class="fa-solid fa-hospital-user mr-1"></i> Sri Lanka Police Hospital Portal</p>
+
                 </div>
+
+
 
                 <div class="hidden sm:flex bg-blue-950/60 border border-blue-500/30 backdrop-blur-md px-3.5 py-2 rounded-xl text-blue-400 font-bold text-[10px] uppercase tracking-wider items-center gap-2 shadow-lg">
+
                     <i class="fa-regular fa-calendar-days text-sm text-amber-400 animate-pulse"></i> DYNAMIC SCHEDULER
+
                 </div>
+
             </div>
+
         </div>
+
+
 
         <!-- Core Operational Grid System -->
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
             
+
             <!-- Left Panel: Appointment Booking Interface -->
+
             <div class="space-y-4">
+
                 <div class="bg-slate-950/60 p-5 rounded-xl border border-slate-800 shadow-md">
+
                     <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-4 flex items-center justify-between">
+
                         <span class="flex items-center gap-1.5"><i class="fa-solid fa-ticket-simple"></i> Schedule Appointment Token</span>
+
                         <span class="text-[9px] text-slate-400 font-normal">(සායනික වෙන්කිරීම)</span>
+
                     </h3>
+
                     
+
                     <form id="appointmentForm" class="space-y-4 text-xs">
+
                         <!-- Patient Mapping ID (PHN Auto-Fetched) -->
+
                         <div>
+
                             <label class="block font-bold text-slate-400 mb-1.5 uppercase">Personal Health Number (PHN)</label>
+
                             <input type="text" id="reg_no_input" readonly placeholder="FETCHING PHN..." class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-blue-400 font-bold font-mono outline-none cursor-not-allowed tracking-wider shadow-inner">
+
                         </div>
+
+
 
                         <!-- Clinic Target -->
+
                         <div>
+
                             <label class="block font-bold text-slate-400 mb-1.5 uppercase">Selected Clinic Block <span class="text-[#f43f5e]">*</span> <span class="text-slate-500 font-normal">(කැලැන්ඩරයෙන් තෝරන්න)</span></label>
+
                             <input type="text" id="selected_clinic_display" readonly placeholder="Click a clinic day from calendar grid" class="w-full px-3 py-2 bg-slate-950 border border-slate-800/80 rounded-xl text-emerald-400 font-bold focus:outline-none cursor-not-allowed">
+
                         </div>
+
+
 
                         <!-- 🚀 DYNAMIC MEDICAL SPECIALIST SELECTOR (Auto-Synced with Doctor Registration) -->
+
                         <div>
+
                             <label class="block font-bold text-slate-400 mb-1.5 uppercase">Preferred Medical Specialist <span class="text-[#f43f5e]">*</span> <span class="text-slate-500 font-normal">(වෛද්‍යවරයා)</span></label>
+
                             <select id="doctor_select" required class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500 appearance-none">
+
                                 <option value="" disabled selected>Loading Doctors List...</option>
+
                             </select>
+
                         </div>
+
+
 
                         <!-- Allocation Time Slots -->
+
                         <div>
+
                             <label class="block font-bold text-slate-400 mb-1.5 uppercase">Preferred Time Slot <span class="text-[#f43f5e]">*</span> <span class="text-slate-500 font-normal">(වේලාව)</span></label>
+
                             <select id="time_slot" required class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500 appearance-none">
+
                                 <option value="" disabled selected>Select Allocation Slot</option>
+
                                 <option value="08:00 AM - 10:00 AM">08:00 AM - 10:00 AM (Morning Batch A)</option>
+
                                 <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM (Morning Batch B)</option>
+
                                 <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM (Evening Batch)</option>
+
                             </select>
+
                         </div>
 
+
+
                         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+
                             <i class="fa-solid fa-circle-check"></i> Book Clinic Token
+
                         </button>
+
                     </form>
+
                 </div>
+
+
 
                 <!-- Live Token Status & Google Calendar Sync Panel -->
+
                 <div id="token_receipt" class="hidden bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl text-center space-y-3 transition-all duration-300">
+
                     <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
+
                         <i class="fa-solid fa-circle-check text-emerald-400"></i> Appointment Token Secured
+
                     </p>
+
                     <div id="token_number" class="text-3xl font-black text-white font-mono tracking-wider">PH-048</div>
+
                     <p id="token_details" class="text-[10px] text-slate-300 leading-relaxed"></p>
 
+
+
                     <!-- GOOGLE CALENDAR ACTION BUTTON -->
+
                     <div class="pt-2 border-t border-emerald-500/20">
+
                         <a id="gcal_btn" target="_blank" href="#" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2 px-3 rounded-lg text-[11px] uppercase tracking-wider shadow-md transition">
+
                             <i class="fa-brands fa-google"></i> Add to Google Calendar
+
                         </a>
+
                     </div>
+
                 </div>
+
             </div>
+
+
 
             <!-- Right Panel: Main Interactive Dynamic Calendar Grid -->
+
             <div class="lg:col-span-2 bg-slate-950/40 border border-slate-800 p-5 rounded-xl">
+
                 
+
                 <!-- 🚀 DYNAMIC MONTH SWITCHING HEADER -->
+
                 <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+
                     <h3 id="calendar_month_year" class="font-bold text-white text-base flex items-center gap-2">
+
                         <i class="fa-solid fa-calendar-days text-blue-400"></i> <span id="month_label">July 2026</span>
+
                     </h3>
+
                     <div class="flex gap-1.5">
+
                         <button onclick="changeMonth(-1)" class="p-1 px-3 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 rounded-lg text-xs transition font-black hover:bg-slate-800">&lt; Prev</button>
+
                         <button onclick="changeMonth(1)" class="p-1 px-3 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 rounded-lg text-xs transition font-black hover:bg-slate-800">Next &gt;</button>
+
                     </div>
+
                 </div>
+
+
 
                 <!-- Days Index Label row -->
+
                 <div class="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wider">
+
                     <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+
                 </div>
+
+
 
                 <!-- Dynamic Calendar Days Matrix -->
+
                 <div id="calendar_days_grid" class="grid grid-cols-7 gap-2 text-center text-xs font-semibold text-slate-400">
+
                     <!-- Dynamic Days Injected via JavaScript -->
+
                 </div>
+
+
 
                 <!-- Calendar Color Legends Display Box -->
+
                 <div class="flex flex-wrap gap-4 mt-6 pt-4 border-t border-slate-800 text-[10px] text-slate-400 font-bold justify-center">
+
                     <div class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 bg-rose-500/20 border border-rose-500/40 rounded"></span><span>Diabetic Clinic</span></div>
+
                     <div class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 bg-blue-500/20 border border-blue-500/40 rounded"></span><span>Cardiology Clinic</span></div>
+
                     <div class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 bg-emerald-500/20 border border-emerald-500/40 rounded"></span><span>Dental Clinic</span></div>
+
                     <div class="flex items-center space-x-1.5"><span class="w-2.5 h-2.5 bg-amber-500/20 border border-amber-500/40 rounded"></span><span>OPD / General</span></div>
+
                 </div>
 
+
+
             </div>
+
         </div>
+
+
 
         <!-- Footer Module -->
+
         <div class="text-center text-[10px] text-slate-600 mt-8 border-t border-slate-800/60 pt-4">
+
             <p>© 2026 Sri Lanka Police Hospital. All Operational Rights Reserved.</p>
+
         </div>
+
     </div>
 
+
+
     <!-- Script Architecture Node -->
+
     <script>
+
         let currentDate = new Date(2026, 6, 1); // Default July 2026
+
         let selectedRawDate = "20260701";
 
+
+
         // Pre-configured clinic dates engine
+
         const predefinedClinics = {
+
             "2026-07-03": { name: "Diabetic Clinic", class: "border-rose-500/30 bg-rose-500/5 text-rose-400", tag: "Diabetic" },
+
             "2026-07-10": { name: "Cardiology Clinic", class: "border-blue-500/30 bg-blue-500/5 text-blue-400", tag: "Cardiac" },
+
             "2026-07-22": { name: "Dental Clinic", class: "border-emerald-500/30 bg-emerald-500/5 text-emerald-400", tag: "Dental" },
+
             "2026-08-05": { name: "Diabetic Clinic", class: "border-rose-500/30 bg-rose-500/5 text-rose-400", tag: "Diabetic" },
+
             "2026-08-14": { name: "Cardiology Clinic", class: "border-blue-500/30 bg-blue-500/5 text-blue-400", tag: "Cardiac" },
+
             "2026-08-25": { name: "OPD General Clinic", class: "border-amber-500/30 bg-amber-500/5 text-amber-400", tag: "OPD" }
+
         };
 
+
+
         document.addEventListener('DOMContentLoaded', () => {
+
             fetchPatientPHN();
+
             loadRegisteredDoctors();
+
             renderCalendar();
+
         });
 
+
+
         // 1. AUTO FETCH PHN
+
         function fetchPatientPHN() {
+
             const phnInputField = document.getElementById('reg_no_input');
+
             let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+
             let resolvedPhn = "";
 
+
+
             const registryKeys = Object.keys(patientsData);
+
             if(registryKeys.length > 0) {
+
                 registryKeys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
+
                 resolvedPhn = patientsData[registryKeys[0]].phn;
+
             }
+
+
 
             phnInputField.value = resolvedPhn ? resolvedPhn.toUpperCase() : "PHN-NOT-FOUND";
+
         }
+
+
 
         // 2. AUTO LOAD REGISTERED DOCTORS INTO DROPDOWN
+
         function loadRegisteredDoctors() {
+
             const doctorSelect = document.getElementById('doctor_select');
+
             doctorSelect.innerHTML = '<option value="" disabled selected>-- Select Consultant / Doctor --</option>';
 
+
+
             // Load registered doctors from LocalStorage vault
+
             let registeredDoctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
 
+
+
             // Default fallback doctors if vault is empty
+
             if (registeredDoctors.length === 0) {
+
                 registeredDoctors = [
+
                     { name: "Dr. Perera", spec: "Chief Diabetologist" },
+
                     { name: "Dr. Fernando", spec: "Consultant Cardiologist" },
+
                     { name: "Dr. Jayasinghe", spec: "Senior Dental Surgeon" }
+
                 ];
+
             }
 
+
+
             registeredDoctors.forEach(doc => {
+
                 const opt = document.createElement('option');
+
                 opt.value = `${doc.name} (${doc.spec})`;
+
                 opt.textContent = `${doc.name} - ${doc.spec}`;
+
                 doctorSelect.appendChild(opt);
+
             });
+
         }
 
+
+
         // 3. DYNAMIC CALENDAR RENDER ENGINE
+
         function renderCalendar() {
+
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
             const year = currentDate.getFullYear();
+
             const month = currentDate.getMonth();
+
+
 
             document.getElementById('month_label').innerText = `${monthNames[month]} ${year}`;
 
+
+
             const firstDayIndex = new Date(year, month, 1).getDay();
+
             const totalDays = new Date(year, month + 1, 0).getDate();
 
+
+
             const grid = document.getElementById('calendar_days_grid');
+
             grid.innerHTML = "";
 
+
+
             // Render empty padding slots
+
             for (let i = 0; i < firstDayIndex; i++) {
+
                 grid.innerHTML += `<div class="p-4 bg-slate-900/10 text-transparent select-none">0</div>`;
+
             }
+
+
 
             // Render days
+
             for (let day = 1; day <= totalDays; day++) {
+
                 const formattedMonth = String(month + 1).padStart(2, '0');
+
                 const formattedDay = String(day).padStart(2, '0');
+
                 const dateKey = `${year}-${formattedMonth}-${formattedDay}`;
+
                 const rawDateVal = `${year}${formattedMonth}${formattedDay}`;
 
+
+
                 if (predefinedClinics[dateKey]) {
+
                     const clinic = predefinedClinics[dateKey];
+
                     grid.innerHTML += `
+
                         <div class="p-2 border ${clinic.class} font-bold rounded-xl cursor-pointer hover:scale-105 transition shadow-sm" onclick="selectClinic('${clinic.name} - ${dateKey}', '${rawDateVal}')">
+
                             ${day} <span class="block text-[8px] font-normal mt-1 uppercase tracking-tighter">${clinic.tag}</span>
+
                         </div>`;
+
                 } else {
+
                     grid.innerHTML += `
+
                         <div class="p-3 bg-slate-900/40 border border-slate-800/60 rounded-xl hover:border-slate-700 cursor-pointer transition" onclick="selectClinic('General Consultation - ${dateKey}', '${rawDateVal}')">
+
                             ${day}
+
                         </div>`;
+
                 }
+
             }
+
         }
+
+
 
         // Change Month Controller (< and >)
+
         function changeMonth(direction) {
+
             currentDate.setMonth(currentDate.getMonth() + direction);
+
             renderCalendar();
+
         }
+
+
 
         function selectClinic(clinicName, rawDate) {
+
             document.getElementById('selected_clinic_display').value = clinicName;
+
             if(rawDate) selectedRawDate = rawDate;
+
         }
 
+
+
         // Appointment Form Handler
+
         document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+
             e.preventDefault();
+
             
+
             const phn = document.getElementById('reg_no_input').value;
+
             const clinic = document.getElementById('selected_clinic_display').value;
+
             const doctor = document.getElementById('doctor_select').value;
+
             const slot = document.getElementById('time_slot').value;
 
+
+
             if (!clinic) {
+
                 alert('Input Action Interrupted: Please select a clinic block directly from the calendar.');
+
                 return;
+
             }
 
+
+
             const randomTokenNum = Math.floor(Math.random() * 80) + 1;
+
             const paddedToken = "TKN-" + String(randomTokenNum).padStart(3, '0');
 
+
+
             document.getElementById('token_number').innerText = paddedToken;
+
             document.getElementById('token_details').innerText = `PHN: ${phn} | Allocated for ${clinic} with ${doctor} during ${slot}.`;
+
             
+
             // Dynamic Google Calendar URL
+
             const title = encodeURIComponent(`Police Hospital Appointment: ${clinic}`);
+
             const details = encodeURIComponent(`Token Number: ${paddedToken}\nPHN: ${phn}\nClinic: ${clinic}\nSpecialist: ${doctor}\nTime Slot: ${slot}`);
+
             const location = encodeURIComponent(`Sri Lanka Police Hospital`);
+
             
+
             const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${selectedRawDate}/${selectedRawDate}`;
+
             document.getElementById('gcal_btn').href = gcalUrl;
+
+
 
             document.getElementById('token_receipt').classList.remove('hidden');
 
+
+
             alert(`✅ Token Secured successfully! Queue Number: ${paddedToken}\nClick 'Add to Google Calendar' to sync with your phone calendar.`);
+
         });
+
     </script>
+
 </body>
+
 </html>
