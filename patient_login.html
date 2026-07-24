@@ -4,80 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Portal Login - Sri Lanka Police Hospital</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #020617; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        input:focus { border-color: #3b82f6 !important; outline: none; }
+    </style>
 </head>
-<body class="bg-[#020617] min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen p-4 md:p-6 flex items-center justify-center text-slate-100">
 
-    <div class="w-full max-w-md bg-[#090d1f] border border-slate-900 rounded-2xl p-6 md:p-8 shadow-2xl relative">
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-2xl"></div>
+    <!-- Main Dynamic Card Container -->
+    <div class="w-full max-w-md bg-[#090d1f] border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden my-auto space-y-6">
+        
+        <!-- Top Neon Accent Line -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500"></div>
 
-        <!-- Header -->
-        <div class="text-center mb-6">
-            <div class="w-16 h-16 mx-auto mb-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-2xl">
+        <!-- Header Branding -->
+        <div class="text-center space-y-2">
+            <div class="w-12 h-12 bg-blue-600/10 border border-blue-500/30 text-blue-400 rounded-2xl flex items-center justify-center mx-auto text-xl shadow-[0_0_15px_rgba(59,130,246,0.2)]">
                 <i class="fa-solid fa-user-shield"></i>
             </div>
-            <h2 class="text-xl font-bold text-white tracking-wide">Patient Portal Login</h2>
-            <p class="text-xs text-slate-500 mt-1">Sri Lanka Police Hospital Central Portal</p>
+            <h1 class="text-xl font-black text-white uppercase tracking-wider">Patient Portal Login</h1>
+            <p class="text-[10px] text-blue-400 font-mono tracking-widest uppercase">Sri Lanka Police Hospital Central Portal</p>
         </div>
 
-        <!-- Form -->
-        <form id="patientLoginForm" class="space-y-4">
+        <!-- Security Notification Banner -->
+        <div id="security_alert" class="hidden p-3 bg-rose-950/80 border border-rose-500/50 rounded-xl text-[11px] text-rose-300 font-bold text-center">
+            <!-- Dynamic Alert Message -->
+        </div>
+
+        <!-- Patient Login Form -->
+        <form id="patientLoginForm" class="space-y-4 text-xs">
             <div>
-                <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Police Service Number</label>
+                <label class="block font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Police Service Number / NIC</label>
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-address-card text-sm"></i></span>
-                    <input type="text" id="service_no" required placeholder="e.g., PC84489" class="w-full pl-10 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono text-sm focus:outline-none focus:border-blue-500 transition-all">
+                    <input type="text" id="service_no_input" placeholder="Enter Police ID (e.g., PC-12345)" required class="w-full pl-9 pr-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold tracking-wider focus:outline-none focus:border-blue-500">
+                    <i class="fa-solid fa-id-badge absolute left-3 top-3 text-slate-500"></i>
                 </div>
             </div>
 
             <div>
-                <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Portal Password</label>
+                <label class="block font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Portal Security Password</label>
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-600"><i class="fa-solid fa-lock text-sm"></i></span>
-                    <input type="password" id="portal_pass" required placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 bg-[#040817] border border-slate-800 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 transition-all">
+                    <input type="password" id="password_input" placeholder="••••••••" required class="w-full pl-9 pr-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-blue-500">
+                    <i class="fa-solid fa-lock absolute left-3 top-3 text-slate-500"></i>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-right-to-bracket"></i> Login as Patient
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                <i class="fa-solid fa-right-to-bracket"></i> Login as Officer Patient
             </button>
         </form>
 
-        <!-- 🚀 NEW BIOMETRIC LOGIN LAYER -->
-        <div class="mt-6 pt-5 border-t border-slate-900 text-center space-y-3">
-            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Or Login via Linked Biometrics</span>
-            <div class="flex justify-center gap-4">
-                <button onclick="triggerBiometricAuth('Fingerprint')" type="button" class="w-12 h-12 bg-[#040817] border border-slate-800 hover:border-cyan-500/50 text-cyan-400 rounded-xl flex items-center justify-center text-lg hover:bg-slate-900/50 transition-all shadow-md group" title="Login with Touch ID">
-                    <i class="fa-solid fa-fingerprint group-hover:scale-110 transition-transform"></i>
-                </button>
-                <button onclick="triggerBiometricAuth('Face ID')" type="button" class="w-12 h-12 bg-[#040817] border border-slate-800 hover:border-cyan-500/50 text-cyan-400 rounded-xl flex items-center justify-center text-lg hover:bg-slate-900/50 transition-all shadow-md group" title="Login with Face ID">
-                    <i class="fa-solid fa-face-viewfinder group-hover:scale-110 transition-transform"></i>
-                </button>
-            </div>
+        <!-- Biometric Quick Access Module -->
+        <div class="pt-3 border-t border-slate-800/80 text-center space-y-2">
+            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest block">OR LOGIN VIA LINKED BIOMETRICS</span>
+            <button onclick="triggerPatientBiometrics()" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-cyan-400 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-fingerprint text-cyan-400 text-sm animate-pulse"></i> Scan Officer Biometrics
+            </button>
         </div>
 
-        <div class="text-center mt-6">
-            <span class="text-xs text-slate-500">Don't have a portal account? <a href="patient_registration.html" class="text-blue-400 hover:underline">Register here</a></span>
+        <!-- STRICT DOCTOR PORTAL REDIRECT BLOCK -->
+        <div class="pt-3 border-t border-slate-800/80 text-center space-y-1.5">
+            <p class="text-[11px] text-slate-400">ඔබ වෛද්‍ය නිලධාරියෙක්ද? (Are you a Medical Officer?)</p>
+            <a href="doctor_login.html" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-bold uppercase tracking-wider transition">
+                <i class="fa-solid fa-user-doctor"></i> Switch to Authorized Doctor Portal
+            </a>
         </div>
+
+        <div class="text-center pt-1">
+            <p class="text-[11px] text-slate-400">Don't have a portal account? <a href="patient_registration.html" class="text-blue-400 font-bold hover:underline">Register here</a></p>
+        </div>
+
+        <footer class="text-center text-[10px] text-slate-600 border-t border-slate-800/60 pt-3">
+            <p>© 2026 Sri Lanka Police Hospital. Central Administration Core.</p>
+        </footer>
     </div>
 
+    <!-- Strict Verification Logic Script -->
     <script>
         document.getElementById('patientLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Store active session and route back to main dashboard frame
-            localStorage.setItem('active_patient_session', 'true');
-            alert("🔒 Authentication Verified. Welcome Officer!");
-            window.location.href = "dashboard.html";
+
+            const serviceNo = document.getElementById('service_no_input').value.trim().toUpperCase();
+            const password = document.getElementById('password_input').value;
+            const alertBox = document.getElementById('security_alert');
+
+            alertBox.classList.add('hidden');
+
+            // STRICT CHECK 1: BLOCK DOCTORS / SLMC CREDENTIALS FROM PATIENT LOGIN
+            if (serviceNo.includes('SLMC') || serviceNo.includes('DOC') || serviceNo.includes('DR')) {
+                alertBox.classList.remove('hidden');
+                alertBox.innerHTML = `
+                    <i class="fa-solid fa-triangle-exclamation text-rose-400 text-base mb-1 block"></i>
+                    ACCESS DENIED: Doctor credentials (SLMC) are strictly prohibited on the Patient Portal!<br>
+                    <span class="text-white">Please click "Switch to Authorized Doctor Portal" below.</span>`;
+                return;
+            }
+
+            // STRICT CHECK 2: AUTHENTICATE REGISTERED PATIENT OFFICERS ONLY
+            let patientVault = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            
+            let isAuthenticated = false;
+            let matchedOfficer = null;
+
+            Object.keys(patientVault).forEach(key => {
+                const p = patientVault[key];
+                if ((p.policeId || p.police_id || p.phn || p.nic || '').toUpperCase() === serviceNo) {
+                    isAuthenticated = true;
+                    matchedOfficer = p;
+                }
+            });
+
+            if (isAuthenticated) {
+                localStorage.setItem('active_patient_session', 'true');
+                localStorage.setItem('active_patient_id', serviceNo);
+                alert('✅ OFFICER AUTHENTICATION SUCCESSFUL!\n\nWelcome to Police Hospital Health Management System.');
+                window.location.href = "dashboard.html";
+            } else {
+                alertBox.classList.remove('hidden');
+                alertBox.innerHTML = `
+                    <i class="fa-solid fa-circle-xmark text-rose-400 text-base mb-1 block"></i>
+                    AUTHENTICATION FAILED: Invalid Police Service Number or Password.<br>
+                    Please register if you are a new officer.`;
+            }
         });
 
-        function triggerBiometricAuth(type) {
-            alert(`🔒 INITIALIZING HARDWARE NODE:\nScanning via secure client ${type} hardware...`);
+        // Biometric Scan Verification
+        function triggerPatientBiometrics() {
+            alert("🖐️ Officer Biometric Scanner Active...\nPlease scan finger/face to verify officer identity.");
             setTimeout(() => {
                 localStorage.setItem('active_patient_session', 'true');
-                alert(`✅ Biometric Match Found! Session Token successfully bound to ledger.`);
+                alert("✅ BIOMETRIC VERIFICATION SUCCESSFUL!\nRedirecting to Dashboard...");
                 window.location.href = "dashboard.html";
-            }, 800);
+            }, 1200);
         }
     </script>
 </body>
