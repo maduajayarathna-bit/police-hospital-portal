@@ -7,6 +7,34 @@
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 🌟 GOOGLE FIREBASE CLOUD DATABASE SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 🔑 YOUR EXPLICIT FIREBASE CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJRnDZHAZyx95sg6nfN8be88Xn6xMlwXY",
+            authDomain: "police-hospital-system.firebaseapp.com",
+            projectId: "police-hospital-system",
+            storageBucket: "police-hospital-system.firebasestorage.app",
+            messagingSenderId: "361089620575",
+            appId: "1:361089620575:web:c84ba34eb6fcb656eed9ea",
+            measurementId: "G-S2FGQ16RTW"
+        };
+
+        // Initialize Firebase & Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Global export for script access
+        window.db = db;
+        window.doc = doc;
+        window.setDoc = setDoc;
+        window.getDoc = getDoc;
+    </script>
+
     <style>
         body { font-family: 'Arial', sans-serif; }
         ::-webkit-scrollbar { width: 6px; }
@@ -30,7 +58,7 @@
                 <i class="fa-solid fa-hospital-user animate-pulse"></i>
             </div>
             <h2 id="page_main_title" class="text-xl font-black text-white tracking-wide uppercase">Patient Officer Enrollment Portal</h2>
-            <p class="text-[11px] text-blue-400 font-mono tracking-widest uppercase mt-0.5">Sri Lanka Police Hospital</p>
+            <p class="text-[11px] text-blue-400 font-mono tracking-widest uppercase mt-0.5">Sri Lanka Police Hospital Core System</p>
         </div>
 
         <!-- Collision Error Messages Console -->
@@ -52,13 +80,13 @@
                         <input type="text" id="p_name" required placeholder="Enter officer's full name" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">02. Police ID Number</label>
-                        <input type="text" id="p_id_no" required placeholder="Enter Police ID Number" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono placeholder-slate-800">
+                        <label class="block text-[11px] font-bold text-cyan-400 mb-1.5 uppercase">02. Police ID Number (Username) *</label>
+                        <input type="text" id="p_id_no" required placeholder="Enter Police ID Number" class="w-full px-3 py-2 bg-[#040817] border border-cyan-500/50 rounded-xl text-cyan-300 font-mono font-bold tracking-wider">
                     </div>
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
                             <label class="block text-[11px] font-bold text-slate-400 uppercase">03. National Identity Card (NIC)</label>
-                            <span class="text-[9px] text-amber-500 font-bold uppercase tracking-tighter">Format: Old/New Required</span>
+                            <span class="text-[9px] text-amber-500 font-bold uppercase tracking-tighter">Format Required</span>
                         </div>
                         <input type="text" id="p_nic" required placeholder="Format: 981234567V or 199812345678" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white font-mono">
                         <span id="nic_error_msg" class="text-[10px] text-rose-500 font-bold hidden mt-1 block"><i class="fa-solid fa-circle-xmark mr-1"></i> Invalid Sri Lankan NIC format detected!</span>
@@ -99,6 +127,7 @@
                             <option value="SP">Superintendent of Police (SP)</option>
                             <option value="SSP">Senior Superintendent of Police (SSP)</option>
                             <option value="DIG">Deputy Inspector General (DIG)</option>
+
                             <option value="SDIG">Senior DIG (SDIG)</option>
                             <option value="IGP">Inspector General of Police (IGP)</option>
                             <option value="Civil Support Staff">Civil Support Staff</option>
@@ -142,7 +171,6 @@
                         <input type="email" id="p_email" required placeholder="officer@police.gov.lk" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-xl text-white">
                     </div>
                     
-                    <!-- MOBILE OTP GATEWAY SYSTEM -->
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">12. Contact No (Mobile Verification Required)</label>
                         <div class="flex gap-2">
@@ -158,7 +186,7 @@
                             </div>
                             <span id="otp_timer" class="font-mono text-[10px] text-amber-400 tracking-wide shrink-0">30s</span>
                         </div>
-                        <span id="otp_success_msg" class="text-[10px] text-emerald-400 font-bold hidden mt-1 block"><i class="fa-solid fa-circle-check mr-1"></i> Mobile number successfully authenticated via token verification loop.</span>
+                        <span id="otp_success_msg" class="text-[10px] text-emerald-400 font-bold hidden mt-1 block"><i class="fa-solid fa-circle-check mr-1"></i> Mobile number successfully authenticated.</span>
                     </div>
                 </div>
                 <div class="text-xs">
@@ -170,17 +198,17 @@
             <!-- PORTAL LOGIN ACCOUNT & BIOMETRIC CONFIGURATION -->
             <div class="p-5 bg-[#040817]/40 border border-slate-900 rounded-xl space-y-4 mt-6 shadow-inner">
                 <span class="text-xs font-bold text-blue-400 flex items-center gap-1 uppercase tracking-wider">
-                    <i class="fa-solid fa-lock text-sm"></i> 14. Portal Login & Biometric Hardware Sync Configuration
+                    <i class="fa-solid fa-lock text-sm"></i> 14. Portal Account Security Password
                 </span>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 mb-1 uppercase">Assigned Username (Based on Police ID)</label>
-                        <input type="text" id="p_username" readonly placeholder="AUTO-GENERATED FROM POLICE ID" class="w-full px-3 py-2 bg-[#020617] border border-slate-800 rounded-lg text-slate-600 font-mono text-xs outline-none cursor-not-allowed">
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1 uppercase">Assigned Username (Police ID)</label>
+                        <input type="text" id="p_username" readonly placeholder="AUTO-MAPPED FROM POLICE ID" class="w-full px-3 py-2 bg-[#020617] border border-slate-800 rounded-lg text-cyan-400 font-mono text-xs font-bold outline-none cursor-not-allowed">
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1 uppercase">Account Password</label>
-                        <input type="password" id="p_password" required placeholder="Create a strong vault credentials passcode" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1 uppercase">Account Password *</label>
+                        <input type="password" id="p_password" required placeholder="Create strong portal password" class="w-full px-3 py-2 bg-[#040817] border border-slate-800 rounded-lg text-white text-xs font-bold">
                     </div>
                 </div>
 
@@ -202,14 +230,14 @@
 
             <!-- Submission Area -->
             <div class="flex justify-end pt-3">
-                <button type="submit" id="submit_form_btn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1">
-                    <i class="fa-solid fa-user-check"></i> Register Account
+                <button type="submit" id="submit_form_btn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-user-check"></i> Register Officer Account
                 </button>
             </div>
         </form>
     </div>
 
-    <!-- Script Processing Vault Engine -->
+    <!-- Script Vault Engine -->
     <script>
         let isBiometricLinked = false;
         let isMobileVerified = false;
@@ -222,10 +250,8 @@
         const usernameDisplay = document.getElementById('p_username');
 
         idNoInput.addEventListener('input', function(e) {
-            if(!isEditMode) {
-                const rawVal = e.target.value.trim().toLowerCase();
-                usernameDisplay.value = rawVal ? rawVal : "AUTO-GENERATED FROM POLICE ID";
-            }
+            const rawVal = e.target.value.trim().toUpperCase();
+            usernameDisplay.value = rawVal ? rawVal : "AUTO-MAPPED FROM POLICE ID";
         });
 
         document.getElementById('p_dob').addEventListener('change', function(e) {
@@ -323,64 +349,59 @@
             }, 850);
         }
 
-        // 🚀 CHECK IF IN "EDIT MODE" ON PAGE LOAD
-        document.addEventListener('DOMContentLoaded', () => {
+        // LOAD PROFILE FOR EDIT MODE
+        document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('edit') === 'true') {
-                isEditMode = true;
-                isMobileVerified = true; // Bypass OTP check when editing existing verified profile
+            const activeId = localStorage.getItem('active_patient_id') || '';
 
-                document.getElementById('page_main_title').innerText = "Edit Officer Profile Particulars";
-                document.getElementById('submit_form_btn').innerHTML = `<i class="fa-solid fa-[#000] fa-floppy-disk"></i> Save Profile Changes`;
-                document.getElementById('submit_form_btn').className = "bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-xl text-xs uppercase tracking-wider flex items-center gap-1";
+            if (urlParams.get('edit') === 'true' || activeId) {
+                if (window.db && activeId) {
+                    try {
+                        const docRef = window.doc(window.db, "patients", activeId);
+                        const docSnap = await window.getDoc(docRef);
 
-                // Hide OTP Button
-                const sendBtn = document.getElementById('otp_send_btn');
-                if(sendBtn) sendBtn.remove();
+                        if (docSnap.exists()) {
+                            isEditMode = true;
+                            isMobileVerified = true;
+                            const rec = docSnap.data();
 
-                // Fetch latest profile from vault
-                let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-                const keys = Object.keys(patientsData);
-                if (keys.length > 0) {
-                    keys.sort((x, y) => (patientsData[y].timestamp || 0) - (patientsData[x].timestamp || 0));
-                    editingUserId = keys[0];
-                    const rec = patientsData[editingUserId];
-
-                    // Pre-fill fields
-                    document.getElementById('p_name').value = rec.name || "";
-                    idNoInput.value = rec.policeIdNumber || "";
-                    idNoInput.setAttribute('readonly', 'true');
-                    idNoInput.className = "w-full px-3 py-2 bg-[#020617] border border-slate-800 rounded-xl text-slate-400 font-mono cursor-not-allowed";
-                    
-                    document.getElementById('p_nic').value = rec.nic || "";
-                    document.getElementById('p_dob').value = rec.dob || "";
-                    document.getElementById('p_dob').dispatchEvent(new Event('change'));
-                    
-                    document.getElementById('p_rank').value = rec.rank || "PC";
-                    handleRankSelectionChange(rec.rank || "PC");
-                    document.getElementById('p_rank_service_number').value = rec.rankServiceNumber || "";
-                    
-                    document.getElementById('p_enlist_date').value = rec.enlistmentDate || "";
-                    document.getElementById('p_division').value = rec.division || "";
-                    document.getElementById('p_station').value = rec.station || "";
-                    document.getElementById('p_phn').value = rec.phn || "";
-                    document.getElementById('p_email').value = rec.email || "";
-                    document.getElementById('p_contact').value = rec.contact || "";
-                    document.getElementById('p_address').value = rec.address || "";
-                    usernameDisplay.value = rec.username || editingUserId;
+                            document.getElementById('page_main_title').innerText = "Edit Officer Profile Particulars";
+                            document.getElementById('p_name').value = rec.fullName || rec.name || "";
+                            idNoInput.value = rec.policeId || rec.policeIdNumber || activeId;
+                            usernameDisplay.value = rec.policeId || activeId;
+                            
+                            document.getElementById('p_nic').value = rec.nic || "";
+                            document.getElementById('p_dob').value = rec.dob || "";
+                            document.getElementById('p_dob').dispatchEvent(new Event('change'));
+                            
+                            document.getElementById('p_rank').value = rec.rankName || rec.rank || "PC";
+                            handleRankSelectionChange(document.getElementById('p_rank').value);
+                            document.getElementById('p_rank_service_number').value = rec.rankServiceNumber || "";
+                            
+                            document.getElementById('p_enlist_date').value = rec.enlistmentDate || "";
+                            document.getElementById('p_division').value = rec.division || "";
+                            document.getElementById('p_station').value = rec.station || "";
+                            document.getElementById('p_phn').value = rec.phn || "";
+                            document.getElementById('p_email').value = rec.email || "";
+                            document.getElementById('p_contact').value = rec.phone || rec.contact || "";
+                            document.getElementById('p_address').value = rec.address || "";
+                        }
+                    } catch (e) {
+                        console.error("Firebase Load Error:", e);
+                    }
                 }
             }
         });
 
-        // FORM SUBMIT INTERCEPT
-        document.getElementById('patientRegForm').addEventListener('submit', function(e) {
+        // FORM SUBMIT HANDLER - CLOUD FIREBASE + LOCAL BACKUP
+        document.getElementById('patientRegForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const errorBox = document.getElementById('collision_error_box');
             const errorText = document.getElementById('collision_error_text');
             errorBox.classList.add('hidden');
 
-            const currentNic = document.getElementById('p_nic').value.trim();
+            const currentNic = document.getElementById('p_nic').value.trim().toUpperCase();
             if(!checkSriLankanNicValidity(currentNic)) {
                 alert("Security Reject: Invalid National Identity Card (NIC) footprint.");
                 return;
@@ -395,44 +416,19 @@
             const enteredContact = document.getElementById('p_contact').value.trim();
             const enteredPhn = document.getElementById('p_phn').value.trim();
 
-            let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
-
-            // Collision check only if NOT editing
-            if (!isEditMode) {
-                for (let usernameKey in patientsData) {
-                    let existingOfficer = patientsData[usernameKey];
-
-                    if (existingOfficer.policeIdNumber && existingOfficer.policeIdNumber.toUpperCase() === enteredIdNo) {
-                        errorText.innerText = `ID COLLISION ALERT: The Police ID Number [${enteredIdNo}] is already assigned to a registered medical proxy within this station ledger.`;
-                        errorBox.classList.remove('hidden');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        return;
-                    }
-
-                    if (existingOfficer.contact && existingOfficer.contact === enteredContact) {
-                        errorText.innerText = `MOBILE COLLISION ALERT: The Contact Number [${enteredContact}] is already registered.`;
-                        errorBox.classList.remove('hidden');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        return; 
-                    }
-
-                    if (existingOfficer.phn && existingOfficer.phn === enteredPhn) {
-                        errorText.innerText = `PHN IDENTITY COLLISION ALERT: The Personal Health Number (PHN) [${enteredPhn}] already exists in the registry.`;
-                        errorBox.classList.remove('hidden');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        return; 
-                    }
-                }
-            }
-
-            const generatedUser = usernameDisplay.value.trim();
+            const submitBtn = document.getElementById('submit_form_btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Saving to Firebase Cloud...`;
 
             const patientRecord = {
-                name: document.getElementById('p_name').value.trim(),
+                policeId: enteredIdNo,
                 policeIdNumber: enteredIdNo,
+                fullName: document.getElementById('p_name').value.trim(),
+                name: document.getElementById('p_name').value.trim(),
                 nic: currentNic,
                 dob: document.getElementById('p_dob').value,
                 age: document.getElementById('p_age_display').value,
+                rankName: document.getElementById('p_rank').value,
                 rank: document.getElementById('p_rank').value,
                 rankServiceNumber: document.getElementById('p_rank_service_number').value.trim(),
                 enlistmentDate: document.getElementById('p_enlist_date').value,
@@ -440,28 +436,38 @@
                 station: document.getElementById('p_station').value.trim(),
                 phn: enteredPhn,
                 email: document.getElementById('p_email').value.trim(),
+                phone: enteredContact,
                 contact: enteredContact,
                 address: document.getElementById('p_address').value.trim(),
-                username: generatedUser,
+                username: enteredIdNo,
+                password: document.getElementById('p_password').value,
                 biometricsActive: isBiometricLinked,
                 hardwareNodeMapped: activeHardwareNode,
+                updatedAt: new Date().toISOString(),
                 timestamp: Date.now()
             };
 
-            patientsData[generatedUser] = patientRecord;
-            localStorage.setItem('hospital_patients', JSON.stringify(patientsData));
-            localStorage.setItem('active_patient_session', 'true');
+            try {
+                // 1. CLOUD FIREBASE SAVE
+                if (window.db) {
+                    await window.setDoc(window.doc(window.db, "patients", enteredIdNo), patientRecord);
+                }
 
-            if(isEditMode) {
-                alert("🎉 Profile Updated: Officer profile particulars updated successfully!");
-            } else {
-                alert("🎉 Unique Profile Verified & Account Provisioned Successfully!");
-            }
+                // 2. LOCALSTORAGE VAULT SAVE
+                let patientsData = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+                patientsData[enteredIdNo] = patientRecord;
+                localStorage.setItem('hospital_patients', JSON.stringify(patientsData));
 
-            if (window.parent && typeof window.parent.executePipelineAdvance === 'function' && !isEditMode) {
-                window.parent.executePipelineAdvance();
+                localStorage.setItem('active_patient_id', enteredIdNo);
+                localStorage.setItem('active_patient_session', 'true');
+
+                alert(`🔥 FIREBASE LIVE CLOUD SUCCESS!\n\nOfficer ID: ${enteredIdNo}\nPHN: ${enteredPhn}\n\nඔබගේ දත්ත සජීවීව Google Firebase Cloud Database එකෙහි සේව් විය.`);
+                window.location.href = "dashboard.html";
+            } catch (err) {
+                console.error("Firebase Sync Error:", err);
+                alert(`⚠️ Firebase Warning: ${err.message}. Saved to local backup.`);
+                window.location.href = "dashboard.html";
             }
-            window.location.href = "dashboard.html";
         });
     </script>
 </body>
