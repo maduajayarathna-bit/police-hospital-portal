@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chief Medical Officer (MOI) Vault - Sri Lanka Police Hospital</title>
+    <title>Chief Medical Officer (MOIC) Vault - Sri Lanka Police Hospital</title>
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,7 +27,7 @@
             </div>
             <div>
                 <h1 id="moi_name_display" class="text-lg md:text-xl font-black text-white uppercase tracking-wider flex items-center gap-2">
-                    Medical Officer In-Charge (MOI): <span class="text-amber-400" id="moi_officer_name">FETCHING MOI...</span>
+                    Medical Officer In-Charge (MOIC): <span class="text-amber-400" id="moi_officer_name">FETCHING MOIC...</span>
                 </h1>
                 <p id="moi_slmc_display" class="text-xs text-cyan-400 font-mono tracking-widest uppercase">
                     <i class="fa-solid fa-id-card mr-1"></i> SLMC Reg No: <span id="moi_slmc_no" class="text-white font-bold">--</span> | System Admin Command Vault
@@ -48,35 +48,49 @@
 
     <main class="max-w-7xl mx-auto space-y-6">
 
-        <!-- 📊 REAL-TIME CLINICAL ANALYTICS CARDS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 📊 REAL-TIME CLINICAL ANALYTICS CARDS (WITH REGISTERED PATIENTS COUNT) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Card 1: Registered Patient Officers Count -->
+            <div class="bg-[#090d1f] border border-cyan-500/40 p-4 rounded-2xl shadow-xl space-y-2">
+                <div class="flex justify-between items-center text-cyan-400">
+                    <span class="text-xs font-bold uppercase tracking-wider">Registered Patients</span>
+                    <i class="fa-solid fa-users-between-lines text-lg"></i>
+                </div>
+                <div class="text-2xl font-black text-white font-mono" id="real_stat_patients">0</div>
+                <p class="text-[10px] text-slate-400">Total Officers Registered</p>
+            </div>
+
+            <!-- Card 2: Today's Appointments -->
             <div class="bg-[#090d1f] border border-blue-900/40 p-4 rounded-2xl shadow-xl space-y-2">
                 <div class="flex justify-between items-center text-blue-400">
                     <span class="text-xs font-bold uppercase tracking-wider">Today's Appointments</span>
                     <i class="fa-solid fa-calendar-check text-lg"></i>
                 </div>
                 <div class="text-2xl font-black text-white font-mono" id="real_stat_appointments">0</div>
-                <p class="text-[10px] text-slate-400">Recorded Officer Consultations</p>
+                <p class="text-[10px] text-slate-400">Recorded Consultations</p>
             </div>
 
+            <!-- Card 3: Emergency GPS Alerts -->
             <div class="bg-[#090d1f] border border-rose-900/40 p-4 rounded-2xl shadow-xl space-y-2">
                 <div class="flex justify-between items-center text-rose-400">
                     <span class="text-xs font-bold uppercase tracking-wider">Emergency Alerts</span>
                     <i class="fa-solid fa-truck-medical text-lg animate-pulse"></i>
                 </div>
                 <div class="text-2xl font-black text-rose-400 font-mono" id="real_stat_emergencies">0</div>
-                <p class="text-[10px] text-slate-400">Live GPS Field Dispatches Active</p>
+                <p class="text-[10px] text-slate-400">Live Field GPS Dispatches</p>
             </div>
 
+            <!-- Card 4: Registered Doctors -->
             <div class="bg-[#090d1f] border border-emerald-900/40 p-4 rounded-2xl shadow-xl space-y-2">
                 <div class="flex justify-between items-center text-emerald-400">
                     <span class="text-xs font-bold uppercase tracking-wider">Registered Doctors</span>
                     <i class="fa-solid fa-user-doctor text-lg"></i>
                 </div>
                 <div class="text-2xl font-black text-white font-mono" id="real_stat_doctors">0</div>
-                <p class="text-[10px] text-slate-400">Active Medical Personnel Vault</p>
+                <p class="text-[10px] text-slate-400">Active Medical Staff</p>
             </div>
 
+            <!-- Card 5: Pending Approvals -->
             <div class="bg-[#090d1f] border border-amber-900/40 p-4 rounded-2xl shadow-xl space-y-2">
                 <div class="flex justify-between items-center text-amber-400">
                     <span class="text-xs font-bold uppercase tracking-wider">Pending Approvals</span>
@@ -101,7 +115,7 @@
             </div>
         </section>
 
-        <!-- 🔍 MASTER PATIENT OFFICER INSPECTION DESK -->
+        <!-- 🔍 MULTI-FIELD MASTER PATIENT OFFICER INSPECTION DESK (NIC / POLICE ID / MOBILE / PHN) -->
         <section class="bg-[#090d1f] border border-cyan-500/30 p-5 md:p-6 rounded-2xl shadow-2xl space-y-5">
             <div class="flex items-center justify-between border-b border-cyan-500/20 pb-3">
                 <h2 class="text-sm font-black text-cyan-400 uppercase tracking-wider flex items-center gap-2">
@@ -112,20 +126,21 @@
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div class="md:col-span-3 relative">
-                    <input type="text" id="master_search_input" placeholder="Enter Patient Officer NIC No / Police ID No / PHN No..." class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold tracking-wider text-xs focus:outline-none focus:border-cyan-500">
-                    <i class="fa-solid fa-id-card absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+                    <input type="text" id="master_search_input" placeholder="Enter Police ID / Phone No / PHN No / NIC No..." class="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold tracking-wider text-xs focus:outline-none focus:border-cyan-500">
+                    <i class="fa-solid fa-address-card absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
                 </div>
                 <button onclick="executeMasterPatientSearch()" class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition text-xs uppercase tracking-wider flex items-center justify-center gap-2">
                     <i class="fa-solid fa-search"></i> Inspect Officer File
                 </button>
             </div>
 
+            <!-- Search Result Patient Profile Display Card -->
             <div id="patient_file_output" class="hidden bg-slate-950/80 border border-slate-800 rounded-xl p-5 space-y-4">
                 <!-- Dynamic Content Injected via JS -->
             </div>
         </section>
 
-        <!-- 👨‍⚕️ CLEAN DOCTOR APPROVAL & MANAGEMENT VAULT -->
+        <!-- 👨‍⚕️ DOCTOR APPROVAL & MANAGEMENT VAULT -->
         <section class="bg-[#090d1f] border border-slate-800 p-5 md:p-6 rounded-2xl shadow-2xl space-y-5">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <h2 class="text-sm font-black text-amber-400 uppercase tracking-wider flex items-center gap-2">
@@ -148,7 +163,7 @@
                         </tr>
                     </thead>
                     <tbody id="doctors_table_body" class="divide-y divide-slate-800/60 font-mono">
-                        <!-- Pure Dynamic Rows without Test/Dummy Data -->
+                        <!-- Dynamic Rows -->
                     </tbody>
                 </table>
             </div>
@@ -169,10 +184,9 @@
             loadEmergencyAlerts();
         });
 
-        // 1. FETCH REGISTERED MOI DETAILS FROM ACTUAL STORAGE
+        // 1. FETCH REGISTERED MOIC DETAILS
         function loadRegisteredMOIDetails() {
             let doctorVault = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
-            
             const moiDoctor = doctorVault.find(d => (d.department || '').includes("MOI") || (d.department || '').includes("Officer Incharge"));
 
             const nameElement = document.getElementById('moi_officer_name');
@@ -182,19 +196,27 @@
                 nameElement.innerText = moiDoctor.name;
                 slmcElement.innerText = moiDoctor.slmc || 'SLMC-VERIFIED';
             } else {
-                nameElement.innerText = "NO REGISTERED MOI";
+                nameElement.innerText = "NO REGISTERED MOIC";
                 slmcElement.innerText = "PENDING REGISTRATION";
             }
         }
 
-        // 2. REAL-TIME DATA CALCULATOR
+        // 2. REAL-TIME DATA CALCULATOR (INCLUDES TOTAL REGISTERED PATIENT OFFICERS COUNT)
         function loadRealTimeAnalyticsData() {
+            // Count Patients
+            let patientVault = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
+            const patientKeys = Object.keys(patientVault);
+            document.getElementById('real_stat_patients').innerText = patientKeys.length;
+
+            // Count Appointments
             let appointmentsVault = JSON.parse(localStorage.getItem('hospital_appointments') || '[]');
             document.getElementById('real_stat_appointments').innerText = appointmentsVault.length;
 
+            // Count Emergency Alerts
             let emergencyVault = JSON.parse(localStorage.getItem('hospital_emergency_alerts') || '[]');
             document.getElementById('real_stat_emergencies').innerText = emergencyVault.length;
 
+            // Count Registered Doctors and Pending Approvals
             let doctorVault = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
             document.getElementById('real_stat_doctors').innerText = doctorVault.length;
 
@@ -238,25 +260,28 @@
             });
         }
 
-        // 4. MASTER PATIENT OFFICER SEARCH LOGIC
+        // 4. MULTI-FIELD MASTER PATIENT SEARCH ENGINE (POLICE ID / PHONE / PHN / NIC)
         function executeMasterPatientSearch() {
             const query = document.getElementById('master_search_input').value.trim().toUpperCase();
             const outputCard = document.getElementById('patient_file_output');
 
             if (!query) {
-                alert('⚠️ Please enter a valid NIC Number, Police ID, or PHN to search.');
+                alert('⚠️ Please enter a Police ID, Mobile Phone Number, PHN, or NIC to search.');
                 return;
             }
 
             let patientVault = JSON.parse(localStorage.getItem('hospital_patients') || '{}');
             let matchedPatient = null;
 
+            // Search through all keys & records with Multi-Field capability
             Object.keys(patientVault).forEach(key => {
                 const pat = patientVault[key];
-                if ((pat.phn || '').toUpperCase().includes(query) || 
-                    (pat.nic || '').toUpperCase().includes(query) || 
-                    (pat.policeId || '').toUpperCase().includes(query) ||
-                    (pat.police_id || '').toUpperCase().includes(query)) {
+                const targetPoliceId = (pat.policeId || pat.police_id || pat.service_no || '').toUpperCase();
+                const targetNic = (pat.nic || '').toUpperCase();
+                const targetPhn = (pat.phn || '').toUpperCase();
+                const targetPhone = (pat.phone || pat.mobile || pat.contact || '').toUpperCase();
+
+                if (targetPoliceId.includes(query) || targetNic.includes(query) || targetPhn.includes(query) || targetPhone.includes(query)) {
                     matchedPatient = pat;
                 }
             });
@@ -269,16 +294,16 @@
                         
                         <div class="space-y-1">
                             <span class="bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold px-2.5 py-0.5 rounded font-mono uppercase">${matchedPatient.rankName || 'Police Officer'}</span>
-                            <h3 class="text-lg font-black text-white uppercase">${matchedPatient.fullName || 'Officer Record'}</h3>
-                            <p class="text-xs text-slate-400 font-mono">Division: <span class="text-slate-200 font-bold">${matchedPatient.division || 'Central Command'}</span></p>
-                            <p class="text-xs text-slate-400 font-mono">PHN: <span class="text-cyan-400 font-bold">${matchedPatient.phn || 'N/A'}</span> | Police ID: <span class="text-amber-400 font-bold">${matchedPatient.policeId || matchedPatient.police_id || 'N/A'}</span> | NIC: <span class="text-emerald-400 font-bold">${matchedPatient.nic || 'N/A'}</span></p>
+                            <h3 class="text-lg font-black text-white uppercase">${matchedPatient.fullName || matchedPatient.name || 'Officer Record'}</h3>
+                            <p class="text-xs text-slate-400 font-mono">Division: <span class="text-slate-200 font-bold">${matchedPatient.division || matchedPatient.department || 'Central Division'}</span></p>
+                            <p class="text-xs text-slate-400 font-mono">PHN: <span class="text-cyan-400 font-bold">${matchedPatient.phn || 'N/A'}</span> | Police ID: <span class="text-amber-400 font-bold">${matchedPatient.policeId || matchedPatient.police_id || 'N/A'}</span> | Phone: <span class="text-blue-400 font-bold">${matchedPatient.phone || matchedPatient.contact || 'N/A'}</span> | NIC: <span class="text-emerald-400 font-bold">${matchedPatient.nic || 'N/A'}</span></p>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono pt-2">
                         <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
                             <span class="text-[10px] text-slate-500 uppercase font-bold">Blood Group</span>
-                            <p class="text-rose-400 font-black text-sm">${matchedPatient.bloodGroup || 'O POSITIVE'}</p>
+                            <p class="text-rose-400 font-black text-sm">${matchedPatient.bloodGroup || matchedPatient.blood_group || 'O POSITIVE'}</p>
                         </div>
                         <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1">
                             <span class="text-[10px] text-slate-500 uppercase font-bold">Critical Allergies</span>
@@ -293,12 +318,12 @@
                 outputCard.classList.remove('hidden');
                 outputCard.innerHTML = `
                     <div class="p-4 bg-rose-950/40 border border-rose-500/30 rounded-xl text-center text-rose-300 text-xs font-mono">
-                        <i class="fa-solid fa-circle-exclamation text-base mb-1 block"></i> Officer Record Not Found for Key: "${query}". Please verify NIC / Police ID.
+                        <i class="fa-solid fa-circle-exclamation text-base mb-1 block"></i> Officer Record Not Found for Search Key: "${query}". Please check the Police ID, Phone Number, PHN, or NIC.
                     </div>`;
             }
         }
 
-        // 5. LOAD DOCTOR REGISTRATION & APPROVAL TABLE (PURE DYNAMIC DATA ONLY)
+        // 5. LOAD DOCTOR REGISTRATION TABLE (FIXED UNDEFINED FIELDS)
         function loadDoctorRegistryTable() {
             const tableBody = document.getElementById('doctors_table_body');
             let doctorVault = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
@@ -306,7 +331,6 @@
             document.getElementById('doctor_count_badge').innerText = doctorVault.length;
             tableBody.innerHTML = "";
 
-            // Show empty state if no doctor is registered
             if (doctorVault.length === 0) {
                 tableBody.innerHTML = `
                     <tr>
@@ -329,11 +353,11 @@
 
                 const row = `
                     <tr class="hover:bg-slate-900/40">
-                        <td class="p-3 text-white font-bold">${doc.name}</td>
-                        <td class="p-3 text-cyan-400 font-bold">${doc.slmc}</td>
+                        <td class="p-3 text-white font-bold">${doc.name || 'N/A'}</td>
+                        <td class="p-3 text-cyan-400 font-bold">${doc.slmc || 'N/A'}</td>
                         <td class="p-3 text-amber-400">${doc.nic || 'N/A'}</td>
-                        <td class="p-3 text-slate-300">${doc.department}</td>
-                        <td class="p-3 text-slate-400">${doc.phone}</td>
+                        <td class="p-3 text-slate-300">${doc.department || 'General Medicine'}</td>
+                        <td class="p-3 text-slate-400">${doc.phone || 'N/A'}</td>
                         <td class="p-3">${statusBadge}</td>
                         <td class="p-3 text-right">${actionButtons}</td>
                     </tr>`;
