@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <!-- 🚀 BIOMETRIC QUICK LOGIN BUTTON -->
+        <!-- BIOMETRIC QUICK LOGIN BUTTON -->
         <div class="space-y-2">
             <button type="button" onclick="triggerDoctorBiometricLogin()" class="w-full bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 py-3 rounded-xl shadow-lg transition-all text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 group">
                 <i class="fa-solid fa-fingerprint text-lg text-cyan-400 group-hover:scale-110 transition animate-pulse"></i> Login with Biometrics (Fingerprint / Face)
@@ -95,15 +95,15 @@
 
     <!-- Script Logic -->
     <script>
-        // 🚀 BIOMETRIC LOGIN FUNCTION FOR DOCTORS
+        // BIOMETRIC LOGIN FUNCTION FOR DOCTORS -> REDIRECTS TO CMO VAULT
         function triggerDoctorBiometricLogin() {
             alert("🖐️ Scanning Biometric Data (Fingerprint / Face ID)...\n\nPlease place your registered finger on the biometric scanner.");
             
             setTimeout(() => {
                 localStorage.setItem('active_doctor_session', 'true');
-                localStorage.setItem('active_doctor_name', 'Dr. B.P.G. Anil (Biometric Authenticated)');
-                alert("✅ BIOMETRIC AUTHENTICATION SUCCESSFUL!\n\nWelcome Doctor. Redirecting to Management Dashboard...");
-                window.location.href = "dashboard.html";
+                localStorage.setItem('active_doctor_name', 'Medical Officer In-Charge (Biometric Verified)');
+                alert("✅ BIOMETRIC AUTHENTICATION SUCCESSFUL!\n\nWelcome Medical Officer In-Charge. Accessing CMO Control Vault...");
+                window.location.href = "cmo_dashboard.html";
             }, 1200);
         }
 
@@ -115,21 +115,31 @@
 
             let registeredDoctors = JSON.parse(localStorage.getItem('hospital_doctors') || '[]');
 
-            if ((docId.toUpperCase() === "SLMC-12345" || docId.toUpperCase() === "ADMIN") && docPass === "admin123") {
+            // 👑 1. CHIEF MEDICAL OFFICER / MOI / ADMIN LOGIN -> REDIRECTS TO cmo_dashboard.html
+            if ((docId.toUpperCase() === "SLMC-12345" || docId.toUpperCase() === "ADMIN" || docId.toUpperCase().includes("MOI")) && docPass === "admin123") {
                 localStorage.setItem('active_doctor_session', 'true');
-                localStorage.setItem('active_doctor_name', 'Chief Medical Officer');
-                alert('👨‍⚕️ Welcome Chief Medical Officer! Accessing Doctor Control Panel...');
-                window.location.href = "dashboard.html";
+                localStorage.setItem('active_doctor_name', 'Medical Officer In-Charge (MOI)');
+                alert('👨‍⚕️ Welcome Medical Officer In-Charge! Accessing CMO Command Vault...');
+                window.location.href = "cmo_dashboard.html";
                 return;
             }
 
+            // 👨‍⚕️ 2. CHECK IN REGISTERED DOCTORS LIST
             const matchedDoctor = registeredDoctors.find(d => (d.slmc || '').toUpperCase() === docId.toUpperCase());
 
             if (matchedDoctor) {
                 localStorage.setItem('active_doctor_session', 'true');
                 localStorage.setItem('active_doctor_name', matchedDoctor.name);
-                alert(`👨‍⚕️ Welcome ${matchedDoctor.name}! Access Granted.`);
-                window.location.href = "dashboard.html";
+                
+                // If the registered doctor is an MOI (Officer In-Charge) -> Go to cmo_dashboard.html
+                if ((matchedDoctor.department || '').includes("MOI") || (matchedDoctor.department || '').includes("Officer Incharge")) {
+                    alert(`👨‍⚕️ Welcome ${matchedDoctor.name}! Accessing Chief Medical Officer (MOI) Vault...`);
+                    window.location.href = "cmo_dashboard.html";
+                } else {
+                    // Standard Doctor -> Go to doctor_dashboard.html
+                    alert(`👨‍⚕️ Welcome ${matchedDoctor.name}! Accessing Doctor Dashboard...`);
+                    window.location.href = "doctor_dashboard.html";
+                }
             } else {
                 alert('⚠️ Access Denied: Medical ID or Password incorrect. Please Register if you are a new Doctor.');
             }
